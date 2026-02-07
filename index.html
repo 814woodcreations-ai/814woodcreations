@@ -80,118 +80,57 @@
         </p>
 
         <!-- Netlify-ready form -->
-        <form
-  name="order-form"
+  <form
+  name="custom-notebook-order"
   method="POST"
   data-netlify="true"
-  data-netlify-honeypot="bot-field"
-  class="order-form"
+  netlify-honeypot="bot-field"
+  id="order"
 >
-  <!-- Netlify hidden fields -->
-  <input type="hidden" name="form-name" value="order-form" />
-  <p class="hidden">
+
+  <input type="hidden" name="form-name" value="custom-notebook-order" />
+
+  <p style="display:none;">
     <label>
-      Don’t fill this out if you’re human:
+      Don’t fill this out:
       <input name="bot-field" />
     </label>
   </p>
 
-  <div class="form-grid">
-    <!-- Customer Info -->
-    <div class="form-group">
-      <label for="name">Full Name *</label>
-      <input id="name" name="name" type="text" required />
-    </div>
-
-    <div class="form-group">
-      <label for="email">Email *</label>
-      <input id="email" name="email" type="email" required />
-    </div>
-
-    <div class="form-group">
-      <label for="phone">Phone (optional)</label>
-      <input id="phone" name="phone" type="tel" />
-    </div>
-
-    <!-- Order Details -->
-    <div class="form-group">
-      <label for="product">Select Item *</label>
-      <select id="product" name="product" required>
-        <option value="">Choose an option</option>
-        <option value="Custom Notebook">Custom Notebook</option>
-        <option value="Laser-Engraved Leather">Laser-Engraved Leather</option>
-        <option value="Personalized Gift Set">Personalized Gift Set</option>
-      </select>
-    </div>
-
-    <!-- Design number from catalog -->
-    <div class="form-group">
-  <label for="design-number">Design Number from Catalog *</label>
-  <input
-    id="design-number"
-    name="design_number"
-    type="text"
-    required
-    placeholder="e.g., A1, U3, B5"
-  />
-  <span class="small-note">
-    Enter the code that matches the image/design you chose (for example A1, U3, B5).
-  </span>
-</div>
-
-
-    <!-- Color dropdown -->
-    <div class="form-group">
-      <label for="color">Color *</label>
-      <select id="color" name="color" required>
-        <option value="">Select a color</option>
-        <option value="Red">Red</option>
-        <option value="Blue">Blue</option>
-        <option value="Brown">Brown</option>
-        <option value="Teal">Teal</option>
-      </select>
-    </div>
-
-    <!-- Font dropdown -->
-    <div class="form-group">
-      <label for="font">Font *</label>
-      <select id="font" name="font" required>
-        <option value="">Select a font</option>
-        <option value="Block">Block</option>
-        <option value="Script">Script</option>
-        <option value="Military Stencil">Military Stencil</option>
-        <option value="Serif">Serif</option>
-        <option value="Sans Serif">Sans Serif</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label for="quantity">Quantity *</label>
-      <input id="quantity" name="quantity" type="number" min="1" value="1" required />
-    </div>
-
-    <div class="form-group form-group-full">
-      <label for="custom-text">Custom Text / Engraving (if any)</label>
-      <textarea id="custom-text" name="custom_text" rows="2"></textarea>
-    </div>
-
-    <div class="form-group form-group-full">
-      <label for="notes">Design Notes or Special Instructions</label>
-      <textarea
-        id="notes"
-        name="notes"
-        rows="4"
-        placeholder="Placement, sizing, unit info, fundraiser details, or anything else you want me to know."
-      ></textarea>
-    </div>
+  <div class="form-group">
+    <label for="product">Product</label>
+    <input id="product" name="product" type="text" readonly />
   </div>
 
-  <button type="submit" class="btn-primary form-submit">
-    Submit Order Request
+  <div class="form-group">
+    <label for="color">Color</label>
+    <input id="color" name="color" type="text" readonly />
+  </div>
+
+  <div class="form-group">
+    <label for="design-number">Design</label>
+    <input id="design-number" name="design_number" type="text" readonly />
+  </div>
+
+  <div class="form-group">
+    <label for="customer-name">Your Name</label>
+    <input id="customer-name" name="customer_name" type="text" required />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Your Email</label>
+    <input id="email" name="email" type="email" required />
+  </div>
+
+  <div class="form-group">
+    <label for="notes">Notes / Custom Requests</label>
+    <textarea id="notes" name="notes"></textarea>
+  </div>
+
+  <button type="submit" class="btn-primary">
+    Submit Order
   </button>
-  <p class="small-note">
-    You are not charged automatically. I’ll email you to confirm your design number, color, font, and total cost before work begins.
-  </p>
+
 </form>
 
       </div>
