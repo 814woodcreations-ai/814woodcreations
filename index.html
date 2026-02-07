@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Shop Name</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">Your Shop Name</div>
+      <nav class="nav">
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#order">Order</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1>Custom Handmade & Laser-Engraved Creations</h1>
+          <p>
+            Choose your item, personalize it, and I’ll create it by hand and ship it to you.
+          </p>
+          <a href="#order" class="btn-primary">Place an Order</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section">
+      <div class="container">
+        <h2>About This Shop</h2>
+        <p>
+          Every piece is made to order. Select your item, add your custom text or design notes,
+          and I’ll follow up with a confirmation email and payment details before I start.
+        </p>
+      </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section id="products" class="section section-alt">
+      <div class="container">
+        <h2>Products</h2>
+        <div class="product-grid">
+          <article class="product-card">
+            <h3>Custom Notebook</h3>
+            <p>Personalized cover, perfect for gifts, journaling, or unit keepsakes.</p>
+          </article>
+
+          <article class="product-card">
+            <h3>Laser-Engraved Leather</h3>
+            <p>Wallets, keychains, patches, and more with detailed laser engraving.</p>
+          </article>
+
+          <article class="product-card">
+            <h3>Personalized Gift Set</h3>
+            <p>Mix and match items (notebook + keychain, etc.) customized to your request.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ORDER FORM SECTION -->
+    <section id="order" class="section">
+      <div class="container">
+        <h2>Place an Order</h2>
+        <p class="section-intro">
+          Fill out the form below with what you’d like. You’ll receive a confirmation email with
+          pricing, payment instructions, and an estimated shipping date.
+        </p>
+
+        <!-- Netlify-ready form -->
+        <form
+          name="order-form"
+          method="POST"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          class="order-form"
+        >
+          <!-- Netlify hidden fields -->
+          <input type="hidden" name="form-name" value="order-form" />
+          <p class="hidden">
+            <label>
+              Don’t fill this out if you’re human:
+              <input name="bot-field" />
+            </label>
+          </p>
+
+          <div class="form-grid">
+            <!-- Customer Info -->
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input id="name" name="name" type="text" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone (optional)</label>
+              <input id="phone" name="phone" type="tel" />
+            </div>
+
+            <div class="form-group form-group-full">
+              <label for="address">Shipping Address *</label>
+              <textarea id="address" name="address" rows="2" required></textarea>
+            </div>
+
+            <!-- Order Details -->
+            <div class="form-group">
+              <label for="product">Select Item *</label>
+              <select id="product" name="product" required>
+                <option value="">Choose an option</option>
+                <option value="Custom Notebook">Custom Notebook</option>
+                <option value="Laser-Engraved Leather">Laser-Engraved Leather</option>
+                <option value="Personalized Gift Set">Personalized Gift Set</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="quantity">Quantity *</label>
+              <input id="quantity" name="quantity" type="number" min="1" value="1" required />
+            </div>
+
+            <div class="form-group">
+              <label>Finish / Style</label>
+              <div class="option-group">
+                <label>
+                  <input type="radio" name="finish" value="Minimal" checked />
+                  Minimal
+                </label>
+                <label>
+                  <input type="radio" name="finish" value="Detailed" />
+                  Detailed
+                </label>
+                <label>
+                  <input type="radio" name="finish" value="Surprise Me" />
+                  Surprise me
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group form-group-full">
+              <label for="custom-text">Custom Text / Engraving (if any)</label>
+              <textarea id="custom-text" name="custom_text" rows="2"></textarea>
+            </div>
+
+            <div class="form-group form-group-full">
+              <label for="notes">Design Notes or Special Instructions</label>
+              <textarea
+                id="notes"
+                name="notes"
+                rows="4"
+                placeholder="Tell me about fonts, unit logo, dates, names, or any specific idea you have."
+              ></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary form-submit">
+            Submit Order Request
+          </button>
+          <p class="small-note">
+            You are not charged automatically. I’ll email you to confirm details and total cost
+            before work begins.
+          </p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Your Shop Name. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
