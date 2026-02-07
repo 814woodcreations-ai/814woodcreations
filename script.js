@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let selectedColor = null;
   let selectedLogo = null;
+  let selectedFont = null;
 
   // Color selection
   document.querySelectorAll("[data-color]").forEach((btn) => {
@@ -19,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Logo selection
+  // Logo / design selection
   document.querySelectorAll("[data-logo]").forEach((btn) => {
     btn.addEventListener("click", () => {
       document
@@ -30,7 +31,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Lightbox elements (only exist on category pages)
+  // Font selection (new)
+  document.querySelectorAll("[data-font]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document
+        .querySelectorAll("[data-font]")
+        .forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      selectedFont = btn.dataset.font;
+    });
+  });
+
+  // Lightbox elements (for enlarging design images)
   const lightbox = document.getElementById("image-lightbox");
   const lightboxImg = document.getElementById("lightbox-img");
   const lightboxClose = document.getElementById("lightbox-close");
@@ -69,10 +81,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      if (!selectedFont) {
+        alert("Please select a font before continuing.");
+        return;
+      }
+
       // Save selections for order form
       localStorage.setItem("product", "Custom Notebook");
       localStorage.setItem("color", selectedColor);
       localStorage.setItem("design_number", selectedLogo);
+      localStorage.setItem("font", selectedFont);
 
       // Go to order section on home page
       window.location.href = "index.html#order";
@@ -83,6 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const product = localStorage.getItem("product");
   const color = localStorage.getItem("color");
   const design = localStorage.getItem("design_number");
+  const font = localStorage.getItem("font");
 
   if (product && document.getElementById("product")) {
     document.getElementById("product").value = product;
@@ -93,5 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (design && document.getElementById("design-number")) {
     document.getElementById("design-number").value = design;
   }
+  if (font && document.getElementById("font")) {
+    const fontField = document.getElementById("font");
+    // works whether it's an <input> or <select>
+    fontField.value = font;
+  }
 });
-

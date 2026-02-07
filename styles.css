@@ -281,6 +281,15 @@ textarea:focus {
   letter-spacing: 0.04em;
   font-size: 1.05rem;
 }
+.font-thumb {
+  width: 100%;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+
 /* Smaller images for color swatches */
 .color-thumb {
   width: 70px;          /* smaller width */
