@@ -2,14 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Products | 814 Wood Creations</title>
+  <title>Custom Notebooks | 814 Wood Creations</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
+  <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
-      <div class="logo">814 Wood Creations</div>
+      <div class="brand">
+        <img src="logo.png" alt="814 Wood Creations Logo" class="brand-logo" />
+        <div class="logo-text">814 Wood Creations</div>
+      </div>
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="products.html">Products</a>
@@ -18,64 +23,60 @@
     </div>
   </header>
 
+  <!-- Main Content -->
   <main>
     <section class="section">
       <div class="container">
-        <h1>Our Products</h1>
+
+        <h1>Custom Notebooks</h1>
         <p class="section-intro">
-          All items are custom laser-engraved and made to order.  
-          Select your product and use the design number from the catalog when placing your order.
+          Select a notebook theme to see available designs and color options. Once you choose your
+          color and design, your selections will be added automatically into the order form.
         </p>
 
         <div class="product-grid">
-          <article class="product-card">
-            <h3>Custom Notebooks</h3>
-            <p>
-              Laser-engraved notebooks perfect for gifts, fundraisers, unit keepsakes,
-              or personal use.
-            </p>
-          </article>
+          <a class="product-card category-card" href="notebooks-animals.html">
+            <h3>Animals</h3>
+            <p>Animal-themed notebook designs.</p>
+          </a>
 
-          <article class="product-card">
-            <h3>Laser-Engraved Leather</h3>
-            <p>
-              Wallets, keychains, patches, and leather goods engraved with precision and detail.
-            </p>
-          </article>
+          <a class="product-card category-card" href="notebooks-army.html">
+            <h3>U.S. Army</h3>
+            <p>Army-inspired designs, perfect for units and gifts.</p>
+          </a>
 
-          <article class="product-card">
-            <h3>Plaques & Wood Signs</h3>
-            <p>
-              Custom plaques, award pieces, and engraved wood signs for recognition and events.
-            </p>
-          </article>
+          <a class="product-card category-card" href="notebooks-baseball.html">
+            <h3>Baseball</h3>
+            <p>Baseball-themed designs for players, families, and fans.</p>
+          </a>
 
-          <article class="product-card">
-            <h3>Fundraiser Items</h3>
-            <p>
-              Unit and organization fundraiser products customized with logos, dates,
-              and design numbers.
-            </p>
-          </article>
+          <a class="product-card category-card" href="notebooks-camping.html">
+            <h3>Camping</h3>
+            <p>Outdoor, camping, and adventure designs.</p>
+          </a>
 
-          <article class="product-card">
-            <h3>Custom Requests</h3>
-            <p>
-              Have something specific in mind? Select a design number and describe your idea
-              in the order notes.
-            </p>
-          </article>
+          <a class="product-card category-card" href="notebooks-christmas.html">
+            <h3>Christmas</h3>
+            <p>Holiday and Christmas-themed custom notebooks.</p>
+          </a>
+
+          <a class="product-card category-card" href="notebooks-skull.html">
+            <h3>Skull</h3>
+            <p>Skull and edgy themed designs.</p>
+          </a>
         </div>
 
         <div style="margin-top: 2rem;">
           <a href="index.html#order" class="btn-primary">
-            Place an Order
+            Go to Order Form
           </a>
         </div>
+
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <p>© <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
