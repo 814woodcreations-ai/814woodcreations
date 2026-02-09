@@ -2,19 +2,26 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Your Shop Name</title>
+  <title>814 Wood Creations</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <div class="logo">Your Shop Name</div>
+      <div class="brand">
+  <img src="logo.png" alt="814 Wood Creations Logo" class="brand-logo" />
+  <div class="logo-text">814 Wood Creations</div>
+</div>
+
       <nav class="nav">
-        <a href="#about">About</a>
-        <a href="#products">Products</a>
-        <a href="#order">Order</a>
-      </nav>
+  <a href="index.html">Home</a>
+  <a href="products.html">Notebooks</a>
+  <a href="leather.html">Leather</a>
+  <a href="gift-sets.html">Gallery</a>
+  <a href="index.html#order">Order</a>
+</nav>
+
     </div>
   </header>
 
@@ -25,9 +32,8 @@
         <div class="hero-text">
           <h1>Custom Handmade & Laser-Engraved Creations</h1>
           <p>
-            Choose your item, personalize it, and I’ll create it by hand and ship it to you.
+            Select your item, add your personal details, and your custom piece will be thoughtfully created.
           </p>
-          <a href="#order" class="btn-primary">Place an Order</a>
         </div>
       </div>
     </section>
@@ -35,10 +41,9 @@
     <!-- ABOUT SECTION -->
     <section id="about" class="section">
       <div class="container">
-        <h2>About This Shop</h2>
+        <h2>About 814 Wood Creations</h2>
         <p>
-          Every piece is made to order. Select your item, add your custom text or design notes,
-          and I’ll follow up with a confirmation email and payment details before I start.
+          At 814 Wood Creations, we believe the smallest details carry the deepest meaning. We create custom laser-engraved pieces on wood, leather, and metal, carefully crafting each item to reflect moments worth remembering..
         </p>
       </div>
     </section>
@@ -49,18 +54,22 @@
         <h2>Products</h2>
         <div class="product-grid">
           <article class="product-card">
-            <h3>Custom Notebook</h3>
-            <p>Personalized cover, perfect for gifts, journaling, or unit keepsakes.</p>
+            <a href="products.html" style="text-decoration: none; color: inherit;">
+              <h3>Custom Notebook</h3>
+              <p>Personalized cover, perfect for gifts, journaling, or unit keepsakes.</p>
+            </a>
           </article>
 
           <article class="product-card">
-            <h3>Laser-Engraved Leather</h3>
+            <h3>Laser-Engraved Leather Not available at this time</h3>
             <p>Wallets, keychains, patches, and more with detailed laser engraving.</p>
           </article>
 
           <article class="product-card">
-            <h3>Personalized Gift Set</h3>
-            <p>Mix and match items (notebook + keychain, etc.) customized to your request.</p>
+            <a href="gift-sets.html" style="text-decoration: none; color: inherit;">
+              <h3>Gallery</h3>
+              <p>Curious about what your piece could look like? Explore the Gallery to see examples of past creations.</p>
+            </a>
           </article>
         </div>
       </div>
@@ -69,116 +78,192 @@
     <!-- ORDER FORM SECTION -->
     <section id="order" class="section">
       <div class="container">
+        <div class="order-section-wrapper">
         <h2>Place an Order</h2>
         <p class="section-intro">
-          Fill out the form below with what you’d like. You’ll receive a confirmation email with
-          pricing, payment instructions, and an estimated shipping date.
+          Fill out the form below with what you’d like. 1 form per order. 
         </p>
 
         <!-- Netlify-ready form -->
         <form
-          name="order-form"
-          method="POST"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-          class="order-form"
-        >
-          <!-- Netlify hidden fields -->
-          <input type="hidden" name="form-name" value="order-form" />
-          <p class="hidden">
-            <label>
-              Don’t fill this out if you’re human:
-              <input name="bot-field" />
-            </label>
-          </p>
+  name="custom-notebook-order"
+  method="POST"
+  data-netlify="true"
+  netlify-honeypot="bot-field"
+  id="order"
 
-          <div class="form-grid">
-            <!-- Customer Info -->
-            <div class="form-group">
-              <label for="name">Full Name *</label>
-              <input id="name" name="name" type="text" required />
-            </div>
+>
+  <!-- Netlify hidden fields -->
+  <input type="hidden" name="form-name" value="custom-notebook-order" />
 
-            <div class="form-group">
-              <label for="email">Email *</label>
-              <input id="email" name="email" type="email" required />
-            </div>
+  <p class="hidden">
+    <label>
+      Don’t fill this out if you’re human:
+      <input name="bot-field" />
+    </label>
+  </p>
 
-            <div class="form-group">
-              <label for="phone">Phone (optional)</label>
-              <input id="phone" name="phone" type="tel" />
-            </div>
+  <div class="form-grid">
+    <!-- Customer Info -->
+    <div class="form-group">
+      <label for="name">Full Name *</label>
+      <input id="name" name="name" type="text" required />
+    </div>
 
-            <div class="form-group form-group-full">
-              <label for="address">Shipping Address *</label>
-              <textarea id="address" name="address" rows="2" required></textarea>
-            </div>
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input id="email" name="email" type="email" required />
+    </div>
 
-            <!-- Order Details -->
-            <div class="form-group">
-              <label for="product">Select Item *</label>
-              <select id="product" name="product" required>
-                <option value="">Choose an option</option>
-                <option value="Custom Notebook">Custom Notebook</option>
-                <option value="Laser-Engraved Leather">Laser-Engraved Leather</option>
-                <option value="Personalized Gift Set">Personalized Gift Set</option>
-              </select>
-            </div>
+    <div class="form-group">
+  <label for="phone">Phone Number *</label>
+  <input
+    id="phone"
+    name="phone"
+    type="tel"
+    placeholder="e.g., 555-123-4567"
+    required
+  />
+</div>
 
-            <div class="form-group">
-              <label for="quantity">Quantity *</label>
-              <input id="quantity" name="quantity" type="number" min="1" value="1" required />
-            </div>
 
-            <div class="form-group">
-              <label>Finish / Style</label>
-              <div class="option-group">
-                <label>
-                  <input type="radio" name="finish" value="Minimal" checked />
-                  Minimal
-                </label>
-                <label>
-                  <input type="radio" name="finish" value="Detailed" />
-                  Detailed
-                </label>
-                <label>
-                  <input type="radio" name="finish" value="Surprise Me" />
-                  Surprise me
-                </label>
-              </div>
-            </div>
+    <!-- Order Details -->
+    <div class="form-group">
+      <label for="product">Select Item *</label>
+      <select id="product" name="product" required>
+        <option value="">Choose an option</option>
+        <option value="Custom Notebook">Custom Notebook</option>
+        <option value="Laser-Engraved Leather">Laser-Engraved Leather</option>
+        </select>
+    </div>
 
-            <div class="form-group form-group-full">
-              <label for="custom-text">Custom Text / Engraving (if any)</label>
-              <textarea id="custom-text" name="custom_text" rows="2"></textarea>
-            </div>
+    <!-- Design number from catalog -->
+    <div class="form-group">
+  <label for="design-number">Design Number from Catalog *</label>
+  <input
+    id="design-number"
+    name="design_number"
+    type="text"
+    required
+    readonly
+    placeholder="e.g., A1, U3, B5"
+  />
+  <span class="small-note">
+    Selected from catalog. Cannot be changed here.
+  </span>
+</div>
 
-            <div class="form-group form-group-full">
-              <label for="notes">Design Notes or Special Instructions</label>
-              <textarea
-                id="notes"
-                name="notes"
-                rows="4"
-                placeholder="Tell me about fonts, unit logo, dates, names, or any specific idea you have."
-              ></textarea>
-            </div>
-          </div>
 
-          <button type="submit" class="btn-primary form-submit">
-            Submit Order Request
-          </button>
-          <p class="small-note">
-            You are not charged automatically. I’ll email you to confirm details and total cost
-            before work begins.
-          </p>
-        </form>
+    <!-- Color text input -->
+    <div class="form-group">
+      <label for="color">Color *</label>
+      <input
+        id="color"
+        name="color"
+        type="text"
+        required
+        readonly
+        placeholder="e.g., Red, Blue, Brown, Teal"
+      />
+      <span class="small-note">
+        Selected from catalog. Cannot be changed here.
+      </span>
+    </div>
+
+    <!-- Font text input -->
+   <div class="form-group">
+  <label for="font">Font *</label>
+  <input
+    id="font"
+    name="font"
+    type="text"
+    required
+    readonly
+    placeholder="e.g., Alegreya SC, Caveat, Lato"
+  />
+  <span class="small-note">
+    Selected from catalog. Cannot be changed here.
+  </span>
+</div>
+
+   <!-- Fundraising Unit dropdown -->
+    <div class="form-group">
+      <label for="fundraising-unit">Fundraising Unit</label>
+      <select id="fundraising-unit" name="fundraising_unit">
+        <option value="">Select a unit (optional)</option>
+        <option value="Fire Department">Fire Department</option>
+        <option value="Police Department">Police Department</option>
+        <option value="EMS">EMS</option>
+        <option value="Military Unit">Military Unit</option>
+        <option value="School">School</option>
+        <option value="Sports Team">Sports Team</option>
+        <option value="Church">Church</option>
+        <option value="Non-Profit Organization">Non-Profit Organization</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+
+   <div class="form-group">
+  <label for="quantity">Quantity (1 per order)</label>
+  <input
+    id="quantity"
+    name="quantity"
+    type="number"
+    value="1"
+    readonly
+  />
+</div>
+    <!-- Engraving Placement (Required Radio Buttons) -->
+    <div class="form-group form-group-full">
+      <label>Engraving Placement of Custom Text *</label>
+      <div class="option-group">
+        <label>
+          <input type="radio" name="engraving_placement" value="Above Design" required />
+          Above Design
+        </label>
+        <label>
+          <input type="radio" name="engraving_placement" value="Below Design" required />
+          Below Design
+        </label>
+        <label>
+          <input type="radio" name="engraving_placement" value="No Engraving Required" required />
+          No Engraving Required
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group form-group-full">
+      <label for="custom-text">Custom Text (It will engraved exactly as written)</label>
+      <textarea id="custom-text" name="custom_text" rows="2"></textarea>
+    </div>
+
+    <div class="form-group form-group-full">
+      <label for="notes">Design Notes or Special Instructions</label>
+      <textarea
+        id="notes"
+        name="notes"
+        rows="4"
+        placeholder="Placement, sizing, unit info, fundraiser details, or anything else you want me to know."
+      ></textarea>
+    </div>
+  </div>
+
+  <button type="submit" class="btn-primary form-submit">
+    Submit Order Request
+  </button>
+  <p class="small-note">
+    You are not charged until you receive your product.
+  </p>
+</form>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© <span id="year"></span> Your Shop Name. All rights reserved.</p>
+      <p>© <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
     </div>
   </footer>
 

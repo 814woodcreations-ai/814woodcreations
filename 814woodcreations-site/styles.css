@@ -1,3 +1,24 @@
+/* Step */
+/* Step */
+:root {
+  --bg-main: #f4efe9;
+  --text-main: #000000;
+  --brand-primary: #3B693C;
+  --brand-dark: #4b2e1a;
+  --brand-light: #eadfce;
+  --border-soft: #c8b49a;
+  --light-nature-green: #d4e8d4;
+}
+
+
+<!-- Step -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>814 Wood Creations</title>
+</head>
+
 *,
 *::before,
 *::after {
@@ -7,9 +28,109 @@
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #1f2933;
-  background: #f7fafc;
+  color: #000000;
+  background-color: var(--bg-main);
+  /* Rustic wood grain feel: subtle gradient + optional texture image */
+  background-image:
+    linear-gradient(120deg, rgba(139, 92, 60, 0.16), rgba(120, 64, 32, 0.10)),
+    url("images/background-wood.png");
+  background-size: auto, cover;
+  background-repeat: repeat, no-repeat;
+  background-attachment: fixed;
+  background-position: center;
   line-height: 1.5;
+  position: relative;
+}
+
+/* Floating notebook images on sides */
+.notebook-bg {
+  position: fixed;
+  width: 210px;
+  height: auto;
+  opacity: 0.80;
+  z-index: 10;
+  cursor: pointer;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  transition: opacity 0.2s;
+}
+
+.notebook-bg:hover {
+  opacity: 1;
+}
+
+/* Left side notebooks */
+.notebook-bg-1 {
+  top: 10%;
+  left: 65px;
+  transform: rotate(-8deg);
+  animation: float-1 20s ease-in-out infinite;
+}
+
+.notebook-bg-2 {
+  top: 55%;
+  left: 65px;
+  transform: rotate(5deg);
+  animation: float-2 18s ease-in-out infinite;
+}
+
+/* Right side notebooks */
+.notebook-bg-3 {
+  top: 15%;
+  right: 65px;
+  transform: rotate(12deg);
+  animation: float-3 22s ease-in-out infinite;
+}
+
+.notebook-bg-4 {
+  top: 60%;
+  right: 65px;
+  transform: rotate(-6deg);
+  animation: float-4 19s ease-in-out infinite;
+}
+
+/* Floating animations */
+@keyframes float-1 {
+  0%, 100% {
+    transform: rotate(-8deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(-5deg) translateY(-20px);
+  }
+}
+
+@keyframes float-2 {
+  0%, 100% {
+    transform: rotate(5deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(8deg) translateY(15px);
+  }
+}
+
+@keyframes float-3 {
+  0%, 100% {
+    transform: rotate(12deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(9deg) translateY(-15px);
+  }
+}
+
+@keyframes float-4 {
+  0%, 100% {
+    transform: rotate(-6deg) translateY(0px);
+  }
+  50% {
+    transform: rotate(-3deg) translateY(20px);
+  }
+}
+
+/* Make sure main content is above background images */
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
 }
 
 /* Layout helpers */
@@ -22,12 +143,7 @@ body {
 
 /* Header */
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: #ffffffcc;
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid #e5e7eb;
+  padding: 1rem 0;
 }
 
 .header-inner {
@@ -40,23 +156,34 @@ body {
 .logo {
   font-weight: 700;
   letter-spacing: 0.03em;
+  color: #000000;
+  background-color: var(--light-nature-green);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  display: inline-block;
 }
 
 .nav a {
   margin-left: 1rem;
   text-decoration: none;
-  color: #374151;
-  font-size: 0.95rem;
+  color: #000000;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background-color: var(--light-nature-green);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  display: inline-block;
 }
 
 .nav a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  color: #000000;
+  background-color: #c0dcc0;
 }
 
 /* Hero */
 .hero {
   padding: 4rem 0 3rem;
-  background: linear-gradient(135deg, #e0f2fe, #f5f3ff);
 }
 
 .hero-inner {
@@ -64,31 +191,41 @@ body {
 }
 
 .hero h1 {
+  color: #000000;
   font-size: clamp(1.8rem, 4vw, 2.4rem);
   margin-bottom: 0.75rem;
+  background-color: var(--light-nature-green);
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  display: inline-block;
 }
 
 .hero p {
   max-width: 480px;
   margin: 0 auto 1.5rem;
-  color: #4b5563;
+  color: #000000;
+  background-color: var(--light-nature-green);
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
 }
 
 .btn-primary {
   display: inline-block;
-  padding: 0.7rem 1.5rem;
+  padding: 0.9rem 2rem;
   border-radius: 999px;
   border: none;
-  background: #111827;
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.95rem;
+  background: var(--brand-primary);
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 1.15rem;
   cursor: pointer;
   text-decoration: none;
 }
 
 .btn-primary:hover {
+  background-color: #5e3822;
   opacity: 0.9;
+  color: #ffffff !important;
 }
 
 /* Sections */
@@ -97,16 +234,71 @@ body {
 }
 
 .section-alt {
-  background: #ffffff;
+  /* No background - removed banner */
+}
+
+/* Order section wrapper - includes heading, button, and form */
+.order-section-wrapper {
+  background-color: var(--light-nature-green);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.order-section-wrapper h2 {
+  background-color: transparent;
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.order-section-wrapper p {
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.order-section-wrapper .btn-primary {
+  margin-bottom: 1.5rem;
+}
+
+/* All form elements inside wrapper should have no extra backgrounds */
+.order-section-wrapper .form-group label {
+  background-color: transparent;
+  padding: 0;
+  display: block;
+}
+
+.order-section-wrapper .small-note {
+  background-color: transparent;
+  padding: 0;
 }
 
 .section h2 {
   font-size: 1.4rem;
   margin-bottom: 0.75rem;
+  color: #000000;
+  background-color: var(--light-nature-green);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  display: inline-block;
+}
+
+/* Also apply green background to h1 headings */
+h1 {
+  color: #000000;
+  background-color: var(--light-nature-green);
+  padding: 1rem 1.5rem;
+  border-radius: 0.75rem;
+  display: inline-block;
 }
 
 .section p {
-  color: #4b5563;
+  color: #000000;
+  background-color: var(--light-nature-green);
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
 }
 
 .section-intro {
@@ -122,24 +314,121 @@ body {
 }
 
 .product-card {
-  background: #f9fafb;
+  border: 2px solid var (--border-soft);
+  background-color: #3B693C;
   border-radius: 0.75rem;
   padding: 1.25rem;
-  border: 1px solid #e5e7eb;
+  border: 0px solid #e5e7eb;
 }
 
 .product-card h3 {
   margin-top: 0;
   margin-bottom: 0.5rem;
+  background-color: var(--light-nature-green);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.75rem;
 }
+
+/* Category cards - force all text to black */
+.category-card {
+  text-decoration: none;
+  color: #000000;
+}
+
+.category-card h3 {
+  color: #000000;
+}
+
+.category-card p {
+  color: #000000;
+}
+
+.category-card:hover {
+  text-decoration: none;
+  color: #000000;
+}
+
+.category-card:hover h3 {
+  color: #000000;
+}
+
+.category-card:hover p {
+  color: #000000;
+}
+
+.category-card:visited {
+  color: #000000;
+}
+
+.category-card:visited h3 {
+  color: #000000;
+}
+
+.category-card:visited p {
+  color: #000000;
+}
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.option-card {
+  padding: 1rem;
+  border: 2px solid var(--border-soft);
+  background: #ffffff;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+
+.option-card:hover {
+  border-color: #111827;
+}
+
+.option-card.selected {
+  border-color: var(--brand-primary);
+  background-color: var(--brand-light);
+}
+
+/* Checkbox indicator in lower left corner */
+.option-card::after {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid #000000;
+  border-radius: 3px;
+  background-color: #ffffff;
+  transition: all 0.2s;
+}
+
+/* Red checkmark when selected */
+.option-card.selected::after {
+  content: '✓';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff0000;
+  font-weight: bold;
+  font-size: 22px;
+  background-color: #ffffff;
+}
+
 
 /* Form */
 .order-form {
-  margin-top: 1.5rem;
-  background: #ffffff;
-  border-radius: 0.75rem;
-  padding: 1.5rem;
-  border: 1px solid #e5e7eb;
+  margin-top: 0;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  border: none;
 }
 
 .form-grid {
@@ -198,7 +487,7 @@ textarea:focus {
 
 .small-note {
   font-size: 0.8rem;
-  color: #6b7280;
+  color: #000000;
   margin-top: 0.5rem;
 }
 
@@ -208,15 +497,48 @@ textarea:focus {
 
 /* Footer */
 .site-footer {
-  border-top: 1px solid #e5e7eb;
-  background: #f9fafb;
+  padding: 1rem 0;
+  text-align: center;
 }
 
 .footer-inner {
   padding: 1rem 0;
   text-align: center;
   font-size: 0.85rem;
-  color: #6b7280;
+  color: #000000;
+  background-color: var(--light-nature-green);
+  border-radius: 0.75rem;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.gallery-item {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
 }
 
 /* Responsive tweaks */
@@ -235,4 +557,97 @@ textarea:focus {
   .order-form {
     padding: 1.1rem;
   }
+}/* Brand header (logo + business name) */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
+
+.brand-logo {
+  max-width: 120px;       /* increased from 90px */
+  height: auto;
+  margin-bottom: 0.3rem;
+}
+
+.logo-text {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: 1.05rem;
+  color: #000000;
+  background-color: var(--light-nature-green);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  display: inline-block;
+}
+.font-thumb {
+  width: 100%;
+  height: 70px;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+/* Smaller images for color swatches */
+.color-thumb {
+  width: 70px;          /* smaller width */
+  height: 70px;         /* smaller height */
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+/* Larger images for engraving designs */
+.design-thumb {
+  width: 100%;
+  height: 120px;        /* larger, fills the card */
+  object-fit: cover;
+  border-radius: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+/* Simple image lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.05); /* barely visible */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.lightbox.open {
+  display: flex;              /* show when .open is added */
+}
+
+.lightbox-inner {
+  background: #FFFFFF;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  max-width: 90vw;
+  max-height: 90vh;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-inner img {
+  display: block;
+  max-width: 80vw;
+  max-height: 70vh;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+#lightbox-close {
+  display: inline-block;
+  border: none;
+  background: #f9fafb;
+  color: #111827;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+
+
+
