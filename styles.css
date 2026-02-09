@@ -1,5 +1,3 @@
-/* Step */
-/* Step */
 :root {
   --bg-main: #f4efe9;
   --text-main: #000000;
@@ -9,15 +7,6 @@
   --border-soft: #c8b49a;
   --light-nature-green: #d4e8d4;
 }
-
-
-<!-- Step -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>814 Wood Creations</title>
-</head>
 
 *,
 *::before,
@@ -30,7 +19,6 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: #000000;
   background-color: var(--bg-main);
-  /* Rustic wood grain feel: subtle gradient + optional texture image */
   background-image:
     linear-gradient(120deg, rgba(139, 92, 60, 0.16), rgba(120, 64, 32, 0.10)),
     url("images/background-wood.png");
@@ -42,7 +30,7 @@ body {
   position: relative;
 }
 
-/* Floating notebook images on sides */
+/* Floating notebook images - hidden on mobile */
 .notebook-bg {
   position: fixed;
   width: 210px;
@@ -52,6 +40,7 @@ body {
   cursor: pointer;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
   transition: opacity 0.2s;
+  display: none; /* Hidden by default on mobile */
 }
 
 .notebook-bg:hover {
@@ -151,28 +140,51 @@ main,
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem 0;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.logo {
+/* Brand header (logo + business name) */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.brand-logo {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 0.3rem;
+}
+
+.logo-text {
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
+  font-size: 1rem;
   color: #000000;
   background-color: var(--light-nature-green);
   padding: 0.5rem 1rem;
   border-radius: 0.75rem;
   display: inline-block;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .nav a {
-  margin-left: 1rem;
   text-decoration: none;
   color: #000000;
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   background-color: var(--light-nature-green);
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0.75rem;
   border-radius: 0.75rem;
   display: inline-block;
+  white-space: nowrap;
 }
 
 .nav a:hover {
@@ -183,7 +195,7 @@ main,
 
 /* Hero */
 .hero {
-  padding: 4rem 0 3rem;
+  padding: 3rem 0 2rem;
 }
 
 .hero-inner {
@@ -192,12 +204,13 @@ main,
 
 .hero h1 {
   color: #000000;
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-size: clamp(1.4rem, 5vw, 2.4rem);
   margin-bottom: 0.75rem;
   background-color: var(--light-nature-green);
   padding: 1rem 1.5rem;
   border-radius: 0.75rem;
   display: inline-block;
+  max-width: 100%;
 }
 
 .hero p {
@@ -230,7 +243,7 @@ main,
 
 /* Sections */
 .section {
-  padding: 3rem 0;
+  padding: 2rem 0;
 }
 
 .section-alt {
@@ -241,7 +254,7 @@ main,
 .order-section-wrapper {
   background-color: var(--light-nature-green);
   border-radius: 1rem;
-  padding: 2.5rem;
+  padding: 1.5rem;
   margin-top: 1.5rem;
 }
 
@@ -276,13 +289,14 @@ main,
 }
 
 .section h2 {
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 4vw, 1.4rem);
   margin-bottom: 0.75rem;
   color: #000000;
   background-color: var(--light-nature-green);
   padding: 0.75rem 1.25rem;
   border-radius: 0.75rem;
   display: inline-block;
+  max-width: 100%;
 }
 
 /* Also apply green background to h1 headings */
@@ -292,6 +306,7 @@ h1 {
   padding: 1rem 1.5rem;
   border-radius: 0.75rem;
   display: inline-block;
+  max-width: 100%;
 }
 
 .section p {
@@ -314,7 +329,7 @@ h1 {
 }
 
 .product-card {
-  border: 2px solid var (--border-soft);
+  border: 2px solid var(--border-soft);
   background-color: #3B693C;
   border-radius: 0.75rem;
   padding: 1.25rem;
@@ -327,6 +342,11 @@ h1 {
   background-color: var(--light-nature-green);
   padding: 0.5rem 0.75rem;
   border-radius: 0.75rem;
+  color: #000000;
+}
+
+.product-card p {
+  color: #000000;
 }
 
 /* Category cards - force all text to black */
@@ -367,6 +387,7 @@ h1 {
 .category-card:visited p {
   color: #000000;
 }
+
 .option-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -421,7 +442,6 @@ h1 {
   background-color: #ffffff;
 }
 
-
 /* Form */
 .order-form {
   margin-top: 0;
@@ -451,6 +471,7 @@ label {
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
+  color: #000000;
 }
 
 input,
@@ -458,8 +479,10 @@ select,
 textarea {
   border-radius: 0.5rem;
   border: 1px solid #d1d5db;
-  padding: 0.45rem 0.6rem;
+  padding: 0.65rem 0.75rem;
   font: inherit;
+  width: 100%;
+  background-color: #ffffff;
 }
 
 input:focus,
@@ -467,7 +490,7 @@ select:focus,
 textarea:focus {
   outline: none;
   border-color: #111827;
-  box-shadow: 0 0 0 1px #11182711;
+  box-shadow: 0 0 0 1px rgba(17, 24, 39, 0.1);
 }
 
 .option-group {
@@ -479,16 +502,22 @@ textarea:focus {
 
 .option-group label {
   font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .form-submit {
   margin-top: 0.5rem;
+  width: 100%;
+  max-width: 300px;
 }
 
 .small-note {
   font-size: 0.8rem;
   color: #000000;
   margin-top: 0.5rem;
+  display: block;
 }
 
 .hidden {
@@ -515,7 +544,7 @@ textarea:focus {
 /* Gallery Grid */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }
@@ -541,46 +570,6 @@ textarea:focus {
   display: block;
 }
 
-/* Responsive tweaks */
-@media (max-width: 640px) {
-  .header-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-
-  .nav a {
-    margin-left: 0.75rem;
-    font-size: 0.9rem;
-  }
-
-  .order-form {
-    padding: 1.1rem;
-  }
-}/* Brand header (logo + business name) */
-.brand {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.brand-logo {
-  max-width: 120px;       /* increased from 90px */
-  height: auto;
-  margin-bottom: 0.3rem;
-}
-
-.logo-text {
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  font-size: 1.05rem;
-  color: #000000;
-  background-color: var(--light-nature-green);
-  padding: 0.5rem 1rem;
-  border-radius: 0.75rem;
-  display: inline-block;
-}
 .font-thumb {
   width: 100%;
   height: 70px;
@@ -588,36 +577,41 @@ textarea:focus {
   border-radius: 0.5rem;
   margin-bottom: 0.4rem;
 }
+
 /* Smaller images for color swatches */
 .color-thumb {
-  width: 70px;          /* smaller width */
-  height: 70px;         /* smaller height */
+  width: 70px;
+  height: 70px;
   object-fit: cover;
   border-radius: 0.5rem;
   margin-bottom: 0.4rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Larger images for engraving designs */
 .design-thumb {
   width: 100%;
-  height: 120px;        /* larger, fills the card */
+  height: 120px;
   object-fit: cover;
   border-radius: 0.5rem;
   margin-bottom: 0.4rem;
 }
+
 /* Simple image lightbox */
 .lightbox {
   position: fixed;
   inset: 0;
-  background: rgba(255, 255, 255, 0.05); /* barely visible */
+  background: rgba(0, 0, 0, 0.8);
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  padding: 1rem;
 }
 
 .lightbox.open {
-  display: flex;              /* show when .open is added */
+  display: flex;
 }
 
 .lightbox-inner {
@@ -627,14 +621,18 @@ textarea:focus {
   max-width: 90vw;
   max-height: 90vh;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .lightbox-inner img {
   display: block;
-  max-width: 80vw;
+  max-width: 100%;
   max-height: 70vh;
   margin-bottom: 0.5rem;
   border-radius: 0.5rem;
+  object-fit: contain;
 }
 
 #lightbox-close {
@@ -642,12 +640,125 @@ textarea:focus {
   border: none;
   background: #f9fafb;
   color: #111827;
-  padding: 0.25rem 0.75rem;
+  padding: 0.5rem 1rem;
   border-radius: 999px;
   font-size: 0.9rem;
   cursor: pointer;
 }
 
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
 
+  .brand-logo {
+    max-width: 80px;
+  }
 
+  .logo-text {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
 
+  .nav {
+    justify-content: center;
+  }
+
+  .nav a {
+    font-size: 0.85rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .hero {
+    padding: 2rem 0 1.5rem;
+  }
+
+  .hero h1 {
+    padding: 0.75rem 1rem;
+    font-size: 1.4rem;
+  }
+
+  .hero p {
+    padding: 0.75rem 1rem;
+  }
+
+  .section {
+    padding: 1.5rem 0;
+  }
+
+  .section h2 {
+    padding: 0.6rem 1rem;
+  }
+
+  .order-section-wrapper {
+    padding: 1rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .gallery-img {
+    height: 250px;
+  }
+
+  .btn-primary {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Show floating notebooks only on larger screens */
+@media (min-width: 1200px) {
+  .notebook-bg {
+    display: block;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .hero h1 {
+    font-size: 1.2rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+  }
+
+  .nav a {
+    font-size: 0.8rem;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .section h2 {
+    font-size: 1.1rem;
+  }
+
+  .product-card {
+    padding: 1rem;
+  }
+
+  .form-submit {
+    max-width: 100%;
+  }
+}
