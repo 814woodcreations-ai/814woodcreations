@@ -4,9 +4,9 @@
 
 // YOUR GOOGLE SHEETS CREDENTIALS
 // Replace these with your actual values:
-const SHEET_ID = 'YOUR_SHEET_ID_HERE';  // Get this from your Google Sheet URL
-const API_KEY = 'YOUR_API_KEY_HERE';     // Your Google Cloud API Key
-const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';  // Your deployed Apps Script URL
+const SHEET_ID = 'd/19RJfvLen6l7O_wa5tnUpCWvqVwblphlkC8EburaS1gg';  // Get this from your Google Sheet URL
+const API_KEY = 'AIzaSyAGlTgAucD7am_MJUHDkot4ez7pwezL_7Y';     // Your Google Cloud API Key
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyB_KQ0-hU7wEvDJjazOg8KTbYgvRjR5Uja3scMW3GZMqZrMakUfWhnzwnNgGT_3TOB/exec';  // Your deployed Apps Script URL
 const SECRET_KEY = 'mySecretPassword123';  // Match this to your Apps Script password
 
 // ========================================
