@@ -5,6 +5,56 @@
   <title>Custom Notebooks – Skull | 814 Wood Creations</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Add inventory CSS -->
+  <style>
+    /* Out of Stock Styling */
+    .option-card.out-of-stock {
+      opacity: 0.5;
+      pointer-events: none;
+      position: relative;
+      cursor: not-allowed;
+    }
+
+    .option-card.out-of-stock::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(to top right,
+          transparent 0%,
+          transparent calc(50% - 2px),
+          #ff0000 50%,
+          transparent calc(50% + 2px),
+          transparent 100%),
+        linear-gradient(to bottom right,
+          transparent 0%,
+          transparent calc(50% - 2px),
+          #ff0000 50%,
+          transparent calc(50% + 2px),
+          transparent 100%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .stock-label {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 0, 0, 0.9);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      z-index: 11;
+      white-space: nowrap;
+    }
+  </style>
 </head>
 
 <body>
@@ -174,7 +224,10 @@
       </div>
     </div>
   </div>
-
-   <script src="script.js"></script>
+  <!-- Load your existing script -->
+  <script src="script.js"></script>
+  
+  <!-- Inventory tracking script -->
+  <script src="inventory.js"></script>
 </body>
 </html>
