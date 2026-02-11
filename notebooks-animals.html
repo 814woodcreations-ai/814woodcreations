@@ -109,77 +109,165 @@
           </button>
         </div>
 
-        <!-- Font Selection -->
-        <h2 style="margin-top: 2rem;">Choose a Font</h2>
-        <div class="option-grid" id="font-options">
-
-          <button class="option-card image-option" data-font="Alegreya SC">
-            <img src="images/fonts/alegreyasc.png" alt="Alegreya SC Font Example" class="design-thumb" />
-            <span>Alegreya SC</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Algerian">
-            <img src="images/fonts/algerian.png" alt="Algerian Font Example" class="design-thumb" />
-            <span>Algerian</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Bit5">
-            <img src="images/fonts/bit5.png" alt="Bit5 Font Example" class="design-thumb" />
-            <span>Bit5</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Bloody">
-            <img src="images/fonts/bloody.png" alt="Bloody Font Example" class="design-thumb" />
-            <span>Bloody</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Caveat">
-            <img src="images/fonts/caveat.png" alt="Caveat Font Example" class="design-thumb" />
-            <span>Caveat</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Dancing Script">
-            <img src="images/fonts/dancingscript.png" alt="Dancing Script Font Example" class="design-thumb" />
-            <span>Dancing Script</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Great Vibes">
-            <img src="images/fonts/greatvibes.png" alt="Great Vibes Font Example" class="design-thumb" />
-            <span>Great Vibes</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Lato">
-            <img src="images/fonts/lato.png" alt="Lato Font Example" class="design-thumb" />
-            <span>Lato</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Lobster">
-            <img src="images/fonts/lobster.png" alt="Lobster Font Example" class="design-thumb" />
-            <span>Lobster</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Noto Serif KR">
-            <img src="images/fonts/notoserifkr.png" alt="Noto Serif KR Font Example" class="design-thumb" />
-            <span>Noto Serif KR</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Ravie">
-            <img src="images/fonts/ravie.png" alt="Ravie Font Example" class="design-thumb" />
-            <span>Ravie</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Strados Stencil">
-            <img src="images/fonts/stradosstencil.png" alt="Strados Stencil Font Example" class="design-thumb" />
-            <span>Strados Stencil</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Zombie City">
-            <img src="images/fonts/zombiecity.png" alt="Zombie City Font Example" class="design-thumb" />
-            <span>Zombie City</span>
-          </button>
-
+        <!-- Engraving Text -->
+        <h2 style="margin-top: 2rem;">Engraving Text</h2>
+        <div style="max-width: 520px; margin-top: 1rem;">
+          <label for="engraving-text" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">
+            Text to engrave
+          </label>
+          <input
+            id="engraving-text"
+            type="text"
+            placeholder="Type the text you want engraved"
+            maxlength="30"
+            style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;"
+          />
+          <small class="small-note" style="display: block; margin-top: 0.5rem; background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Max 30 characters</small>
         </div>
 
+        <!-- Text Position Selection -->
+        <h2 style="margin-top: 2rem;">Text Position</h2>
+        <div style="max-width: 520px; margin-top: 1rem;">
+          <select 
+            id="text-position" 
+            style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;"
+          >
+            <option value="none">None (No Text)</option>
+            <option value="top">Top</option>
+            <option value="bottom" selected>Bottom</option>
+          </select>
+          <small class="small-note" style="display: block; margin-top: 0.5rem; background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Choose where the text should appear on your notebook</small>
+        </div>
+
+        <!-- Font Selection -->
+        <h2 style="margin-top: 2rem;">Choose a Font</h2>
+        <div style="max-width: 400px; margin-top: 1rem;">
+          <select id="font-select" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;">
+            <option value="">Choose a font</option>
+            <option value="Achafexp">Achafexp (Expanded)</option>
+            <option value="Achafita">Achafita (Italic)</option>
+            <option value="Achaflft">Achaflft (Light)</option>
+            <option value="Achafont">Achafont (Regular)</option>
+            <option value="Achafout">Achafout (Outline)</option>
+            <option value="Achafsex">Achafsex (Semi-Extended)</option>
+            <option value="Alegreya SC">Alegreya SC (Regular)</option>
+            <option value="Alegreya SC Italic">Alegreya SC (Italic)</option>
+            <option value="Alegreya SC Bold">Alegreya SC (Bold)</option>
+            <option value="Alegreya SC Bold Italic">Alegreya SC (Bold Italic)</option>
+            <option value="Alegreya SC Black">Alegreya SC (Black)</option>
+            <option value="Alegreya SC Black Italic">Alegreya SC (Black Italic)</option>
+            <option value="Dancing Script">Dancing Script (Regular)</option>
+            <option value="Dancing Script Medium">Dancing Script (Medium)</option>
+            <option value="Dancing Script SemiBold">Dancing Script (SemiBold)</option>
+            <option value="Dancing Script Bold">Dancing Script (Bold)</option>
+            <option value="Bloody Terror">Bloody Terror</option>
+            <option value="Clesgoth">Clesgoth (Gothic)</option>
+            <option value="Collegiate">Collegiate (Regular)</option>
+            <option value="Collegiate Black">Collegiate (Black)</option>
+            <option value="Collegiate Border">Collegiate (Border)</option>
+            <option value="Collegiate Inside">Collegiate (Inside)</option>
+            <option value="Collegiate Outline">Collegiate (Outline)</option>
+            <option value="Enchanted Land">Enchanted Land</option>
+            <option value="Freshman">Freshman</option>
+            <option value="Heorot">Heorot (Regular)</option>
+            <option value="Heorot Italic">Heorot (Italic)</option>
+            <option value="Heorot Bold">Heorot (Bold)</option>
+            <option value="Heorot Bold Italic">Heorot (Bold Italic)</option>
+            <option value="Heorot SemiBold">Heorot (SemiBold)</option>
+            <option value="Heorot SemiBold Italic">Heorot (SemiBold Italic)</option>
+            <option value="Lato Thin">Lato (Thin)</option>
+            <option value="Lato Thin Italic">Lato (Thin Italic)</option>
+            <option value="Lato Light">Lato (Light)</option>
+            <option value="Lato Light Italic">Lato (Light Italic)</option>
+            <option value="Lato">Lato (Regular)</option>
+            <option value="Lato Italic">Lato (Italic)</option>
+            <option value="Lato Bold">Lato (Bold)</option>
+            <option value="Lato Bold Italic">Lato (Bold Italic)</option>
+            <option value="Lato Black">Lato (Black)</option>
+            <option value="Lato Black Italic">Lato (Black Italic)</option>
+            <option value="Marlboro">Marlboro</option>
+            <option value="Mostwasted">Mostwasted (Grunge)</option>
+            <option value="Old London">Old London</option>
+            <option value="Old London Alternate">Old London Alternate</option>
+            <option value="Plank">Plank (Wooden)</option>
+            <option value="Playball">Playball (Script)</option>
+            <option value="Prince Valiant">Prince Valiant (Medieval)</option>
+            <option value="Remachine Script">Remachine Script</option>
+            <option value="Stardos Stencil">Stardos Stencil (Regular)</option>
+            <option value="Stardos Stencil Bold">Stardos Stencil (Bold)</option>
+          </select>
+        </div>
+
+        <!-- PREVIEW SECTION -->
+        <div id="preview-section" style="margin-top: 3rem; display: none;">
+          <h2>Your Notebook Preview</h2>
+          <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+            <!-- Left side: Preview image -->
+            <div style="flex: 1; min-width: 300px;">
+              <div style="border-radius: 1rem; padding: 2rem; text-align: center;">
+                <div style="position: relative; display: inline-block; max-width: 400px;">
+                  <!-- Notebook color background -->
+                  <img id="preview-notebook" src="" alt="Notebook Preview" style="width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.2);" />
+                  
+                  <!-- Design overlay -->
+                  <div id="preview-design-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60%; display: none;">
+                    <img id="preview-design" src="" alt="Design Preview" style="width: 100%; height: auto; opacity: 0.9;" />
+                  </div>
+                  
+                  <!-- Font preview text -->
+                  <div id="preview-text-container" style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); width: 80%; display: none;">
+                    <p id="preview-text" style="margin: 0; font-size: 1.5rem; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Your Text</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right side: Preview Controls -->
+            <div style="flex: 0 0 300px; min-width: 250px;">
+              <div style="background-color: var(--light-nature-green); padding: 1.5rem; border-radius: 0.75rem;">
+                <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.1rem; background-color: transparent; padding: 0;">Adjust Preview Display</h3>
+                
+                <!-- Font Size Control -->
+                <div style="margin-bottom: 1.5rem;" id="font-size-control-wrapper">
+                  <label for="font-size-control" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">Text Size:</label>
+                  <input 
+                    type="range" 
+                    id="font-size-control" 
+                    min="12" 
+                    max="48" 
+                    value="24" 
+                    step="2"
+                    style="width: 100%;"
+                  />
+                  <div style="display: flex; justify-content: space-between; margin-top: 0.25rem;">
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Small (12px)</small>
+                    <small id="font-size-display" style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">24px</small>
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Large (48px)</small>
+                  </div>
+                </div>
+
+                <!-- Design Size Control -->
+                <div style="margin-bottom: 0;">
+                  <label for="design-size-control" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">Design Size:</label>
+                  <input 
+                    type="range" 
+                    id="design-size-control" 
+                    min="30" 
+                    max="80" 
+                    value="60" 
+                    step="5"
+                    style="width: 100%;"
+                  />
+                  <div style="display: flex; justify-content: space-between; margin-top: 0.25rem;">
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Small (30%)</small>
+                    <small id="design-size-display" style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">60%</small>
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Large (80%)</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- Design Selection -->
         <h2 style="margin-top: 2rem;">Choose an Animal Design</h2>
@@ -189,238 +277,168 @@
             <span>Elephant Paint</span>
           </button>
           <button class="option-card image-option" data-logo="Dog">
-  <img src="images/animals/2.png" class="design-thumb" />
-  <span>Dog</span>
-</button>
-           </button>
+            <img src="images/animals/2.png" class="design-thumb" />
+            <span>Dog</span>
+          </button>
           <button class="option-card image-option" data-logo="Raptorsaurus">
-  <img src="images/animals/3.png" class="design-thumb" />
-  <span>Raptorsaurus</span>
-</button>
-           </button>
+            <img src="images/animals/3.png" class="design-thumb" />
+            <span>Raptorsaurus</span>
+          </button>
           <button class="option-card image-option" data-logo="Heart Butterfly">
-  <img src="images/animals/4.png" class="design-thumb" />
-  <span>Heart Butterfly</span>
-</button>           
-	  </button>
+            <img src="images/animals/4.png" class="design-thumb" />
+            <span>Heart Butterfly</span>
+          </button>
           <button class="option-card image-option" data-logo="Chicken">
-  <img src="images/animals/5.png" class="design-thumb" />
-  <span>Chicken</span>
-</button>            
-	  </button>
-         <button class="option-card image-option" data-logo="Cow">
-  <img src="images/animals/6.png" class="design-thumb" />
-  <span>Cow</span>
-</button>           
- 	  </button>
-          <button class="option-card image-option" data-logo="Elephant with Hearts">
-  <img src="images/animals/7.png" class="design-thumb" />
-  <span>Elephant with Hearts</span>
-</button> 
-	  </button>
-          <button class="option-card image-option" data-logo="Giraffe">
-  <img src="images/animals/8.png" class="design-thumb" />
-  <span>Giraffe</span>
-</button>
+            <img src="images/animals/5.png" class="design-thumb" />
+            <span>Chicken</span>
           </button>
-          <button class="option-card image-option" data-logo="Elephant Hearts">
-  <img src="images/animals/9.png" class="design-thumb" />
-  <span>Elephant Hearts</span>
-</button>
+          <button class="option-card image-option" data-logo="Cat">
+            <img src="images/animals/6.png" class="design-thumb" />
+            <span>Cat</span>
           </button>
-          <button class="option-card image-option" data-logo="Side Raptorsaurus">
-  <img src="images/animals/10.png" class="design-thumb" />
-  <span>Side Raptorsaurus</span>
-</button>
+          <button class="option-card image-option" data-logo="Cat Warrior">
+            <img src="images/animals/7.png" class="design-thumb" />
+            <span>Cat Warrior</span>
           </button>
-          <button class="option-card image-option" data-logo="Brontosaurus">
-  <img src="images/animals/11.png" class="design-thumb" />
-  <span>Brontosaurus</span>
-</button>
+          <button class="option-card image-option" data-logo="Cat in Sunglasses">
+            <img src="images/animals/8.png" class="design-thumb" />
+            <span>Cat in Sunglasses</span>
           </button>
-          <button class="option-card image-option" data-logo="Triceratops">
-  <img src="images/animals/12.png" class="design-thumb" />
-  <span>Triceratops</span>
-</button>
+          <button class="option-card image-option" data-logo="Cat with Flower">
+            <img src="images/animals/9.png" class="design-thumb" />
+            <span>Cat with Flower</span>
           </button>
-         <button class="option-card image-option" data-logo="Dog Paw Heart">
-  <img src="images/animals/13.png" class="design-thumb" />
-  <span>Dog Paw Heart</span>
-</button>
+          <button class="option-card image-option" data-logo="Cat Silhouette">
+            <img src="images/animals/10.png" class="design-thumb" />
+            <span>Cat Silhouette</span>
           </button>
+          <button class="option-card image-option" data-logo="Dog Silhouette">
+            <img src="images/animals/11.png" class="design-thumb" />
+            <span>Dog Silhouette</span>
           </button>
-         <button class="option-card image-option" data-logo="Dog Paw Infinity">
-  <img src="images/animals/14.png" class="design-thumb" />
-  <span>Dog Paw Infinity</span>
-</button>
+          <button class="option-card image-option" data-logo="Dog with Leash">
+            <img src="images/animals/12.png" class="design-thumb" />
+            <span>Dog with Leash</span>
           </button>
+          <button class="option-card image-option" data-logo="Dog Paws">
+            <img src="images/animals/13.png" class="design-thumb" />
+            <span>Dog Paws</span>
           </button>
-         <button class="option-card image-option" data-logo="Dog Heart Shape">
-  <img src="images/animals/15.png" class="design-thumb" />
-  <span>Dog Heart Shape</span>
-</button>
+          <button class="option-card image-option" data-logo="Dog with Paws">
+            <img src="images/animals/14.png" class="design-thumb" />
+            <span>Dog with Paws</span>
           </button>
+          <button class="option-card image-option" data-logo="Dog Heart Shape">
+            <img src="images/animals/15.png" class="design-thumb" />
+            <span>Dog Heart Shape</span>
           </button>
-         <button class="option-card image-option" data-logo="Fish">
-  <img src="images/animals/16.png" class="design-thumb" />
-  <span>Fish</span>
-</button>
+          <button class="option-card image-option" data-logo="Fish">
+            <img src="images/animals/16.png" class="design-thumb" />
+            <span>Fish</span>
           </button>
+          <button class="option-card image-option" data-logo="Flower Paws">
+            <img src="images/animals/17.png" class="design-thumb" />
+            <span>Flower Paws</span>
           </button>
-         <button class="option-card image-option" data-logo="Flower Paws">
-  <img src="images/animals/17.png" class="design-thumb" />
-  <span>Flower Paws</span>
-</button>
+          <button class="option-card image-option" data-logo="Gorilla with Hat">
+            <img src="images/animals/18.png" class="design-thumb" />
+            <span>Gorilla with Hat</span>
           </button>
+          <button class="option-card image-option" data-logo="Gorilla Ganster">
+            <img src="images/animals/19.png" class="design-thumb" />
+            <span>Gorilla Ganster</span>
           </button>
-         <button class="option-card image-option" data-logo="Gorilla with Hat">
-  <img src="images/animals/18.png" class="design-thumb" />
-  <span>Gorilla with Hat</span>
-</button>
+          <button class="option-card image-option" data-logo="Gorilla Promask">
+            <img src="images/animals/20.png" class="design-thumb" />
+            <span>Gorilla Promask</span>
           </button>
+          <button class="option-card image-option" data-logo="Lion Half">
+            <img src="images/animals/21.png" class="design-thumb" />
+            <span>Lion Half</span>
           </button>
-         <button class="option-card image-option" data-logo="Gorilla Ganster">
-  <img src="images/animals/19.png" class="design-thumb" />
-  <span>Gorilla Ganster</span>
-</button>
+          <button class="option-card image-option" data-logo="Lioness Half">
+            <img src="images/animals/22.png" class="design-thumb" />
+            <span>Lioness Half</span>
           </button>
+          <button class="option-card image-option" data-logo="Lion">
+            <img src="images/animals/23.png" class="design-thumb" />
+            <span>Lion</span>
           </button>
-         <button class="option-card image-option" data-logo="Gorilla Promask">
-  <img src="images/animals/20.png" class="design-thumb" />
-  <span>Gorilla Promask</span>
-</button>
+          <button class="option-card image-option" data-logo="Dog Paw Love">
+            <img src="images/animals/24.png" class="design-thumb" />
+            <span>Paw Love</span>
           </button>
+          <button class="option-card image-option" data-logo="Antistress Cat">
+            <img src="images/animals/25.png" class="design-thumb" />
+            <span>Antistress Cat</span>
           </button>
-         <button class="option-card image-option" data-logo="Lion Half">
-  <img src="images/animals/21.png" class="design-thumb" />
-  <span>Lion Half</span>
-</button>
+          <button class="option-card image-option" data-logo="Antistress Fish">
+            <img src="images/animals/26.png" class="design-thumb" />
+            <span>Antistress Fish</span>
           </button>
+          <button class="option-card image-option" data-logo="Antistress Wolf">
+            <img src="images/animals/27.png" class="design-thumb" />
+            <span>Antistress Wolf</span>
           </button>
-         <button class="option-card image-option" data-logo="Lioness Half">
-  <img src="images/animals/22.png" class="design-thumb" />
-  <span>Lioness Half</span>
-</button>
+          <button class="option-card image-option" data-logo="Peeking Cat">
+            <img src="images/animals/28.png" class="design-thumb" />
+            <span>Peeking Cat</span>
           </button>
+          <button class="option-card image-option" data-logo="Peeking Cat 2">
+            <img src="images/animals/29.png" class="design-thumb" />
+            <span>Peeking Cat 2</span>
           </button>
-         <button class="option-card image-option" data-logo="Lion">
-  <img src="images/animals/23.png" class="design-thumb" />
-  <span>Lion</span>
-</button>
+          <button class="option-card image-option" data-logo="Chicken Adobo">
+            <img src="images/animals/30.png" class="design-thumb" />
+            <span>Chicken Adobo</span>
           </button>
+          <button class="option-card image-option" data-logo="Deer Head Heart">
+            <img src="images/animals/31.png" class="design-thumb" />
+            <span>Deer Head Heart</span>
           </button>
-         <button class="option-card image-option" data-logo="Dog Paw Love">
-  <img src="images/animals/24.png" class="design-thumb" />
-  <span>Paw Love</span>
-</button>
+          <button class="option-card image-option" data-logo="Deer Head">
+            <img src="images/animals/32.png" class="design-thumb" />
+            <span>Deer Head</span>
           </button>
+          <button class="option-card image-option" data-logo="Giraffe Head">
+            <img src="images/animals/33.png" class="design-thumb" />
+            <span>Giraffe Head</span>
           </button>
-         <button class="option-card image-option" data-logo="Antistress Cat">
-  <img src="images/animals/25.png" class="design-thumb" />
-  <span>Antistress Cat</span>
-</button>
+          <button class="option-card image-option" data-logo="Kid Giraffe">
+            <img src="images/animals/34.png" class="design-thumb" />
+            <span>Kid Giraffe</span>
           </button>
+          <button class="option-card image-option" data-logo="Monarch Butterfly">
+            <img src="images/animals/35.png" class="design-thumb" />
+            <span>Monarch Butterfly</span>
           </button>
-         <button class="option-card image-option" data-logo="Antistress Fish">
-  <img src="images/animals/26.png" class="design-thumb" />
-  <span>Antistress Fish</span>
-</button>
+          <button class="option-card image-option" data-logo="Queen Bee">
+            <img src="images/animals/36.png" class="design-thumb" />
+            <span>Queen Bee</span>
           </button>
+          <button class="option-card image-option" data-logo="Stuff Bunny">
+            <img src="images/animals/37.png" class="design-thumb" />
+            <span>Stuff Bunny</span>
           </button>
-         <button class="option-card image-option" data-logo="Antistress Wolf">
-  <img src="images/animals/27.png" class="design-thumb" />
-  <span>Antistress Wolf</span>
-</button>
+          <button class="option-card image-option" data-logo="Tiger Eyes">
+            <img src="images/animals/38.png" class="design-thumb" />
+            <span>Tiger Eyes</span>
           </button>
+          <button class="option-card image-option" data-logo="Tiger Head On">
+            <img src="images/animals/39.png" class="design-thumb" />
+            <span>Tiger Head On</span>
           </button>
-         <button class="option-card image-option" data-logo="Peeking Cat">
-  <img src="images/animals/28.png" class="design-thumb" />
-  <span>Peeking Cat</span>
-</button>
+          <button class="option-card image-option" data-logo="Tribal Buffalo">
+            <img src="images/animals/40.png" class="design-thumb" />
+            <span>Tribal Buffalo</span>
           </button>
+          <button class="option-card image-option" data-logo="Tribal Water Buffalo">
+            <img src="images/animals/41.png" class="design-thumb" />
+            <span>Tribal Water Buffalo</span>
           </button>
-         <button class="option-card image-option" data-logo="Peeking Cat 2">
-  <img src="images/animals/29.png" class="design-thumb" />
-  <span>Peeking Cat 2</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Chicken Adobo">
-  <img src="images/animals/30.png" class="design-thumb" />
-  <span>Chicken Adobo</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Deer Head Heart">
-  <img src="images/animals/31.png" class="design-thumb" />
-  <span>Deer Head Heart</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Deer Head">
-  <img src="images/animals/32.png" class="design-thumb" />
-  <span>Deer Head</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Giraffe Head">
-  <img src="images/animals/33.png" class="design-thumb" />
-  <span>Giraffe Head</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Kid Giraffe">
-  <img src="images/animals/34.png" class="design-thumb" />
-  <span>Kid Giraffe</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Monarch Butterfly">
-  <img src="images/animals/35.png" class="design-thumb" />
-  <span>Monarch Butterfly</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Queen Bee">
-  <img src="images/animals/36.png" class="design-thumb" />
-  <span>Queen Bee</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Stuff Bunny">
-  <img src="images/animals/37.png" class="design-thumb" />
-  <span>Stuff Bunny</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Tiger Eyes">
-  <img src="images/animals/38.png" class="design-thumb" />
-  <span>Tiger Eyes</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Tiger Head On">
-  <img src="images/animals/39.png" class="design-thumb" />
-  <span>Tiger Head On</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Tribal Buffalo">
-  <img src="images/animals/40.png" class="design-thumb" />
-  <span>Tribal Buffalo</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="Tribal Water Buffalo">
-  <img src="images/animals/41.png" class="design-thumb" />
-  <span>Tribal Water Buffalo</span>
-</button>
-          </button>
-          </button>
-         <button class="option-card image-option" data-logo="White Tiger">
-  <img src="images/animals/42.png" class="design-thumb" />
-  <span>White Tiger</span>
-</button>
+          <button class="option-card image-option" data-logo="White Tiger">
+            <img src="images/animals/42.png" class="design-thumb" />
+            <span>White Tiger</span>
           </button>
         </div>
 
@@ -438,23 +456,12 @@
       <p>© <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
     </div>
   </footer>
+
   <!-- Image Lightbox -->
   <div id="image-lightbox" class="lightbox">
     <div class="lightbox-inner">
       <img id="lightbox-img" src="" alt="Preview" />
       <button id="lightbox-close" type="button">× Close</button>
-    </div>
-  </div>
-
-  <!-- Color Confirmation Lightbox -->
-  <div id="color-confirmation-lightbox" class="lightbox">
-    <div class="lightbox-inner confirmation-box">
-      <h3 id="confirmation-title">Confirm Your Selection</h3>
-      <p id="confirmation-message"></p>
-      <div class="confirmation-buttons">
-        <button id="confirm-yes" class="btn-primary">Yes</button>
-        <button id="confirm-no" class="btn-secondary">No</button>
-      </div>
     </div>
   </div>
 

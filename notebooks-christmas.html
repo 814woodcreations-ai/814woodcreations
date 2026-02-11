@@ -5,7 +5,7 @@
   <title>Custom Notebooks – Christmas | 814 Wood Creations</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
-
+  
   <!-- Add inventory CSS -->
   <style>
     /* Out of Stock Styling */
@@ -59,7 +59,7 @@
 
 <body>
   <!-- Floating notebook background images -->
- <img src="images/paper.png" alt="" class="notebook-bg notebook-bg-1" />
+  <img src="images/paper.png" alt="" class="notebook-bg notebook-bg-1" />
   <img src="images/paper2.png" alt="" class="notebook-bg notebook-bg-2" />
   <img src="images/paper1.png" alt="" class="notebook-bg notebook-bg-3" />
   <img src="images/paper3.png" alt="" class="notebook-bg notebook-bg-4" />
@@ -79,7 +79,7 @@
     </div>
   </header>
 
-  <main>
+ <main>
     <section class="section">
       <div class="container">
         <h1>Custom Notebooks – Christmas</h1>
@@ -109,146 +109,235 @@
           </button>
         </div>
 
+        <!-- Engraving Text -->
+        <h2 style="margin-top: 2rem;">Engraving Text</h2>
+        <div style="max-width: 520px; margin-top: 1rem;">
+          <label for="engraving-text" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">
+            Text to engrave
+          </label>
+          <input
+            id="engraving-text"
+            type="text"
+            placeholder="Type the text you want engraved"
+            maxlength="30"
+            style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;"
+          />
+          <small class="small-note" style="display: block; margin-top: 0.5rem; background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Max 30 characters</small>
+        </div>
+
+        <!-- Text Position Selection -->
+        <h2 style="margin-top: 2rem;">Text Position</h2>
+        <div style="max-width: 520px; margin-top: 1rem;">
+          <select 
+            id="text-position" 
+            style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;"
+          >
+            <option value="none">None (No Text)</option>
+            <option value="top">Top</option>
+            <option value="bottom" selected>Bottom</option>
+          </select>
+          <small class="small-note" style="display: block; margin-top: 0.5rem; background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Choose where the text should appear on your notebook</small>
+        </div>
+
         <!-- Font Selection -->
         <h2 style="margin-top: 2rem;">Choose a Font</h2>
-        <div class="option-grid" id="font-options">
+        <div style="max-width: 400px; margin-top: 1rem;">
+          <select id="font-select" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;">
+            <option value="">Choose a font</option>
+            <option value="Achafexp">Achafexp (Expanded)</option>
+            <option value="Achafita">Achafita (Italic)</option>
+            <option value="Achaflft">Achaflft (Light)</option>
+            <option value="Achafont">Achafont (Regular)</option>
+            <option value="Achafout">Achafout (Outline)</option>
+            <option value="Achafsex">Achafsex (Semi-Extended)</option>
+            <option value="Alegreya SC">Alegreya SC (Regular)</option>
+            <option value="Alegreya SC Italic">Alegreya SC (Italic)</option>
+            <option value="Alegreya SC Bold">Alegreya SC (Bold)</option>
+            <option value="Alegreya SC Bold Italic">Alegreya SC (Bold Italic)</option>
+            <option value="Alegreya SC Black">Alegreya SC (Black)</option>
+            <option value="Alegreya SC Black Italic">Alegreya SC (Black Italic)</option>
+            <option value="Dancing Script">Dancing Script (Regular)</option>
+            <option value="Dancing Script Medium">Dancing Script (Medium)</option>
+            <option value="Dancing Script SemiBold">Dancing Script (SemiBold)</option>
+            <option value="Dancing Script Bold">Dancing Script (Bold)</option>
+            <option value="Bloody Terror">Bloody Terror</option>
+            <option value="Clesgoth">Clesgoth (Gothic)</option>
+            <option value="Collegiate">Collegiate (Regular)</option>
+            <option value="Collegiate Black">Collegiate (Black)</option>
+            <option value="Collegiate Border">Collegiate (Border)</option>
+            <option value="Collegiate Inside">Collegiate (Inside)</option>
+            <option value="Collegiate Outline">Collegiate (Outline)</option>
+            <option value="Enchanted Land">Enchanted Land</option>
+            <option value="Freshman">Freshman</option>
+            <option value="Heorot">Heorot (Regular)</option>
+            <option value="Heorot Italic">Heorot (Italic)</option>
+            <option value="Heorot Bold">Heorot (Bold)</option>
+            <option value="Heorot Bold Italic">Heorot (Bold Italic)</option>
+            <option value="Heorot SemiBold">Heorot (SemiBold)</option>
+            <option value="Heorot SemiBold Italic">Heorot (SemiBold Italic)</option>
+            <option value="Lato Thin">Lato (Thin)</option>
+            <option value="Lato Thin Italic">Lato (Thin Italic)</option>
+            <option value="Lato Light">Lato (Light)</option>
+            <option value="Lato Light Italic">Lato (Light Italic)</option>
+            <option value="Lato">Lato (Regular)</option>
+            <option value="Lato Italic">Lato (Italic)</option>
+            <option value="Lato Bold">Lato (Bold)</option>
+            <option value="Lato Bold Italic">Lato (Bold Italic)</option>
+            <option value="Lato Black">Lato (Black)</option>
+            <option value="Lato Black Italic">Lato (Black Italic)</option>
+            <option value="Marlboro">Marlboro</option>
+            <option value="Mostwasted">Mostwasted (Grunge)</option>
+            <option value="Old London">Old London</option>
+            <option value="Old London Alternate">Old London Alternate</option>
+            <option value="Plank">Plank (Wooden)</option>
+            <option value="Playball">Playball (Script)</option>
+            <option value="Prince Valiant">Prince Valiant (Medieval)</option>
+            <option value="Remachine Script">Remachine Script</option>
+            <option value="Stardos Stencil">Stardos Stencil (Regular)</option>
+            <option value="Stardos Stencil Bold">Stardos Stencil (Bold)</option>
+          </select>
+        </div>
 
-          <button class="option-card image-option" data-font="Alegreya SC">
-            <img src="images/fonts/alegreyasc.png" alt="Alegreya SC Font Example" class="design-thumb" />
-            <span>Alegreya SC</span>
-          </button>
+        <!-- PREVIEW SECTION -->
+        <div id="preview-section" style="margin-top: 3rem; display: none;">
+          <h2>Your Notebook Preview</h2>
+          <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+            <!-- Left side: Preview image -->
+            <div style="flex: 1; min-width: 300px;">
+              <div style="border-radius: 1rem; padding: 2rem; text-align: center;">
+                <div style="position: relative; display: inline-block; max-width: 400px;">
+                  <!-- Notebook color background -->
+                  <img id="preview-notebook" src="" alt="Notebook Preview" style="width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.2);" />
+                  
+                  <!-- Design overlay -->
+                  <div id="preview-design-container" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 60%; display: none;">
+                    <img id="preview-design" src="" alt="Design Preview" style="width: 100%; height: auto; opacity: 0.9;" />
+                  </div>
+                  
+                  <!-- Font preview text -->
+                  <div id="preview-text-container" style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); width: 80%; display: none;">
+                    <p id="preview-text" style="margin: 0; font-size: 1.5rem; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Your Text</p>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <button class="option-card image-option" data-font="Algerian">
-            <img src="images/fonts/algerian.png" alt="Algerian Font Example" class="design-thumb" />
-            <span>Algerian</span>
-          </button>
+            <!-- Right side: Preview Controls -->
+            <div style="flex: 0 0 300px; min-width: 250px;">
+              <div style="background-color: var(--light-nature-green); padding: 1.5rem; border-radius: 0.75rem;">
+                <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.1rem; background-color: transparent; padding: 0;">Adjust Preview Display</h3>
+                
+                <!-- Font Size Control -->
+                <div style="margin-bottom: 1.5rem;" id="font-size-control-wrapper">
+                  <label for="font-size-control" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">Text Size:</label>
+                  <input 
+                    type="range" 
+                    id="font-size-control" 
+                    min="12" 
+                    max="48" 
+                    value="24" 
+                    step="2"
+                    style="width: 100%;"
+                  />
+                  <div style="display: flex; justify-content: space-between; margin-top: 0.25rem;">
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Small (12px)</small>
+                    <small id="font-size-display" style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">24px</small>
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Large (48px)</small>
+                  </div>
+                </div>
 
-          <button class="option-card image-option" data-font="Bit5">
-            <img src="images/fonts/bit5.png" alt="Bit5 Font Example" class="design-thumb" />
-            <span>Bit5</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Bloody">
-            <img src="images/fonts/bloody.png" alt="Bloody Font Example" class="design-thumb" />
-            <span>Bloody</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Caveat">
-            <img src="images/fonts/caveat.png" alt="Caveat Font Example" class="design-thumb" />
-            <span>Caveat</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Dancing Script">
-            <img src="images/fonts/dancingscript.png" alt="Dancing Script Font Example" class="design-thumb" />
-            <span>Dancing Script</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Great Vibes">
-            <img src="images/fonts/greatvibes.png" alt="Great Vibes Font Example" class="design-thumb" />
-            <span>Great Vibes</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Lato">
-            <img src="images/fonts/lato.png" alt="Lato Font Example" class="design-thumb" />
-            <span>Lato</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Lobster">
-            <img src="images/fonts/lobster.png" alt="Lobster Font Example" class="design-thumb" />
-            <span>Lobster</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Noto Serif KR">
-            <img src="images/fonts/notoserifkr.png" alt="Noto Serif KR Font Example" class="design-thumb" />
-            <span>Noto Serif KR</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Ravie">
-            <img src="images/fonts/ravie.png" alt="Ravie Font Example" class="design-thumb" />
-            <span>Ravie</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Strados Stencil">
-            <img src="images/fonts/stradosstencil.png" alt="Strados Stencil Font Example" class="design-thumb" />
-            <span>Strados Stencil</span>
-          </button>
-
-          <button class="option-card image-option" data-font="Zombie City">
-            <img src="images/fonts/zombiecity.png" alt="Zombie City Font Example" class="design-thumb" />
-            <span>Zombie City</span>
-          </button>
-
+                <!-- Design Size Control -->
+                <div style="margin-bottom: 0;">
+                  <label for="design-size-control" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">Design Size:</label>
+                  <input 
+                    type="range" 
+                    id="design-size-control" 
+                    min="30" 
+                    max="80" 
+                    value="60" 
+                    step="5"
+                    style="width: 100%;"
+                  />
+                  <div style="display: flex; justify-content: space-between; margin-top: 0.25rem;">
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Small (30%)</small>
+                    <small id="design-size-display" style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">60%</small>
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Large (80%)</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Design Selection -->
         <h2 style="margin-top: 2rem;">Choose a Christmas Design</h2>
         <div class="option-grid" id="logo-options">
           <button class="option-card image-option" data-logo="Believe">
-            <img src="images/christmas/1.jpg" alt="Christmas Design 1" class="design-thumb" />
+            <img src="images/christmas/1.jpg" alt="Believe" class="design-thumb" />
             <span>Believe</span>
           </button>
           <button class="option-card image-option" data-logo="Believe in Miracle">
-            <img src="images/christmas/2.jpg" alt="Christmas Design 2" class="design-thumb" />
+            <img src="images/christmas/2.jpg" alt="Believe in Miracle" class="design-thumb" />
             <span>Believe in Miracle</span>
           </button>
           <button class="option-card image-option" data-logo="Glory to King">
-            <img src="images/christmas/3.jpg" alt="Christmas Design 3" class="design-thumb" />
+            <img src="images/christmas/3.jpg" alt="Glory to King" class="design-thumb" />
             <span>Glory to King</span>
           </button>
           <button class="option-card image-option" data-logo="White Cross">
-            <img src="images/christmas/4.jpg" alt="Christmas Design 4" class="design-thumb" />
+            <img src="images/christmas/4.jpg" alt="White Cross" class="design-thumb" />
             <span>White Cross</span>
           </button>
           <button class="option-card image-option" data-logo="Black Cross">
-            <img src="images/christmas/5.jpg" alt="Christmas Design 5" class="design-thumb" />
+            <img src="images/christmas/5.jpg" alt="Black Cross" class="design-thumb" />
             <span>Black Cross</span>
           </button>
           <button class="option-card image-option" data-logo="Christ is Born">
-            <img src="images/christmas/6.jpg" alt="Christmas Design 6" class="design-thumb" />
+            <img src="images/christmas/6.jpg" alt="Christ is Born" class="design-thumb" />
             <span>Christ is Born</span>
           </button>
           <button class="option-card image-option" data-logo="Christmas begins with Christ">
-            <img src="images/christmas/7.jpg" alt="Christmas Design 7" class="design-thumb" />
+            <img src="images/christmas/7.jpg" alt="Christmas begins with Christ" class="design-thumb" />
             <span>Christmas begins with Christ</span>
           </button>
           <button class="option-card image-option" data-logo="Peace on Earth">
-            <img src="images/christmas/8.jpg" alt="Christmas Design 8" class="design-thumb" />
+            <img src="images/christmas/8.jpg" alt="Peace on Earth" class="design-thumb" />
             <span>Peace on Earth</span>
           </button>
           <button class="option-card image-option" data-logo="Hope">
-            <img src="images/christmas/9.jpg" alt="Christmas Design 9" class="design-thumb" />
+            <img src="images/christmas/9.jpg" alt="Hope" class="design-thumb" />
             <span>Hope</span>
           </button>
           <button class="option-card image-option" data-logo="Happy Birthday Jesus">
-            <img src="images/christmas/10.jpg" alt="Christmas Design 10" class="design-thumb" />
+            <img src="images/christmas/10.jpg" alt="Happy Birthday Jesus" class="design-thumb" />
             <span>Happy Birthday Jesus</span>
           </button>
           <button class="option-card image-option" data-logo="Blessed">
-            <img src="images/christmas/11.jpg" alt="Christmas Design 11" class="design-thumb" />
+            <img src="images/christmas/11.jpg" alt="Blessed" class="design-thumb" />
             <span>Blessed</span>
           </button>
           <button class="option-card image-option" data-logo="Jesus is the reason">
-            <img src="images/christmas/12.jpg" alt="Christmas Design 12" class="design-thumb" />
+            <img src="images/christmas/12.jpg" alt="Jesus is the reason" class="design-thumb" />
             <span>Jesus is the reason</span>
           </button>
           <button class="option-card image-option" data-logo="Joy to the world">
-            <img src="images/christmas/13.jpg" alt="Christmas Design 13" class="design-thumb" />
+            <img src="images/christmas/13.jpg" alt="Joy to the world" class="design-thumb" />
             <span>Joy to the world</span>
           </button>
           <button class="option-card image-option" data-logo="Adore Him">
-            <img src="images/christmas/14.jpg" alt="Christmas Design 14" class="design-thumb" />
+            <img src="images/christmas/14.jpg" alt="Adore Him" class="design-thumb" />
             <span>Adore Him</span>
           </button>
           <button class="option-card image-option" data-logo="O holy night">
-            <img src="images/christmas/15.jpg" alt="Christmas Design 15" class="design-thumb" />
+            <img src="images/christmas/15.jpg" alt="O holy night" class="design-thumb" />
             <span>O holy night</span>
           </button>
           <button class="option-card image-option" data-logo="True Story">
-            <img src="images/christmas/16.jpg" alt="Christmas Design 16" class="design-thumb" />
+            <img src="images/christmas/16.jpg" alt="True Story" class="design-thumb" />
             <span>True Story</span>
           </button>
           <button class="option-card image-option" data-logo="Wise Men">
-            <img src="images/christmas/17.jpg" alt="Christmas Design 17" class="design-thumb" />
+            <img src="images/christmas/17.jpg" alt="Wise Men" class="design-thumb" />
             <span>Wise Men</span>
           </button>
         </div>
@@ -262,11 +351,12 @@
     </section>
   </main>
 
- <footer class="site-footer">
+  <footer class="site-footer">
     <div class="container footer-inner">
       <p>© <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
     </div>
   </footer>
+
   <!-- Image Lightbox -->
   <div id="image-lightbox" class="lightbox">
     <div class="lightbox-inner">
@@ -275,21 +365,10 @@
     </div>
   </div>
 
-  <!-- Color Confirmation Lightbox -->
-  <div id="color-confirmation-lightbox" class="lightbox">
-    <div class="lightbox-inner confirmation-box">
-      <h3 id="confirmation-title">Confirm Your Selection</h3>
-      <p id="confirmation-message"></p>
-      <div class="confirmation-buttons">
-        <button id="confirm-yes" class="btn-primary">Yes</button>
-        <button id="confirm-no" class="btn-secondary">No</button>
-      </div>
-    </div>
-  </div>
   <!-- Load your existing script -->
   <script src="script.js"></script>
   
   <!-- Inventory tracking script -->
-  <script src="inventory.js"></script
+  <script src="inventory.js"></script>
 </body>
 </html>

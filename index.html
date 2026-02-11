@@ -174,18 +174,100 @@
     <!-- Font text input -->
    <div class="form-group">
   <label for="font">Font *</label>
-  <input
+  <select
     id="font"
     name="font"
-    type="text"
     required
-    readonly
-    placeholder="e.g., Alegreya SC, Caveat, Lato"
-  />
+    disabled
+  >
+    <option value="">Select a font</option>
+    <option value="Achafexp">Achafexp (Expanded)</option>
+    <option value="Achafita">Achafita (Italic)</option>
+    <option value="Achaflft">Achaflft (Light)</option>
+    <option value="Achafont">Achafont (Regular)</option>
+    <option value="Achafout">Achafout (Outline)</option>
+    <option value="Achafsex">Achafsex (Semi-Extended)</option>
+    <option value="Alegreya SC">Alegreya SC (Regular)</option>
+    <option value="Alegreya SC Italic">Alegreya SC (Italic)</option>
+    <option value="Alegreya SC Bold">Alegreya SC (Bold)</option>
+    <option value="Alegreya SC Bold Italic">Alegreya SC (Bold Italic)</option>
+    <option value="Alegreya SC Black">Alegreya SC (Black)</option>
+    <option value="Alegreya SC Black Italic">Alegreya SC (Black Italic)</option>
+    <option value="Dancing Script">Dancing Script (Regular)</option>
+    <option value="Dancing Script Medium">Dancing Script (Medium)</option>
+    <option value="Dancing Script SemiBold">Dancing Script (SemiBold)</option>
+    <option value="Dancing Script Bold">Dancing Script (Bold)</option>
+    <option value="Bloody Terror">Bloody Terror</option>
+    <option value="Clesgoth">Clesgoth (Gothic)</option>
+    <option value="Collegiate">Collegiate (Regular)</option>
+    <option value="Collegiate Black">Collegiate (Black)</option>
+    <option value="Collegiate Border">Collegiate (Border)</option>
+    <option value="Collegiate Inside">Collegiate (Inside)</option>
+    <option value="Collegiate Outline">Collegiate (Outline)</option>
+    <option value="Enchanted Land">Enchanted Land</option>
+    <option value="Freshman">Freshman</option>
+    <option value="Heorot">Heorot (Regular)</option>
+    <option value="Heorot Italic">Heorot (Italic)</option>
+    <option value="Heorot Bold">Heorot (Bold)</option>
+    <option value="Heorot Bold Italic">Heorot (Bold Italic)</option>
+    <option value="Heorot SemiBold">Heorot (SemiBold)</option>
+    <option value="Heorot SemiBold Italic">Heorot (SemiBold Italic)</option>
+    <option value="Lato Thin">Lato (Thin)</option>
+    <option value="Lato Thin Italic">Lato (Thin Italic)</option>
+    <option value="Lato Light">Lato (Light)</option>
+    <option value="Lato Light Italic">Lato (Light Italic)</option>
+    <option value="Lato">Lato (Regular)</option>
+    <option value="Lato Italic">Lato (Italic)</option>
+    <option value="Lato Bold">Lato (Bold)</option>
+    <option value="Lato Bold Italic">Lato (Bold Italic)</option>
+    <option value="Lato Black">Lato (Black)</option>
+    <option value="Lato Black Italic">Lato (Black Italic)</option>
+    <option value="Marlboro">Marlboro</option>
+    <option value="Mostwasted">Mostwasted (Grunge)</option>
+    <option value="Old London">Old London</option>
+    <option value="Old London Alternate">Old London Alternate</option>
+    <option value="Plank">Plank (Wooden)</option>
+    <option value="Playball">Playball (Script)</option>
+    <option value="Prince Valiant">Prince Valiant (Medieval)</option>
+    <option value="Remachine Script">Remachine Script</option>
+    <option value="Stardos Stencil">Stardos Stencil (Regular)</option>
+    <option value="Stardos Stencil Bold">Stardos Stencil (Bold)</option>
+  </select>
   <span class="small-note">
     Selected from catalog. Cannot be changed here.
   </span>
 </div>
+
+    <!-- Text Position -->
+    <div class="form-group">
+      <label for="text-position-form">Text Position *</label>
+      <input
+        id="text-position-form"
+        name="text_position"
+        type="text"
+        required
+        readonly
+        placeholder="e.g., Top, Bottom, None"
+      />
+      <span class="small-note">
+        Selected from catalog. Cannot be changed here.
+      </span>
+    </div>
+
+    <!-- Engraving Text -->
+    <div class="form-group form-group-full">
+      <label for="engraving-text-form">Engraving Text</label>
+      <input
+        id="engraving-text-form"
+        name="engraving_text"
+        type="text"
+        readonly
+        placeholder="Text selected from catalog"
+      />
+      <span class="small-note">
+        Selected from catalog. Cannot be changed here.
+      </span>
+    </div>
 
    <!-- Fundraising Unit dropdown -->
     <div class="form-group">
@@ -208,29 +290,6 @@
     readonly
   />
 </div>
-    <!-- Engraving Placement (Required Radio Buttons) -->
-    <div class="form-group form-group-full">
-      <label>Engraving Placement of Custom Text *</label>
-      <div class="option-group">
-        <label>
-          <input type="radio" name="engraving_placement" value="Above Design" required />
-          Above Design
-        </label>
-        <label>
-          <input type="radio" name="engraving_placement" value="Below Design" required />
-          Below Design
-        </label>
-        <label>
-          <input type="radio" name="engraving_placement" value="No Engraving Required" required />
-          No Engraving Required
-        </label>
-      </div>
-    </div>
-
-    <div class="form-group form-group-full">
-      <label for="custom-text">Custom Text (It will engraved exactly as written)</label>
-      <textarea id="custom-text" name="custom_text" rows="2"></textarea>
-    </div>
 
     <div class="form-group form-group-full">
       <label for="notes">Design Notes or Special Instructions</label>

@@ -1,3 +1,309 @@
+/* Custom Font Faces */
+@font-face {
+  font-family: 'Achafexp';
+  src: url('fonts/Achafexp.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Achafita';
+  src: url('fonts/Achafita.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Achaflft';
+  src: url('fonts/Achaflft.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Achafont';
+  src: url('fonts/Achafont.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Achafout';
+  src: url('fonts/Achafout.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Achafsex';
+  src: url('fonts/Achafsex.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Alegreya SC';
+  src: url('fonts/AlegreyaSC-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Alegreya SC';
+  src: url('fonts/AlegreyaSC-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Alegreya SC';
+  src: url('fonts/AlegreyaSC-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Alegreya SC';
+  src: url('fonts/AlegreyaSC-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Alegreya SC';
+  src: url('fonts/AlegreyaSC-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Alegreya SC';
+  src: url('fonts/AlegreyaSC-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('fonts/DancingScript-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('fonts/DancingScript-Medium.ttf') format('truetype');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('fonts/DancingScript-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Dancing Script';
+  src: url('fonts/dancingscriptbold.ttf') format('truetype');
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: 'Bloody Terror';
+  src: url('fonts/Bloody_Terror_TTF_Personal.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Clesgoth';
+  src: url('fonts/Clesgoth_Demo.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Collegiate';
+  src: url('fonts/CollegiateFLF.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Collegiate Black';
+  src: url('fonts/CollegiateBlackFLF.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Collegiate Border';
+  src: url('fonts/CollegiateBorderFLF.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Collegiate Inside';
+  src: url('fonts/CollegiateInsideFLF.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Collegiate Outline';
+  src: url('fonts/CollegiateOutlineFLF.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Enchanted Land';
+  src: url('fonts/Enchanted_Land.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'Freshman';
+  src: url('fonts/Freshman.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Heorot';
+  src: url('fonts/heorot.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Heorot';
+  src: url('fonts/heoroti.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Heorot';
+  src: url('fonts/heorote.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Heorot';
+  src: url('fonts/heorotei.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Heorot';
+  src: url('fonts/heorots.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Heorot';
+  src: url('fonts/heorotsi.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Marlboro';
+  src: url('fonts/Marlboro.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Mostwasted';
+  src: url('fonts/Mostwasted.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Old London';
+  src: url('fonts/Old_London.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Old London Alternate';
+  src: url('fonts/Old_London_Alternate.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Plank';
+  src: url('fonts/PLANK___.TTF') format('truetype');
+}
+
+@font-face {
+  font-family: 'Playball';
+  src: url('fonts/Playball-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Prince Valiant';
+  src: url('fonts/Prince_Valiant.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Remachine Script';
+  src: url('fonts/RemachineScript_Personal_Use.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Stardos Stencil';
+  src: url('fonts/StardosStencil-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: 'Stardos Stencil';
+  src: url('fonts/StardosStencil-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
 :root {
   --bg-main: #f4efe9;
   --text-main: #000000;
@@ -761,4 +1067,27 @@ textarea:focus {
   .form-submit {
     max-width: 100%;
   }
+}
+
+/* Color-specific filters for preview design images */
+.preview-design-white {
+  filter: brightness(0) invert(1);
+}
+
+.preview-design-black {
+  filter: brightness(0);
+}
+
+/* Preview text styling to ensure fonts display correctly */
+#preview-text {
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: normal;
+  line-height: 1.2;
+}
+
+/* Remove green backgrounds from preview section */
+#preview-section p {
+  background-color: transparent !important;
+  padding: 0.5rem 0 !important;
 }
