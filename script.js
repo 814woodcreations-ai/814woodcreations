@@ -447,11 +447,76 @@ document.addEventListener("DOMContentLoaded", () => {
         if (notebookWrapper && typeof html2canvas !== 'undefined') {
           orderBtn.textContent = "📸 Capturing your design...";
 
+          // html2canvas doesn't support CSS filter, so we manually recolor design
+          // images to match what the customer sees (white or black tint)
+          const colorFilter = selectedColor ? designColorClass[selectedColor] : null;
+
+          // Helper: load an image URL as a recolored data URL using canvas
+          async function recolorImage(src, filterClass) {
+            return new Promise((resolve) => {
+              const img = new Image();
+              img.crossOrigin = 'anonymous';
+              img.onload = () => {
+                const c = document.createElement('canvas');
+                c.width = img.naturalWidth;
+                c.height = img.naturalHeight;
+                const ctx = c.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                if (filterClass === 'preview-design-white') {
+                  // Make all non-transparent pixels white
+                  const imageData = ctx.getImageData(0, 0, c.width, c.height);
+                  const data = imageData.data;
+                  for (let i = 0; i < data.length; i += 4) {
+                    if (data[i + 3] > 10) { // not transparent
+                      data[i] = 255; data[i+1] = 255; data[i+2] = 255;
+                    }
+                  }
+                  ctx.putImageData(imageData, 0, 0);
+                } else if (filterClass === 'preview-design-black') {
+                  // Make all non-transparent pixels black
+                  const imageData = ctx.getImageData(0, 0, c.width, c.height);
+                  const data = imageData.data;
+                  for (let i = 0; i < data.length; i += 4) {
+                    if (data[i + 3] > 10) {
+                      data[i] = 0; data[i+1] = 0; data[i+2] = 0;
+                    }
+                  }
+                  ctx.putImageData(imageData, 0, 0);
+                }
+                resolve(c.toDataURL('image/png'));
+              };
+              img.onerror = () => resolve(src); // fallback to original
+              img.src = src;
+            });
+          }
+
+          // Temporarily swap design image srcs to recolored versions
+          const swappedDesigns = [];
+          if (colorFilter) {
+            for (const d of selectedDesigns) {
+              if (d.el) {
+                const img = d.el.querySelector('img');
+                if (img) {
+                  const recolored = await recolorImage(d.src, colorFilter);
+                  swappedDesigns.push({ img, originalSrc: img.src, originalFilter: img.style.filter });
+                  img.src = recolored;
+                  img.style.filter = 'none'; // remove CSS filter since it's baked in
+                }
+              }
+            }
+          }
+
           const canvas = await html2canvas(notebookWrapper, {
             useCORS: true,
             allowTaint: false,
             scale: 2,
             logging: false
+          });
+
+          // Restore original srcs
+          swappedDesigns.forEach(({ img, originalSrc, originalFilter }) => {
+            img.src = originalSrc;
+            img.style.filter = originalFilter;
           });
 
           // Scale down to ~800px wide and compress as JPEG
