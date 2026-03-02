@@ -447,76 +447,41 @@ document.addEventListener("DOMContentLoaded", () => {
         if (notebookWrapper && typeof html2canvas !== 'undefined') {
           orderBtn.textContent = "📸 Capturing your design...";
 
-          // html2canvas doesn't support CSS filter, so we manually recolor design
-          // images to match what the customer sees (white or black tint)
-          const colorFilter = selectedColor ? designColorClass[selectedColor] : null;
-
-          // Helper: load an image URL as a recolored data URL using canvas
-          async function recolorImage(src, filterClass) {
-            return new Promise((resolve) => {
-              const img = new Image();
-              img.crossOrigin = 'anonymous';
-              img.onload = () => {
-                const c = document.createElement('canvas');
-                c.width = img.naturalWidth;
-                c.height = img.naturalHeight;
-                const ctx = c.getContext('2d');
-                ctx.drawImage(img, 0, 0);
-                if (filterClass === 'preview-design-white') {
-                  // Make all non-transparent pixels white
-                  const imageData = ctx.getImageData(0, 0, c.width, c.height);
-                  const data = imageData.data;
-                  for (let i = 0; i < data.length; i += 4) {
-                    if (data[i + 3] > 10) { // not transparent
-                      data[i] = 255; data[i+1] = 255; data[i+2] = 255;
-                    }
-                  }
-                  ctx.putImageData(imageData, 0, 0);
-                } else if (filterClass === 'preview-design-black') {
-                  // Make all non-transparent pixels black
-                  const imageData = ctx.getImageData(0, 0, c.width, c.height);
-                  const data = imageData.data;
-                  for (let i = 0; i < data.length; i += 4) {
-                    if (data[i + 3] > 10) {
-                      data[i] = 0; data[i+1] = 0; data[i+2] = 0;
-                    }
-                  }
-                  ctx.putImageData(imageData, 0, 0);
-                }
-                resolve(c.toDataURL('image/png'));
-              };
-              img.onerror = () => resolve(src); // fallback to original
-              img.src = src;
-            });
-          }
-
-          // Temporarily swap design image srcs to recolored versions
-          const swappedDesigns = [];
-          if (colorFilter) {
-            for (const d of selectedDesigns) {
-              if (d.el) {
-                const img = d.el.querySelector('img');
-                if (img) {
-                  const recolored = await recolorImage(d.src, colorFilter);
-                  swappedDesigns.push({ img, originalSrc: img.src, originalFilter: img.style.filter });
-                  img.src = recolored;
-                  img.style.filter = 'none'; // remove CSS filter since it's baked in
-                }
-              }
-            }
+          // Force the selected font to fully load before capturing,
+          // otherwise html2canvas renders a fallback font instead.
+          if (selectedFont && fontFamilies[selectedFont]) {
+            try {
+              const fontFamily = fontFamilies[selectedFont].split(',')[0].trim();
+              // Create a short off-screen element to force the browser to rasterize the font
+              const primer = document.createElement('span');
+              primer.style.cssText = `position:fixed;top:-999px;left:-999px;font-family:${fontFamilies[selectedFont]};font-size:32px;opacity:0;pointer-events:none;`;
+              primer.textContent = selectedEngravingText || 'ABCabc';
+              document.body.appendChild(primer);
+              // Wait for fonts to be ready
+              await document.fonts.ready;
+              // Also try the FontFace load API for extra reliability
+              try { await document.fonts.load(`32px "${fontFamily}"`, primer.textContent); } catch(e) {}
+              // Small delay to ensure rendering
+              await new Promise(r => setTimeout(r, 150));
+              document.body.removeChild(primer);
+            } catch(e) { /* continue anyway */ }
           }
 
           const canvas = await html2canvas(notebookWrapper, {
             useCORS: true,
             allowTaint: false,
             scale: 2,
-            logging: false
-          });
-
-          // Restore original srcs
-          swappedDesigns.forEach(({ img, originalSrc, originalFilter }) => {
-            img.src = originalSrc;
-            img.style.filter = originalFilter;
+            logging: false,
+            onclone: (clonedDoc) => {
+              // In the cloned document, explicitly set the font on the preview text
+              // so html2canvas renders it with the correct typeface
+              const clonedText = clonedDoc.getElementById('preview-text');
+              if (clonedText && selectedFont && fontFamilies[selectedFont]) {
+                clonedText.style.setProperty('font-family', fontFamilies[selectedFont], 'important');
+                clonedText.style.setProperty('font-size', `${previewFontSize}px`, 'important');
+                clonedText.style.setProperty('color', selectedColor ? (textColors[selectedColor] || '#000') : '#000', 'important');
+              }
+            }
           });
 
           // Scale down to ~800px wide and compress as JPEG
