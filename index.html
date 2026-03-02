@@ -278,9 +278,22 @@
     <!-- Design Snapshot — visible preview + hidden field for form submission -->
     <div class="form-group form-group-full" id="snapshot-wrapper" style="display:none;">
       <label>Design Preview</label>
-      <img id="snapshot-preview" src="" alt="Customer design preview"
-        style="max-width:100%; border-radius:0.5rem; border:1px solid #d1d5db; margin-bottom:0.5rem; display:block;" />
-      <span class="small-note">This is what the customer designed. Auto-captured from the catalog page.</span>
+      <div style="display:flex; gap:1.25rem; align-items:flex-start; flex-wrap:wrap;">
+        <img id="snapshot-preview" src="" alt="Customer design preview"
+          style="max-width:340px; width:100%; border-radius:0.5rem; border:1px solid #d1d5db; display:block;" />
+        <div style="background:#f8f5f0; border:1px solid #d6c9b0; border-radius:0.5rem; padding:0.85rem 1rem; font-size:0.85rem; color:#4b3f2f; line-height:1.6; min-width:200px; max-width:280px;">
+          <strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem;">🎨 Design Color Note</strong>
+          <p style="margin:0 0 0.5rem 0;">The engraved design color depends on the notebook color selected:</p>
+          <ul style="margin:0; padding-left:1.1rem;">
+            <li><strong>Red</strong> notebook → design will be <strong>White</strong></li>
+            <li><strong>Teal</strong> notebook → design will be <strong>White</strong></li>
+            <li><strong>Blue</strong> notebook → design will be <strong>Black</strong></li>
+            <li><strong>Brown</strong> notebook → design will be <strong>Black</strong></li>
+          </ul>
+          <p style="margin:0.6rem 0 0 0; font-size:0.8rem; color:#6b5c4c;">This matches exactly what you saw in the design preview.</p>
+        </div>
+      </div>
+      <span class="small-note" style="margin-top:0.5rem; display:block;">This is what the customer designed. Auto-captured from the catalog page.</span>
     </div>
     <input type="hidden" id="design-snapshot-url" name="design_snapshot_url" />
 
