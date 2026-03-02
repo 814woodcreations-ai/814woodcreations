@@ -441,7 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("text_pos_x", `${txIn} inches from left`);
       localStorage.setItem("text_pos_y", `${tyIn} inches from top`);
 
-      // ── SNAPSHOT: compressed thumbnail embedded as base64 ───
+      // ── SNAPSHOT: capture + upload to ImgBB → short URL ────
       try {
         const notebookWrapper = previewNotebook ? previewNotebook.parentElement : null;
         if (notebookWrapper && typeof html2canvas !== 'undefined') {
@@ -454,20 +454,36 @@ document.addEventListener("DOMContentLoaded", () => {
             logging: false
           });
 
-          // Scale down to ~600px wide thumbnail and compress as JPEG (~100-200KB)
-          const MAX_WIDTH = 600;
+          // Scale down to ~800px wide and compress as JPEG
+          const MAX_WIDTH = 800;
           const ratio = Math.min(1, MAX_WIDTH / canvas.width);
           const thumb = document.createElement('canvas');
           thumb.width = Math.round(canvas.width * ratio);
           thumb.height = Math.round(canvas.height * ratio);
           thumb.getContext('2d').drawImage(canvas, 0, 0, thumb.width, thumb.height);
 
-          const dataUrl = thumb.toDataURL('image/jpeg', 0.75);
-          localStorage.setItem("design_snapshot_url", dataUrl);
+          const base64 = thumb.toDataURL('image/jpeg', 0.85).split(',')[1];
+
+          orderBtn.textContent = "⬆️ Uploading preview...";
+          const formData = new FormData();
+          formData.append('image', base64);
+          formData.append('name', 'order-' + Date.now());
+
+          const response = await fetch('https://api.imgbb.com/1/upload?key=381873438a13df3df78daa534e89863d', {
+            method: 'POST',
+            body: formData
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            localStorage.setItem("design_snapshot_url", result.data.url);
+          } else {
+            localStorage.setItem("design_snapshot_url", "Upload failed");
+          }
         }
       } catch (err) {
         console.warn("Snapshot failed:", err);
-        localStorage.setItem("design_snapshot_url", "");
+        localStorage.setItem("design_snapshot_url", "Snapshot unavailable");
       }
 
       orderBtn.textContent = "✅ Redirecting to order form...";
@@ -504,7 +520,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (textPosXSaved && document.getElementById("text-pos-x")) document.getElementById("text-pos-x").value = textPosXSaved;
   if (textPosYSaved && document.getElementById("text-pos-y")) document.getElementById("text-pos-y").value = textPosYSaved;
   if (designsSaved && document.getElementById("designs-data")) document.getElementById("designs-data").value = designsSaved;
-  if (snapshotUrl && snapshotUrl.startsWith('data:')) {
+  if (snapshotUrl && snapshotUrl.startsWith('https://')) {
     // Fill hidden field for form submission
     const hiddenField = document.getElementById("design-snapshot-url");
     if (hiddenField) hiddenField.value = snapshotUrl;
