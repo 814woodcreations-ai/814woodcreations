@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Custom Notebooks – Flowers | 814 Wood Creations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  
+  <!-- Add inventory CSS -->
+  <style>
+    /* Out of Stock Styling */
+    .option-card.out-of-stock {
+      opacity: 0.5;
+      pointer-events: none;
+      position: relative;
+      cursor: not-allowed;
+    }
+
+    .option-card.out-of-stock::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(to top right,
+          transparent 0%,
+          transparent calc(50% - 2px),
+          #ff0000 50%,
+          transparent calc(50% + 2px),
+          transparent 100%),
+        linear-gradient(to bottom right,
+          transparent 0%,
+          transparent calc(50% - 2px),
+          #ff0000 50%,
+          transparent calc(50% + 2px),
+          transparent 100%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .flower-tab {
+      padding: 0.45rem 0.9rem;
+      border: none;
+      border-radius: 0.4rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .flower-tab:hover {
+      opacity: 0.85;
+    }
+
+    .stock-label {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 0, 0, 0.9);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      z-index: 11;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Floating notebook background images -->
+  <img src="images/paper.png" alt="" class="notebook-bg notebook-bg-1" />
+  <img src="images/paper2.png" alt="" class="notebook-bg notebook-bg-2" />
+  <img src="images/paper1.png" alt="" class="notebook-bg notebook-bg-3" />
+  <img src="images/paper3.png" alt="" class="notebook-bg notebook-bg-4" />
+    <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="images/logo.png" alt="814 Wood Creations Logo" class="brand-logo" />
+        <div class="logo-text">814 Wood Creations</div>
+      </div>
+      <nav class="nav">
+  <a href="index.html">Home</a>
+  <a href="products.html">Notebooks</a>
+  <a href="leather.html">Leather</a>
+  <a href="gift-sets.html">Gallery</a>
+  <a href="index.html#order">Order</a>
+</nav>
+    </div>
+  </header>
+
+ <main>
+    <section class="section">
+      <div class="container">
+        <h1>Custom Notebooks – Flowers</h1>
+        <p class="section-intro">
+          Choose your notebook color, font, and Flower design. Your selections will be sent to the order form
+          automatically when you click &quot;Order This Notebook.&quot;
+        </p>
+
+        <!-- Color Selection -->
+        <h2>Choose a Color</h2>
+        <div class="option-grid" id="color-options">
+          <button class="option-card image-option" data-color="Red">
+            <img src="images/colors/red.png" alt="Red Notebook" class="design-thumb" />
+            <span>Red</span>
+          </button>
+          <button class="option-card image-option" data-color="Blue">
+            <img src="images/colors/blue.png" alt="Blue Notebook" class="design-thumb" />
+            <span>Blue</span>
+          </button>
+          <button class="option-card image-option" data-color="Brown">
+            <img src="images/colors/brown.png" alt="Brown Notebook" class="design-thumb" />
+            <span>Brown</span>
+          </button>
+          <button class="option-card image-option" data-color="Teal">
+            <img src="images/colors/teal.png" alt="Teal Notebook" class="design-thumb" />
+            <span>Teal</span>
+          </button>
+        </div>
+
+        <!-- Engraving Text -->
+        <h2 style="margin-top: 2rem;">Engraving Text</h2>
+        <div style="max-width: 520px; margin-top: 1rem;">
+          <label for="engraving-text" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">
+            Text to engrave
+          </label>
+          <input
+            id="engraving-text"
+            type="text"
+            placeholder="Type the text you want engraved"
+            maxlength="30"
+            style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;"
+          />
+          <small class="small-note" style="display: block; margin-top: 0.5rem; background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Max 30 characters</small>
+        </div>
+
+        <!-- Font Selection -->
+        <h2 style="margin-top: 2rem;">Choose a Font</h2>
+        <div style="max-width: 400px; margin-top: 1rem;">
+          <select id="font-select" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;">
+            <option value="">Choose a font</option>
+            <option value="Achafexp">Achafexp (Expanded)</option>
+            <option value="Achafita">Achafita (Italic)</option>
+            <option value="Achaflft">Achaflft (Light)</option>
+            <option value="Achafont">Achafont (Regular)</option>
+            <option value="Achafout">Achafout (Outline)</option>
+            <option value="Achafsex">Achafsex (Semi-Extended)</option>
+            <option value="Alegreya SC">Alegreya SC (Regular)</option>
+            <option value="Alegreya SC Italic">Alegreya SC (Italic)</option>
+            <option value="Alegreya SC Bold">Alegreya SC (Bold)</option>
+            <option value="Alegreya SC Bold Italic">Alegreya SC (Bold Italic)</option>
+            <option value="Alegreya SC Black">Alegreya SC (Black)</option>
+            <option value="Alegreya SC Black Italic">Alegreya SC (Black Italic)</option>
+            <option value="Dancing Script">Dancing Script (Regular)</option>
+            <option value="Dancing Script Medium">Dancing Script (Medium)</option>
+            <option value="Dancing Script SemiBold">Dancing Script (SemiBold)</option>
+            <option value="Dancing Script Bold">Dancing Script (Bold)</option>
+            <option value="Bloody Terror">Bloody Terror</option>
+            <option value="Clesgoth">Clesgoth (Gothic)</option>
+            <option value="Collegiate">Collegiate (Regular)</option>
+            <option value="Collegiate Black">Collegiate (Black)</option>
+            <option value="Collegiate Border">Collegiate (Border)</option>
+            <option value="Collegiate Inside">Collegiate (Inside)</option>
+            <option value="Collegiate Outline">Collegiate (Outline)</option>
+            <option value="Enchanted Land">Enchanted Land</option>
+            <option value="Freshman">Freshman</option>
+            <option value="Heorot">Heorot (Regular)</option>
+            <option value="Heorot Italic">Heorot (Italic)</option>
+            <option value="Heorot Bold">Heorot (Bold)</option>
+            <option value="Heorot Bold Italic">Heorot (Bold Italic)</option>
+            <option value="Heorot SemiBold">Heorot (SemiBold)</option>
+            <option value="Heorot SemiBold Italic">Heorot (SemiBold Italic)</option>
+            <option value="Lato Thin">Lato (Thin)</option>
+            <option value="Lato Thin Italic">Lato (Thin Italic)</option>
+            <option value="Lato Light">Lato (Light)</option>
+            <option value="Lato Light Italic">Lato (Light Italic)</option>
+            <option value="Lato">Lato (Regular)</option>
+            <option value="Lato Italic">Lato (Italic)</option>
+            <option value="Lato Bold">Lato (Bold)</option>
+            <option value="Lato Bold Italic">Lato (Bold Italic)</option>
+            <option value="Lato Black">Lato (Black)</option>
+            <option value="Lato Black Italic">Lato (Black Italic)</option>
+            <option value="Marlboro">Marlboro</option>
+            <option value="Mostwasted">Mostwasted (Grunge)</option>
+            <option value="Old London">Old London</option>
+            <option value="Old London Alternate">Old London Alternate</option>
+            <option value="Plank">Plank (Wooden)</option>
+            <option value="Playball">Playball (Script)</option>
+            <option value="Prince Valiant">Prince Valiant (Medieval)</option>
+            <option value="Remachine Script">Remachine Script</option>
+            <option value="Stardos Stencil">Stardos Stencil (Regular)</option>
+            <option value="Stardos Stencil Bold">Stardos Stencil (Bold)</option>
+          </select>
+        </div>
+
+        <!-- PREVIEW SECTION -->
+        <div id="preview-section" style="margin-top: 3rem; display: none;">
+          <h2>Your Notebook Preview</h2>
+          <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+            <!-- Left side: Preview image -->
+            <div style="flex: 1; min-width: 300px;">
+              <div style="border-radius: 1rem; padding: 2rem; text-align: center;">
+                <div style="position: relative; display: inline-block; max-width: 400px;">
+                  <!-- Notebook color background -->
+                  <img id="preview-notebook" src="" alt="Notebook Preview" style="width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.2);" />
+                  
+                  <!-- Multi-design overlay — all draggable designs render here -->
+                  <div id="designs-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
+                  
+                  <!-- Font preview text - DRAGGABLE -->
+                  <div id="preview-text-container" style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); width: 80%; display: none; cursor: grab; user-select: none; touch-action: none;">
+                    <p id="preview-text" style="margin: 0; font-size: 1.5rem; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Your Text</p>
+                    <div id="text-drag-hint" style="position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: #fff; font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; white-space: nowrap; pointer-events: none;">✋ Drag to reposition</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right side: Preview Controls -->
+            <div style="flex: 0 0 300px; min-width: 250px;">
+              <div style="background-color: var(--light-nature-green); padding: 1.5rem; border-radius: 0.75rem;">
+                <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.1rem; background-color: transparent; padding: 0;">Adjust Preview Display</h3>
+                
+                <!-- Font Size Control -->
+                <div style="margin-bottom: 1.5rem;" id="font-size-control-wrapper">
+                  <label for="font-size-control" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">Text Size:</label>
+                  <input 
+                    type="range" 
+                    id="font-size-control" 
+                    min="12" 
+                    max="72" 
+                    value="24" 
+                    step="2"
+                    style="width: 100%;"
+                  />
+                  <div style="display: flex; justify-content: space-between; margin-top: 0.25rem;">
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Small (12px)</small>
+                    <small id="font-size-display" style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">24px</small>
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Large (72px)</small>
+                  </div>
+                </div>
+
+                <!-- Design Positions Readout (multi) - hidden from customer -->
+                <div style="display:none;">
+                  <div id="position-readout-container"></div>
+                </div>
+
+                <!-- Text Position Readout - hidden from customer -->
+                <div id="text-position-readout" style="display: none;">
+                  <div style="display:none;">
+                    <div>↔ From left: <strong id="text-pos-x-display">—</strong></div>
+                    <div>↕ From top: <strong id="text-pos-y-display">—</strong></div>
+                  </div>
+                </div>
+
+                <!-- Design size sliders (visible, per design) -->
+                <div id="design-size-controls"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design Selection -->
+        <h2 style="margin-top: 2rem;">Choose Flower Design(s)</h2>
+        <p style="margin-top: 0.25rem; margin-bottom: 1rem; font-size: 0.92rem; background-color: #add8e6; display: inline-block; padding: 0.4rem 0.75rem; border-radius: 0.5rem;">
+          💡 You can select <strong>multiple designs</strong> — click to add, click again to remove. Each one is draggable on the preview.
+        </p>
+        <div style="margin-bottom: 1.25rem; padding: 0.75rem 1rem; background-color: #fff8e1; border-left: 4px solid #f59e0b; border-radius: 0.5rem; max-width: 520px; font-size: 0.92rem; line-height: 1.6;">
+          💲 <strong>Multiple images?</strong> Adding more than one design is only <strong>$5 extra total</strong> — not per image. Whether you choose 2 designs or 5, it's just one flat $5 addition to your order.
+        </div>
+
+        <!-- Flower type tabs -->
+        <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.25rem;">
+          <button class="flower-tab" data-tab="wildflowers" onclick="showFlowerTab('wildflowers')"  style="background:#2563eb;color:white;">Wild Flowers</button>
+          <button class="flower-tab" data-tab="dandelion" onclick="showFlowerTab('dandelion')"  style="background:#e5e7eb;color:#374151;">Dandelion</button>
+          <button class="flower-tab" data-tab="cherry-blossom" onclick="showFlowerTab('cherry-blossom')"  style="background:#e5e7eb;color:#374151;">Cherry Blossom</button>
+          <button class="flower-tab" data-tab="peonies" onclick="showFlowerTab('peonies')"  style="background:#e5e7eb;color:#374151;">Peonies</button>
+          <button class="flower-tab" data-tab="hibiscus" onclick="showFlowerTab('hibiscus')"  style="background:#e5e7eb;color:#374151;">Hibiscus</button>
+          <button class="flower-tab" data-tab="daisy-sunflower" onclick="showFlowerTab('daisy-sunflower')"  style="background:#e5e7eb;color:#374151;">Daisy Sunflower</button>
+          <button class="flower-tab" data-tab="orchid" onclick="showFlowerTab('orchid')"  style="background:#e5e7eb;color:#374151;">Orchid</button>
+          <button class="flower-tab" data-tab="carnation" onclick="showFlowerTab('carnation')"  style="background:#e5e7eb;color:#374151;">Carnation</button>
+          <button class="flower-tab" data-tab="magnolia" onclick="showFlowerTab('magnolia')"  style="background:#e5e7eb;color:#374151;">Magnolia</button>
+          <button class="flower-tab" data-tab="rose" onclick="showFlowerTab('rose')"  style="background:#e5e7eb;color:#374151;">Rose</button>
+          <button class="flower-tab" data-tab="flower-heads" onclick="showFlowerTab('flower-heads')"  style="background:#e5e7eb;color:#374151;">Flower Heads</button>
+          <button class="flower-tab" data-tab="tulips" onclick="showFlowerTab('tulips')"  style="background:#e5e7eb;color:#374151;">Tulips</button>
+        </div>
+
+        <!-- Tab panels -->
+        <div id="logo-options">
+          <div id="tab-wildflowers" class="flower-tab-panel" style="display:block;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Wild Flowers 1">
+                <img src="images/wildflowers/wf1.png" alt="Wild Flowers 1" class="design-thumb" />
+                <span>Wild Flowers 1</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 2">
+                <img src="images/wildflowers/wf2.png" alt="Wild Flowers 2" class="design-thumb" />
+                <span>Wild Flowers 2</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 3">
+                <img src="images/wildflowers/wf3.png" alt="Wild Flowers 3" class="design-thumb" />
+                <span>Wild Flowers 3</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 4">
+                <img src="images/wildflowers/wf4.png" alt="Wild Flowers 4" class="design-thumb" />
+                <span>Wild Flowers 4</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 5">
+                <img src="images/wildflowers/wf5.png" alt="Wild Flowers 5" class="design-thumb" />
+                <span>Wild Flowers 5</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 6">
+                <img src="images/wildflowers/wf6.png" alt="Wild Flowers 6" class="design-thumb" />
+                <span>Wild Flowers 6</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 7">
+                <img src="images/wildflowers/wf7.png" alt="Wild Flowers 7" class="design-thumb" />
+                <span>Wild Flowers 7</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 8">
+                <img src="images/wildflowers/wf8.png" alt="Wild Flowers 8" class="design-thumb" />
+                <span>Wild Flowers 8</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 9">
+                <img src="images/wildflowers/wf9.png" alt="Wild Flowers 9" class="design-thumb" />
+                <span>Wild Flowers 9</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 10">
+                <img src="images/wildflowers/wf10.png" alt="Wild Flowers 10" class="design-thumb" />
+                <span>Wild Flowers 10</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 11">
+                <img src="images/wildflowers/wf11.png" alt="Wild Flowers 11" class="design-thumb" />
+                <span>Wild Flowers 11</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 12">
+                <img src="images/wildflowers/wf12.png" alt="Wild Flowers 12" class="design-thumb" />
+                <span>Wild Flowers 12</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 13">
+                <img src="images/wildflowers/wf13.png" alt="Wild Flowers 13" class="design-thumb" />
+                <span>Wild Flowers 13</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 14">
+                <img src="images/wildflowers/wf14.png" alt="Wild Flowers 14" class="design-thumb" />
+                <span>Wild Flowers 214</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 15">
+                <img src="images/wildflowers/wf15.png" alt="Wild Flowers 15" class="design-thumb" />
+                <span>Wild Flowers 15</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 16">
+                <img src="images/wildflowers/wf16.png" alt="Wild Flowers 16" class="design-thumb" />
+                <span>Wild Flowers 16</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 17">
+                <img src="images/wildflowers/wf17.png" alt="Wild Flowers 17" class="design-thumb" />
+                <span>Wild Flowers 17</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 18">
+                <img src="images/wildflowers/wf18.png" alt="Wild Flowers 18" class="design-thumb" />
+                <span>Wild Flowers 18</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 19">
+                <img src="images/wildflowers/wf19.png" alt="Wild Flowers 19" class="design-thumb" />
+                <span>Wild Flowers 19</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 20">
+                <img src="images/wildflowers/wf20.png" alt="Wild Flowers 20" class="design-thumb" />
+                <span>Wild Flowers 20</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 21">
+                <img src="images/wildflowers/wf21.png" alt="Wild Flowers 21" class="design-thumb" />
+                <span>Wild Flowers 21</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 22">
+                <img src="images/wildflowers/wf22.png" alt="Wild Flowers 22" class="design-thumb" />
+                <span>Wild Flowers 22</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 23">
+                <img src="images/wildflowers/wf23.png" alt="Wild Flowers 23" class="design-thumb" />
+                <span>Wild Flowers 23</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 24">
+                <img src="images/wildflowers/wf24.png" alt="Wild Flowers 24" class="design-thumb" />
+                <span>Wild Flowers 24</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 25">
+                <img src="images/wildflowers/wf25.png" alt="Wild Flowers 25" class="design-thumb" />
+                <span>Wild Flowers 25</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 26">
+                <img src="images/wildflowers/wf26.png" alt="Wild Flowers 26" class="design-thumb" />
+                <span>Wild Flowers 26</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 27">
+                <img src="images/wildflowers/wf27.png" alt="Wild Flowers 27" class="design-thumb" />
+                <span>Wild Flowers 27</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 28">
+                <img src="images/wildflowers/wf28.png" alt="Wild Flowers 28" class="design-thumb" />
+                <span>Wild Flowers 28</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 29">
+                <img src="images/wildflowers/wf29.png" alt="Wild Flowers 29" class="design-thumb" />
+                <span>Wild Flowers 29</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 30">
+                <img src="images/wildflowers/wf30.png" alt="Wild Flowers 30" class="design-thumb" />
+                <span>Wild Flowers 30</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 31">
+                <img src="images/wildflowers/wf31.png" alt="Wild Flowers 31" class="design-thumb" />
+                <span>Wild Flowers 31</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 32">
+                <img src="images/wildflowers/wf32.png" alt="Wild Flowers 32" class="design-thumb" />
+                <span>Wild Flowers 32</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 33">
+                <img src="images/wildflowers/wf33.png" alt="Wild Flowers 33" class="design-thumb" />
+                <span>Wild Flowers 33</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 34">
+                <img src="images/wildflowers/wf34.png" alt="Wild Flowers 34" class="design-thumb" />
+                <span>Wild Flowers 34</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 35">
+                <img src="images/wildflowers/wf35.png" alt="Wild Flowers 35" class="design-thumb" />
+                <span>Wild Flowers 35</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 36">
+                <img src="images/wildflowers/wf36.png" alt="Wild Flowers 36" class="design-thumb" />
+                <span>Wild Flowers 36</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 37">
+                <img src="images/wildflowers/wf37.png" alt="Wild Flowers 37" class="design-thumb" />
+                <span>Wild Flowers 37</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 38">
+                <img src="images/wildflowers/wf38.png" alt="Wild Flowers 38" class="design-thumb" />
+                <span>Wild Flowers 38</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 39">
+                <img src="images/wildflowers/wf39.png" alt="Wild Flowers 39" class="design-thumb" />
+                <span>Wild Flowers 39</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 40">
+                <img src="images/wildflowers/wf40.png" alt="Wild Flowers 40" class="design-thumb" />
+                <span>Wild Flowers 40</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 41">
+                <img src="images/wildflowers/wf41.png" alt="Wild Flowers 41" class="design-thumb" />
+                <span>Wild Flowers 41</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 42">
+                <img src="images/wildflowers/wf42.png" alt="Wild Flowers 42" class="design-thumb" />
+                <span>Wild Flowers 42</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 43">
+                <img src="images/wildflowers/wf43.png" alt="Wild Flowers 43" class="design-thumb" />
+                <span>Wild Flowers 43</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 44">
+                <img src="images/wildflowers/wf44.png" alt="Wild Flowers 44" class="design-thumb" />
+                <span>Wild Flowers 44</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 45">
+                <img src="images/wildflowers/wf45.png" alt="Wild Flowers 45" class="design-thumb" />
+                <span>Wild Flowers 45</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 46">
+                <img src="images/wildflowers/wf46.png" alt="Wild Flowers 46" class="design-thumb" />
+                <span>Wild Flowers 46</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 47">
+                <img src="images/wildflowers/wf47.png" alt="Wild Flowers 47" class="design-thumb" />
+                <span>Wild Flowers 47</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 48">
+                <img src="images/wildflowers/wf48.png" alt="Wild Flowers 48" class="design-thumb" />
+                <span>Wild Flowers 48</span>
+              </button>
+              <button class="option-card image-option" data-logo="Wild Flowers 49">
+                <img src="images/wildflowers/wf49.png" alt="Wild Flowers 49" class="design-thumb" />
+                <span>Wild Flowers 49</span>
+              </button>
+              </div>
+          </div>
+          <div id="tab-dandelion" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Dandelion 1">
+                <img src="images/flowers/dandelion/1.png" alt="Dandelion 1" class="design-thumb" />
+                <span>Dandelion 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Dandelion 2">
+                <img src="images/flowers/dandelion/2.png" alt="Dandelion 2" class="design-thumb" />
+                <span>Dandelion 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-cherry-blossom" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Cherry Blossom 1">
+                <img src="images/flowers/cherry-blossom/1.png" alt="Cherry Blossom 1" class="design-thumb" />
+                <span>Cherry Blossom 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Cherry Blossom 2">
+                <img src="images/flowers/cherry-blossom/2.png" alt="Cherry Blossom 2" class="design-thumb" />
+                <span>Cherry Blossom 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-peonies" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Peonies 1">
+                <img src="images/flowers/peonies/1.png" alt="Peonies 1" class="design-thumb" />
+                <span>Peonies 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Peonies 2">
+                <img src="images/flowers/peonies/2.png" alt="Peonies 2" class="design-thumb" />
+                <span>Peonies 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-hibiscus" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Hibiscus 1">
+                <img src="images/flowers/hibiscus/1.png" alt="Hibiscus 1" class="design-thumb" />
+                <span>Hibiscus 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Hibiscus 2">
+                <img src="images/flowers/hibiscus/2.png" alt="Hibiscus 2" class="design-thumb" />
+                <span>Hibiscus 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-daisy-sunflower" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Daisy Sunflower 1">
+                <img src="images/flowers/daisy-sunflower/1.png" alt="Daisy Sunflower 1" class="design-thumb" />
+                <span>Daisy Sunflower 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Daisy Sunflower 2">
+                <img src="images/flowers/daisy-sunflower/2.png" alt="Daisy Sunflower 2" class="design-thumb" />
+                <span>Daisy Sunflower 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-orchid" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Orchid 1">
+                <img src="images/flowers/orchid/1.png" alt="Orchid 1" class="design-thumb" />
+                <span>Orchid 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Orchid 2">
+                <img src="images/flowers/orchid/2.png" alt="Orchid 2" class="design-thumb" />
+                <span>Orchid 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-carnation" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Carnation 1">
+                <img src="images/flowers/carnation/1.png" alt="Carnation 1" class="design-thumb" />
+                <span>Carnation 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Carnation 2">
+                <img src="images/flowers/carnation/2.png" alt="Carnation 2" class="design-thumb" />
+                <span>Carnation 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-magnolia" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Magnolia 1">
+                <img src="images/flowers/magnolia/1.png" alt="Magnolia 1" class="design-thumb" />
+                <span>Magnolia 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Magnolia 2">
+                <img src="images/flowers/magnolia/2.png" alt="Magnolia 2" class="design-thumb" />
+                <span>Magnolia 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-rose" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Rose 1">
+                <img src="images/flowers/rose/1.png" alt="Rose 1" class="design-thumb" />
+                <span>Rose 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Rose 2">
+                <img src="images/flowers/rose/2.png" alt="Rose 2" class="design-thumb" />
+                <span>Rose 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-flower-heads" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Flower Heads 1">
+                <img src="images/flowers/flower-heads/1.png" alt="Flower Heads 1" class="design-thumb" />
+                <span>Flower Heads 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Flower Heads 2">
+                <img src="images/flowers/flower-heads/2.png" alt="Flower Heads 2" class="design-thumb" />
+                <span>Flower Heads 2</span>
+              </button> -->
+            </div>
+          </div>
+          <div id="tab-tulips" class="flower-tab-panel" style="display:none;">
+            <div class="option-grid">
+              <button class="option-card image-option" data-logo="Tulips 1">
+                <img src="images/flowers/tulips/1.png" alt="Tulips 1" class="design-thumb" />
+                <span>Tulips 1</span>
+              </button>
+              <!-- Add more designs here following the same pattern -->
+              <!-- <button class="option-card image-option" data-logo="Tulips 2">
+                <img src="images/flowers/tulips/2.png" alt="Tulips 2" class="design-thumb" />
+                <span>Tulips 2</span>
+              </button> -->
+            </div>
+          </div>
+        </div>
+
+        <script>
+          function showFlowerTab(slug) {
+            document.querySelectorAll('.flower-tab-panel').forEach(p => p.style.display = 'none');
+            document.querySelectorAll('.flower-tab').forEach(b => {
+              b.style.background = '#e5e7eb';
+              b.style.color = '#374151';
+            });
+            document.getElementById('tab-' + slug).style.display = 'block';
+            document.querySelector('[data-tab="' + slug + '"]').style.background = '#2563eb';
+            document.querySelector('[data-tab="' + slug + '"]').style.color = 'white';
+          }
+        </script>
+
+
+        <div style="margin-top: 2.5rem;">
+          <button class="btn-primary" id="orderNotebook">
+            Order This Notebook
+          </button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Image Lightbox -->
+  <div id="image-lightbox" class="lightbox">
+    <div class="lightbox-inner">
+      <img id="lightbox-img" src="" alt="Preview" />
+      <button id="lightbox-close" type="button">× Close</button>
+    </div>
+  </div>
+
+  <!-- html2canvas for notebook snapshot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- Load your existing script -->
+  <script src="script.js"></script>
+  
+  <!-- Inventory tracking script -->
+  <script src="inventory.js"></script>
+</body>
+</html>
