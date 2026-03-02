@@ -441,43 +441,33 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("text_pos_x", `${txIn} inches from left`);
       localStorage.setItem("text_pos_y", `${tyIn} inches from top`);
 
-      // ── SNAPSHOT WITH html2canvas ──────────────────────────
+      // ── SNAPSHOT: compressed thumbnail embedded as base64 ───
       try {
         const notebookWrapper = previewNotebook ? previewNotebook.parentElement : null;
         if (notebookWrapper && typeof html2canvas !== 'undefined') {
+          orderBtn.textContent = "📸 Capturing your design...";
+
           const canvas = await html2canvas(notebookWrapper, {
             useCORS: true,
             allowTaint: false,
-            scale: 2, // higher resolution
+            scale: 2,
             logging: false
           });
 
-          const base64Image = canvas.toDataURL("image/png").split(",")[1];
+          // Scale down to ~600px wide thumbnail and compress as JPEG (~100-200KB)
+          const MAX_WIDTH = 600;
+          const ratio = Math.min(1, MAX_WIDTH / canvas.width);
+          const thumb = document.createElement('canvas');
+          thumb.width = Math.round(canvas.width * ratio);
+          thumb.height = Math.round(canvas.height * ratio);
+          thumb.getContext('2d').drawImage(canvas, 0, 0, thumb.width, thumb.height);
 
-          // Upload to ImgBB (free image hosting)
-          orderBtn.textContent = "⬆️ Uploading preview...";
-          const IMGBB_API_KEY = "YOUR_IMGBB_API_KEY"; // ← Replace with your free key from imgbb.com
-          const formData = new FormData();
-          formData.append("image", base64Image);
-          formData.append("name", `order-${Date.now()}`);
-
-          const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
-            method: "POST",
-            body: formData
-          });
-
-          if (response.ok) {
-            const result = await response.json();
-            const imageUrl = result.data.url;
-            localStorage.setItem("design_snapshot_url", imageUrl);
-          } else {
-            // If upload fails, save canvas as base64 fallback
-            localStorage.setItem("design_snapshot_url", "Image upload failed - see designs_data for positions");
-          }
+          const dataUrl = thumb.toDataURL('image/jpeg', 0.75);
+          localStorage.setItem("design_snapshot_url", dataUrl);
         }
       } catch (err) {
         console.warn("Snapshot failed:", err);
-        localStorage.setItem("design_snapshot_url", "Snapshot unavailable - see designs_data for positions");
+        localStorage.setItem("design_snapshot_url", "");
       }
 
       orderBtn.textContent = "✅ Redirecting to order form...";
@@ -514,7 +504,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (textPosXSaved && document.getElementById("text-pos-x")) document.getElementById("text-pos-x").value = textPosXSaved;
   if (textPosYSaved && document.getElementById("text-pos-y")) document.getElementById("text-pos-y").value = textPosYSaved;
   if (designsSaved && document.getElementById("designs-data")) document.getElementById("designs-data").value = designsSaved;
-  if (snapshotUrl && document.getElementById("design-snapshot-url")) {
-    document.getElementById("design-snapshot-url").value = snapshotUrl;
+  if (snapshotUrl && snapshotUrl.startsWith('data:')) {
+    // Fill hidden field for form submission
+    const hiddenField = document.getElementById("design-snapshot-url");
+    if (hiddenField) hiddenField.value = snapshotUrl;
+
+    // Show visible preview image on order form
+    const wrapper = document.getElementById("snapshot-wrapper");
+    const preview = document.getElementById("snapshot-preview");
+    if (wrapper && preview) {
+      preview.src = snapshotUrl;
+      wrapper.style.display = "block";
+    }
   }
 });

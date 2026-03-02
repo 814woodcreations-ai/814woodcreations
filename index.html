@@ -275,18 +275,14 @@
   />
 </div>
 
-    <!-- Design Snapshot Image Link -->
-    <div class="form-group form-group-full">
-      <label>Design Preview Image</label>
-      <input
-        id="design-snapshot-url"
-        name="design_snapshot_url"
-        type="text"
-        readonly
-        placeholder="Auto-generated when customer submits"
-      />
-      <span class="small-note">Link to the customer's notebook preview image. Auto-filled from catalog.</span>
+    <!-- Design Snapshot — visible preview + hidden field for form submission -->
+    <div class="form-group form-group-full" id="snapshot-wrapper" style="display:none;">
+      <label>Design Preview</label>
+      <img id="snapshot-preview" src="" alt="Customer design preview"
+        style="max-width:100%; border-radius:0.5rem; border:1px solid #d1d5db; margin-bottom:0.5rem; display:block;" />
+      <span class="small-note">This is what the customer designed. Auto-captured from the catalog page.</span>
     </div>
+    <input type="hidden" id="design-snapshot-url" name="design_snapshot_url" />
 
     <!-- All selected designs + positions (JSON) -->
     <input type="hidden" id="designs-data" name="designs_data" />
