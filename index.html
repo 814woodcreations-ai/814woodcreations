@@ -238,22 +238,6 @@
   </span>
 </div>
 
-    <!-- Text Position -->
-    <div class="form-group">
-      <label for="text-position-form">Text Position *</label>
-      <input
-        id="text-position-form"
-        name="text_position"
-        type="text"
-        required
-        readonly
-        placeholder="e.g., Top, Bottom, None"
-      />
-      <span class="small-note">
-        Selected from catalog. Cannot be changed here.
-      </span>
-    </div>
-
     <!-- Engraving Text -->
     <div class="form-group form-group-full">
       <label for="engraving-text-form">Engraving Text</label>
@@ -291,6 +275,26 @@
   />
 </div>
 
+    <!-- Design Snapshot Image Link -->
+    <div class="form-group form-group-full">
+      <label>Design Preview Image</label>
+      <input
+        id="design-snapshot-url"
+        name="design_snapshot_url"
+        type="text"
+        readonly
+        placeholder="Auto-generated when customer submits"
+      />
+      <span class="small-note">Link to the customer's notebook preview image. Auto-filled from catalog.</span>
+    </div>
+
+    <!-- All selected designs + positions (JSON) -->
+    <input type="hidden" id="designs-data" name="designs_data" />
+
+    <!-- Text position -->
+    <input type="hidden" id="text-pos-x" name="text_pos_x" />
+    <input type="hidden" id="text-pos-y" name="text_pos_y" />
+
     <div class="form-group form-group-full">
       <label for="notes">Design Notes or Special Instructions</label>
       <textarea
@@ -320,10 +324,9 @@
     </div>
   </footer>
 
-  <!-- Load your existing script -->
-  <script src="script.js"></script>
-  
-  <!-- Inventory tracking script -->
+  <!-- html2canvas for notebook snapshot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- Main script -->
   <script src="script.js"></script>
 </body>
 </html>
