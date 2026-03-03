@@ -66,6 +66,23 @@ document.addEventListener("DOMContentLoaded", () => {
   const textColors = { 'Red':'#ffffff','Blue':'#000000','Brown':'#000000','Teal':'#ffffff' };
   const designColorClass = { 'Red':'preview-design-white','Blue':'preview-design-black','Brown':'preview-design-black','Teal':'preview-design-white' };
 
+  // Images that skip the laser engraving filter and always show in their natural color
+  const noFilterImages = ['50.png'];
+
+  function applyDesignFilter(imgEl) {
+    if (!imgEl) return;
+    const filename = (imgEl.src || '').split('/').pop();
+    if (noFilterImages.some(f => filename === f)) {
+      imgEl.classList.remove('preview-design-white', 'preview-design-black');
+      imgEl.style.filter = 'none';
+      return;
+    }
+    if (selectedColor && designColorClass[selectedColor]) {
+      imgEl.classList.remove('preview-design-white', 'preview-design-black');
+      imgEl.classList.add(designColorClass[selectedColor]);
+    }
+  }
+
   // ── POSITION READOUT ──────────────────────────────────────
   function calcInches(d) {
     const notebookRect = getNotebookRect();
@@ -143,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
     img.src = d.src;
     img.alt = d.name;
     img.style.cssText = 'width:100%;height:auto;opacity:0.9;pointer-events:none;display:block;';
-    if (selectedColor && designColorClass[selectedColor]) img.classList.add(designColorClass[selectedColor]);
+    applyDesignFilter(img);
 
     const badge = document.createElement('div');
     badge.style.cssText = 'position:absolute;top:-10px;left:-10px;background:#2563eb;color:white;border-radius:50%;width:22px;height:22px;font-size:0.7rem;font-weight:bold;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:20;';
@@ -254,10 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedDesigns.forEach(d => {
         if (!d.el) return;
         const img = d.el.querySelector('img');
-        if (img) {
-          img.classList.remove('preview-design-white', 'preview-design-black');
-          if (designColorClass[selectedColor]) img.classList.add(designColorClass[selectedColor]);
-        }
+        if (img) applyDesignFilter(img);
       });
     }
 
