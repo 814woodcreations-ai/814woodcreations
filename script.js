@@ -533,7 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       orderBtn.textContent = "✅ Redirecting to order form...";
       setTimeout(() => {
-        window.location.href = "index.html#order";
+        window.location.href = "order.html";
       }, 600);
     });
   }

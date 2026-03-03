@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Place an Order | 814 Wood Creations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="images/logo.png" alt="images/backstreet.png" class="brand-logo" />
+        <div class="logo-text">814 Wood Creations</div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Notebooks</a>
+        <a href="leather.html">Leather</a>
+        <a href="gift-sets.html">Gallery</a>
+        <a href="order.html">Order</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="order" class="section">
+      <div class="container">
+        <div class="order-section-wrapper">
+          <h2>Place an Order</h2>
+          <p class="section-intro">
+            Fill out the form below with what you'd like. 1 form per order.
+          </p>
+
+          <!-- Netlify-ready form -->
+          <form
+            name="custom-notebook-order"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+          >
+            <!-- Netlify hidden fields -->
+            <input type="hidden" name="form-name" value="custom-notebook-order" />
+
+            <p class="hidden">
+              <label>
+                Don't fill this out if you're human:
+                <input name="bot-field" />
+              </label>
+            </p>
+
+            <div class="form-grid">
+              <!-- Customer Info -->
+              <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input id="name" name="name" type="text" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="e.g., 555-123-4567"
+                  required
+                />
+              </div>
+
+              <!-- Order Details -->
+              <div class="form-group">
+                <label for="product">Select Item *</label>
+                <select id="product" name="product" required>
+                  <option value="">Choose an option</option>
+                  <option value="Custom Notebook">Custom Notebook</option>
+                  <option value="Laser-Engraved Leather">Laser-Engraved Leather</option>
+                </select>
+              </div>
+
+              <!-- Design number from catalog -->
+              <div class="form-group">
+                <label for="design-number">Design Number from Catalog *</label>
+                <input
+                  id="design-number"
+                  name="design_number"
+                  type="text"
+                  required
+                  readonly
+                  placeholder="e.g., A1, U3, B5"
+                />
+                <span class="small-note">
+                  Selected from catalog. Cannot be changed here.
+                </span>
+              </div>
+
+              <!-- Color text input -->
+              <div class="form-group">
+                <label for="color">Color *</label>
+                <input
+                  id="color"
+                  name="color"
+                  type="text"
+                  required
+                  readonly
+                  placeholder="e.g., Red, Blue, Brown, Teal"
+                />
+                <span class="small-note">
+                  Selected from catalog. Cannot be changed here.
+                </span>
+              </div>
+
+              <!-- Font -->
+              <div class="form-group">
+                <label for="font">Font *</label>
+                <select id="font" name="font" required disabled>
+                  <option value="">Select a font</option>
+                  <option value="Achafexp">Achafexp (Expanded)</option>
+                  <option value="Achafita">Achafita (Italic)</option>
+                  <option value="Achaflft">Achaflft (Light)</option>
+                  <option value="Achafont">Achafont (Regular)</option>
+                  <option value="Achafout">Achafout (Outline)</option>
+                  <option value="Achafsex">Achafsex (Semi-Extended)</option>
+                  <option value="Alegreya SC">Alegreya SC (Regular)</option>
+                  <option value="Alegreya SC Italic">Alegreya SC (Italic)</option>
+                  <option value="Alegreya SC Bold">Alegreya SC (Bold)</option>
+                  <option value="Alegreya SC Bold Italic">Alegreya SC (Bold Italic)</option>
+                  <option value="Alegreya SC Black">Alegreya SC (Black)</option>
+                  <option value="Alegreya SC Black Italic">Alegreya SC (Black Italic)</option>
+                  <option value="Dancing Script">Dancing Script (Regular)</option>
+                  <option value="Dancing Script Medium">Dancing Script (Medium)</option>
+                  <option value="Dancing Script SemiBold">Dancing Script (SemiBold)</option>
+                  <option value="Dancing Script Bold">Dancing Script (Bold)</option>
+                  <option value="Bloody Terror">Bloody Terror</option>
+                  <option value="Clesgoth">Clesgoth (Gothic)</option>
+                  <option value="Collegiate">Collegiate (Regular)</option>
+                  <option value="Collegiate Black">Collegiate (Black)</option>
+                  <option value="Collegiate Border">Collegiate (Border)</option>
+                  <option value="Collegiate Inside">Collegiate (Inside)</option>
+                  <option value="Collegiate Outline">Collegiate (Outline)</option>
+                  <option value="Enchanted Land">Enchanted Land</option>
+                  <option value="Freshman">Freshman</option>
+                  <option value="Heorot">Heorot (Regular)</option>
+                  <option value="Heorot Italic">Heorot (Italic)</option>
+                  <option value="Heorot Bold">Heorot (Bold)</option>
+                  <option value="Heorot Bold Italic">Heorot (Bold Italic)</option>
+                  <option value="Heorot SemiBold">Heorot (SemiBold)</option>
+                  <option value="Heorot SemiBold Italic">Heorot (SemiBold Italic)</option>
+                  <option value="Lato Thin">Lato (Thin)</option>
+                  <option value="Lato Thin Italic">Lato (Thin Italic)</option>
+                  <option value="Lato Light">Lato (Light)</option>
+                  <option value="Lato Light Italic">Lato (Light Italic)</option>
+                  <option value="Lato">Lato (Regular)</option>
+                  <option value="Lato Italic">Lato (Italic)</option>
+                  <option value="Lato Bold">Lato (Bold)</option>
+                  <option value="Lato Bold Italic">Lato (Bold Italic)</option>
+                  <option value="Lato Black">Lato (Black)</option>
+                  <option value="Lato Black Italic">Lato (Black Italic)</option>
+                  <option value="Marlboro">Marlboro</option>
+                  <option value="Mostwasted">Mostwasted (Grunge)</option>
+                  <option value="Old London">Old London</option>
+                  <option value="Old London Alternate">Old London Alternate</option>
+                  <option value="Plank">Plank (Wooden)</option>
+                  <option value="Playball">Playball (Script)</option>
+                  <option value="Prince Valiant">Prince Valiant (Medieval)</option>
+                  <option value="Remachine Script">Remachine Script</option>
+                  <option value="Stardos Stencil">Stardos Stencil (Regular)</option>
+                  <option value="Stardos Stencil Bold">Stardos Stencil (Bold)</option>
+                </select>
+                <span class="small-note">
+                  Selected from catalog. Cannot be changed here.
+                </span>
+              </div>
+
+              <!-- Engraving Text -->
+              <div class="form-group form-group-full">
+                <label for="engraving-text-form">Engraving Text</label>
+                <input
+                  id="engraving-text-form"
+                  name="engraving_text"
+                  type="text"
+                  readonly
+                  placeholder="Text selected from catalog"
+                />
+                <span class="small-note">
+                  Selected from catalog. Cannot be changed here.
+                </span>
+              </div>
+
+              <!-- Fundraising Unit dropdown -->
+              <div class="form-group">
+                <label for="fundraising-unit">Fundraising Unit *</label>
+                <select id="fundraising-unit" name="fundraising_unit" required>
+                  <option value="">Select a unit</option>
+                  <option value="USAWOA Morning Calm Chapter 0207">USAWOA Morning Calm Chapter 0207</option>
+                  <option value="DSTB">DTSB</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="quantity">Quantity (1 per order)</label>
+                <input
+                  id="quantity"
+                  name="quantity"
+                  type="number"
+                  value="1"
+                  readonly
+                />
+              </div>
+
+              <!-- Design Snapshot -->
+              <div class="form-group form-group-full" id="snapshot-wrapper" style="display:none;">
+                <label>Design Preview</label>
+                <div style="display:flex; gap:1.25rem; align-items:flex-start; flex-wrap:wrap;">
+                  <img id="snapshot-preview" src="" alt="Customer design preview"
+                    style="max-width:340px; width:100%; border-radius:0.5rem; border:1px solid #d1d5db; display:block;" />
+                  <div style="background:#f8f5f0; border:1px solid #d6c9b0; border-radius:0.5rem; padding:0.85rem 1rem; font-size:0.85rem; color:#4b3f2f; line-height:1.6; min-width:200px; max-width:280px;">
+                    <strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem;">🎨 Design Color Note</strong>
+                    <p style="margin:0 0 0.5rem 0;">The engraved design color depends on the notebook color selected:</p>
+                    <ul style="margin:0; padding-left:1.1rem;">
+                      <li><strong>Red</strong> notebook → design will be <strong>White</strong></li>
+                      <li><strong>Teal</strong> notebook → design will be <strong>White</strong></li>
+                      <li><strong>Blue</strong> notebook → design will be <strong>Black</strong></li>
+                      <li><strong>Brown</strong> notebook → design will be <strong>Black</strong></li>
+                    </ul>
+                    <p style="margin:0.6rem 0 0 0; font-size:0.8rem; color:#6b5c4c;">This matches exactly what you saw in the design preview.</p>
+                  </div>
+                </div>
+                <span class="small-note" style="margin-top:0.5rem; display:block;">This is what the customer designed. Auto-captured from the catalog page.</span>
+              </div>
+              <input type="hidden" id="design-snapshot-url" name="design_snapshot_url" />
+
+              <!-- All selected designs + positions (JSON) -->
+              <input type="hidden" id="designs-data" name="designs_data" />
+
+              <!-- Font size -->
+              <input type="hidden" id="font-size" name="font_size" />
+
+              <!-- Text position -->
+              <input type="hidden" id="text-pos-x" name="text_pos_x" />
+              <input type="hidden" id="text-pos-y" name="text_pos_y" />
+
+              <div class="form-group form-group-full">
+                <label for="notes">Design Notes or Special Instructions</label>
+                <textarea
+                  id="notes"
+                  name="notes"
+                  rows="4"
+                  placeholder="Placement, sizing, unit info, fundraiser details, or anything else you want me to know."
+                ></textarea>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-primary form-submit">
+              Submit Order Request
+            </button>
+            <p class="small-note">
+              You are not charged until you receive your product.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- html2canvas for notebook snapshot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <!-- Main script -->
+  <script src="script.js"></script>
+</body>
+</html>
