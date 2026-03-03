@@ -441,6 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("product", "Custom Notebook");
       localStorage.setItem("color", selectedColor);
       localStorage.setItem("font", selectedFont || "");
+      localStorage.setItem("font_size", selectedFont ? `${previewFontSize}px` : "");
       localStorage.setItem("engraving_text", selectedEngravingText.trim() || "");
       localStorage.setItem("design_number", selectedDesigns.map(d => d.name).join(', '));
 
@@ -542,6 +543,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const color = localStorage.getItem("color");
   const design = localStorage.getItem("design_number");
   const font = localStorage.getItem("font");
+  const fontSize = localStorage.getItem("font_size");
   const engravingText = localStorage.getItem("engraving_text");
 
   if (engravingText && document.getElementById("engraving-text")) document.getElementById("engraving-text").value = engravingText;
@@ -555,6 +557,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const orderForm = document.querySelector('form[name="custom-notebook-order"]');
     if (orderForm && fontField.disabled) orderForm.addEventListener('submit', () => { fontField.disabled = false; });
   }
+  if (fontSize && document.getElementById("font-size")) document.getElementById("font-size").value = fontSize;
 
   const textPosXSaved = localStorage.getItem("text_pos_x");
   const textPosYSaved = localStorage.getItem("text_pos_y");
