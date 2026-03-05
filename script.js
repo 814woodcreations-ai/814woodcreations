@@ -67,10 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const designColorClass = { 'Red':'preview-design-white','Blue':'preview-design-black','Brown':'preview-design-black','Teal':'preview-design-white' };
 
   // Images that skip the laser engraving filter and always show in their natural color
-  const noFilterImages = ['50.png', '52.png'];
+  const noFilterImages = ['50.png', '52.png', '12.png'];
 
   // Images that show a red X overlay when Red or Teal notebook is selected
-  const incompatibleOnLightColors = ['50.png', '52.png'];
+  const incompatibleOnLightColors = ['50.png', '52.png', '12.png'];
   const incompatibleColors = ['Red', 'Teal'];
 
   function isIncompatible(filename) {
