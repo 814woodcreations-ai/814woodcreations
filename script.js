@@ -69,6 +69,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // Images that skip the laser engraving filter and always show in their natural color
   const noFilterImages = ['50.png', '52.png'];
 
+  // Images that show a red X overlay when Red or Teal notebook is selected
+  const incompatibleOnLightColors = ['50.png', '52.png'];
+  const incompatibleColors = ['Red', 'Teal'];
+
+  function isIncompatible(filename) {
+    return incompatibleOnLightColors.some(f => filename === f) &&
+           incompatibleColors.includes(selectedColor);
+  }
+
+  function applyRedXOverlay(container, imgEl) {
+    const existing = container.querySelector('.red-x-overlay');
+    if (existing) existing.remove();
+    const filename = (imgEl.src || '').split('/').pop();
+    if (!isIncompatible(filename)) return;
+    const overlay = document.createElement('div');
+    overlay.className = 'red-x-overlay';
+    overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:15;background:linear-gradient(to top right,transparent 0%,transparent calc(50% - 2px),#ff0000 50%,transparent calc(50% + 2px),transparent 100%),linear-gradient(to bottom right,transparent 0%,transparent calc(50% - 2px),#ff0000 50%,transparent calc(50% + 2px),transparent 100%);';
+    container.appendChild(overlay);
+  }
+
   function applyDesignFilter(imgEl) {
     if (!imgEl) return;
     const filename = (imgEl.src || '').split('/').pop();
@@ -81,6 +101,30 @@ document.addEventListener("DOMContentLoaded", () => {
       imgEl.classList.remove('preview-design-white', 'preview-design-black');
       imgEl.classList.add(designColorClass[selectedColor]);
     }
+  }
+
+  function refreshAllRedXOverlays() {
+    // Update overlays on preview design elements
+    selectedDesigns.forEach(d => {
+      if (!d.el) return;
+      const imgEl = d.el.querySelector('img');
+      if (imgEl) applyRedXOverlay(d.el, imgEl);
+    });
+    // Update overlays on thumbnail cards in the grid
+    document.querySelectorAll('.option-card.image-option[data-logo]').forEach(card => {
+      const imgEl = card.querySelector('img');
+      if (!imgEl) return;
+      const filename = (imgEl.src || '').split('/').pop();
+      if (!incompatibleOnLightColors.some(f => filename === f)) return;
+      const existing = card.querySelector('.red-x-overlay');
+      if (existing) existing.remove();
+      if (!isIncompatible(filename)) return;
+      if (getComputedStyle(card).position === 'static') card.style.position = 'relative';
+      const overlay = document.createElement('div');
+      overlay.className = 'red-x-overlay';
+      overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:15;background:linear-gradient(to top right,transparent 0%,transparent calc(50% - 2px),#ff0000 50%,transparent calc(50% + 2px),transparent 100%),linear-gradient(to bottom right,transparent 0%,transparent calc(50% - 2px),#ff0000 50%,transparent calc(50% + 2px),transparent 100%);';
+      card.appendChild(overlay);
+    });
   }
 
   // ── POSITION READOUT ──────────────────────────────────────
@@ -238,6 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
     selectedDesigns.push(d);
     if (designsOverlay) designsOverlay.appendChild(createDesignElement(d));
     updateAllPositionReadouts();
+    refreshAllRedXOverlays();
   }
 
   function removeDesign(name) {
@@ -273,6 +318,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const img = d.el.querySelector('img');
         if (img) applyDesignFilter(img);
       });
+      refreshAllRedXOverlays();
     }
 
     if (selectedFont && previewText) {
