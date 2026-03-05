@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const designColorClass = { 'Red':'preview-design-white','Blue':'preview-design-black','Brown':'preview-design-black','Teal':'preview-design-white' };
 
   // Images that skip the laser engraving filter and always show in their natural color
-  const noFilterImages = ['50.png'];
+  const noFilterImages = ['50.png', '52.png'];
 
   function applyDesignFilter(imgEl) {
     if (!imgEl) return;
