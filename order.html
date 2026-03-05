@@ -32,6 +32,20 @@
             Fill out the form below with what you'd like. 1 form per order.
           </p>
 
+          <!-- Order Number Display -->
+          <div id="order-number-display" style="
+            display: inline-block;
+            background: #f8f5f0;
+            border: 1px solid #d6c9b0;
+            border-radius: 0.5rem;
+            padding: 0.6rem 1.1rem;
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+            color: #4b3f2f;
+          ">
+            📋 Your Order #: <strong id="order-number-label" style="font-family: monospace; letter-spacing: 0.05em;"></strong>
+          </div>
+
           <!-- Netlify-ready form -->
           <form
             name="custom-notebook-order"
@@ -41,6 +55,9 @@
           >
             <!-- Netlify hidden fields -->
             <input type="hidden" name="form-name" value="custom-notebook-order" />
+
+            <!-- Auto-generated order number -->
+            <input type="hidden" id="order-number" name="order_number" />
 
             <p class="hidden">
               <label>
@@ -272,6 +289,32 @@
       <p>© <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Order Number Generator -->
+  <script>
+    (function () {
+      // Generate a unique order number: 814-YYYYMMDD-XXXX
+      function generateOrderNumber() {
+        var now = new Date();
+        var datePart =
+          now.getFullYear().toString() +
+          String(now.getMonth() + 1).padStart(2, '0') +
+          String(now.getDate()).padStart(2, '0');
+        var randPart = Math.floor(1000 + Math.random() * 9000); // 4-digit random
+        return '814-' + datePart + '-' + randPart;
+      }
+
+      var orderNum = generateOrderNumber();
+
+      // Populate the hidden form field (submitted to Netlify)
+      var hiddenField = document.getElementById('order-number');
+      if (hiddenField) hiddenField.value = orderNum;
+
+      // Show the order number visibly above the form
+      var label = document.getElementById('order-number-label');
+      if (label) label.textContent = orderNum;
+    })();
+  </script>
 
   <!-- html2canvas for notebook snapshot -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
