@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Inventory Admin | 814 Wood Creations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #f3f4f6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* ── Login ── */
+    #login-screen {
+      background: white;
+      border-radius: 1rem;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 380px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    #login-screen h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    #login-screen p  { color: #6b7280; margin-bottom: 1.5rem; font-size: 0.95rem; }
+    #login-screen input {
+      width: 100%; padding: 0.75rem 1rem;
+      border: 1px solid #d1d5db; border-radius: 0.5rem;
+      font-size: 1rem; margin-bottom: 1rem;
+    }
+    #login-screen button {
+      width: 100%; padding: 0.75rem;
+      background: #2563eb; color: white;
+      border: none; border-radius: 0.5rem;
+      font-size: 1rem; font-weight: 600; cursor: pointer;
+    }
+    #login-screen button:hover { background: #1d4ed8; }
+    #login-error { color: #dc2626; font-size: 0.875rem; margin-top: 0.75rem; display: none; }
+
+    /* ── Admin panel ── */
+    #admin-panel { display: none; width: 100%; max-width: 700px; }
+
+    .admin-header {
+      background: white; border-radius: 1rem;
+      padding: 1.5rem 2rem; margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .admin-header h1 { font-size: 1.4rem; }
+    .admin-header p  { color: #6b7280; font-size: 0.875rem; margin-top: 0.2rem; }
+
+    #logout-btn {
+      padding: 0.5rem 1rem; background: #f3f4f6;
+      border: 1px solid #d1d5db; border-radius: 0.5rem;
+      cursor: pointer; font-size: 0.875rem;
+    }
+    #logout-btn:hover { background: #e5e7eb; }
+
+    .card {
+      background: white; border-radius: 1rem;
+      padding: 1.5rem 2rem; margin-bottom: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .card h2 {
+      font-size: 1rem; font-weight: 700;
+      color: #374151; margin-bottom: 1rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb;
+    }
+
+    .item-row {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #f3f4f6;
+      gap: 1rem;
+    }
+    .item-row:last-child { border-bottom: none; }
+
+    .item-name { font-size: 0.95rem; font-weight: 500; color: #111827; flex: 1; }
+
+    .stock-badge {
+      font-size: 0.8rem; font-weight: 600;
+      padding: 0.2rem 0.6rem; border-radius: 999px; white-space: nowrap;
+    }
+    .stock-badge.in-stock  { background: #dcfce7; color: #166534; }
+    .stock-badge.low-stock { background: #fef9c3; color: #854d0e; }
+    .stock-badge.out       { background: #fee2e2; color: #991b1b; }
+
+    .qty-input {
+      width: 70px; padding: 0.4rem 0.5rem;
+      border: 1px solid #d1d5db; border-radius: 0.4rem;
+      font-size: 0.95rem; text-align: center;
+    }
+    .qty-input:focus { outline: none; border-color: #2563eb; }
+
+    #save-all-btn {
+      width: 100%; padding: 0.85rem;
+      background: #16a34a; color: white;
+      border: none; border-radius: 0.5rem;
+      font-size: 1rem; font-weight: 700;
+      cursor: pointer; margin-top: 0.5rem;
+    }
+    #save-all-btn:hover  { background: #15803d; }
+    #save-all-btn.saving { background: #9ca3af; cursor: not-allowed; }
+    #save-all-btn.saved  { background: #16a34a; }
+
+    #status-msg {
+      text-align: center; font-size: 0.875rem;
+      margin-top: 0.75rem; min-height: 1.2rem;
+      color: #16a34a; font-weight: 500;
+    }
+
+    #loading-msg { text-align: center; color: #6b7280; padding: 2rem; font-size: 0.95rem; }
+  </style>
+</head>
+<body>
+
+  <!-- ── Login ── -->
+  <div id="login-screen">
+    <h1>🔒 Admin Login</h1>
+    <p>814 Wood Creations Inventory Manager</p>
+    <input type="password" id="password-input" placeholder="Enter admin password" />
+    <button onclick="login()">Log In</button>
+    <div id="login-error">Incorrect password. Please try again.</div>
+  </div>
+
+  <!-- ── Admin Panel ── -->
+  <div id="admin-panel">
+    <div class="admin-header">
+      <div>
+        <h1>📦 Inventory Manager</h1>
+        <p>814 Wood Creations — Edit quantities and click Save. Changes go live immediately.</p>
+      </div>
+      <button id="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+    <div id="loading-msg">Loading inventory...</div>
+    <div id="inventory-cards"></div>
+
+    <div class="card" id="save-all-card" style="display:none;">
+      <button id="save-all-btn" onclick="saveAll()">💾 Save All Changes</button>
+      <div id="status-msg"></div>
+    </div>
+  </div>
+
+<script>
+  // ── Change this to your own password ─────────────────────
+  var ADMIN_PASSWORD = '814woodadmin';
+  // ─────────────────────────────────────────────────────────
+
+  var SECTIONS = [
+    {
+      title: 'Custom Notebooks',
+      keys:  ['Red', 'Blue', 'Brown', 'Teal']
+    }
+  ];
+
+  var _inventory = {};
+
+  // ── Auth ─────────────────────────────────────────────────
+  function login() {
+    var pw = document.getElementById('password-input').value;
+    if (pw === ADMIN_PASSWORD) {
+      sessionStorage.setItem('814woodadmin', '1');
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-panel').style.display  = 'block';
+      fetchInventory();
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+
+  function logout() {
+    sessionStorage.removeItem('814woodadmin');
+    location.reload();
+  }
+
+  document.getElementById('password-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') login();
+  });
+
+  if (sessionStorage.getItem('814woodadmin') === '1') {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-panel').style.display  = 'block';
+    fetchInventory();
+  }
+
+  // ── Fetch & Render ───────────────────────────────────────
+  function fetchInventory() {
+    fetch('/.netlify/functions/get-inventory')
+      .then(function(r) { return r.json(); })
+      .then(function(inv) {
+        _inventory = inv;
+        renderInventory(inv);
+      })
+      .catch(function(err) {
+        document.getElementById('loading-msg').textContent = 'Error loading inventory: ' + err.message;
+      });
+  }
+
+  function badge(qty) {
+    if (qty <= 0)  return '<span class="stock-badge out">Out of Stock</span>';
+    if (qty <= 3)  return '<span class="stock-badge low-stock">Low: ' + qty + '</span>';
+    return '<span class="stock-badge in-stock">In Stock: ' + qty + '</span>';
+  }
+
+  function renderInventory(inv) {
+    document.getElementById('loading-msg').style.display = 'none';
+    document.getElementById('save-all-card').style.display = 'block';
+
+    var html = '';
+    SECTIONS.forEach(function(section) {
+      html += '<div class="card"><h2>' + section.title + '</h2>';
+      section.keys.forEach(function(key) {
+        var qty = inv[key] !== undefined ? inv[key] : 0;
+        html +=
+          '<div class="item-row" id="row-' + key.replace(/\s+/g, '-') + '">' +
+            '<span class="item-name">' + key + '</span>' +
+            badge(qty) +
+            '<input class="qty-input" type="number" min="0" max="9999" ' +
+              'value="' + qty + '" data-key="' + key + '" ' +
+              'oninput="onQtyChange(this)" />' +
+          '</div>';
+      });
+      html += '</div>';
+    });
+
+    document.getElementById('inventory-cards').innerHTML = html;
+  }
+
+  function onQtyChange(input) {
+    var key = input.dataset.key;
+    var qty = parseInt(input.value, 10);
+    if (isNaN(qty) || qty < 0) return;
+    _inventory[key] = qty;
+
+    var row = document.getElementById('row-' + key.replace(/\s+/g, '-'));
+    if (row) {
+      var oldBadge = row.querySelector('.stock-badge');
+      if (oldBadge) oldBadge.outerHTML = badge(qty);
+    }
+  }
+
+  function saveAll() {
+    var btn = document.getElementById('save-all-btn');
+    var msg = document.getElementById('status-msg');
+
+    btn.textContent = 'Saving...';
+    btn.classList.add('saving');
+    btn.disabled = true;
+    msg.textContent = '';
+
+    document.querySelectorAll('.qty-input').forEach(function(input) {
+      var qty = parseInt(input.value, 10);
+      if (!isNaN(qty) && qty >= 0) _inventory[input.dataset.key] = qty;
+    });
+
+    fetch('/.netlify/functions/set-inventory', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(_inventory)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.success) {
+        btn.textContent = '✅ Saved!';
+        btn.classList.remove('saving');
+        btn.classList.add('saved');
+        msg.textContent = 'Inventory updated successfully.';
+        setTimeout(function() {
+          btn.textContent = '💾 Save All Changes';
+          btn.classList.remove('saved');
+          btn.disabled = false;
+        }, 2000);
+      } else {
+        throw new Error(data.error || 'Unknown error');
+      }
+    })
+    .catch(function(err) {
+      btn.textContent = '💾 Save All Changes';
+      btn.classList.remove('saving');
+      btn.disabled = false;
+      msg.style.color = '#dc2626';
+      msg.textContent = 'Error saving: ' + err.message;
+    });
+  }
+</script>
+</body>
+</html>

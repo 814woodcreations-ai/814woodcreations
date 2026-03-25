@@ -1,140 +1,113 @@
-// ========================================
-// INVENTORY TRACKING CONFIGURATION
-// ========================================
+// ============================================================
+// 814 WOOD CREATIONS — inventory.js
+// Loads live stock counts from Netlify Function → Netlify Blobs.
+// Marks out-of-stock items with a red X and disables ordering.
+// Automatically deducts stock when an order is submitted.
+// ============================================================
 
-// YOUR GOOGLE SHEETS CREDENTIALS
-// Replace these with your actual values:
-const SHEET_ID = '19RJfvLen6l7O_wa5tnUpCWvqVwblphlkC8EburaS1gg';  // Get this from your Google Sheet URL
-const API_KEY = 'AIzaSyAGlTgAucD7am_MJUHDkot4ez7pwezL_7Y';     // Your Google Cloud API Key
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyB_KQ0-hU7wEvDJjazOg8KTbYgvRjR5Uja3scMW3GZMqZrMakUfWhnzwnNgGT_3TOB/exec';  // Your deployed Apps Script URL
-const SECRET_KEY = 'mySecretPassword123';  // Match this to your Apps Script password
+// ── Which inventory keys belong to which order button ────────
+var PRODUCT_KEYS = {
+  orderNotebook: ['Red', 'Blue', 'Brown', 'Teal']
+};
 
-// ========================================
-// INVENTORY FUNCTIONS
-// ========================================
+var _inventory = {};
 
-/**
- * Load inventory from Google Sheets when page loads
- */
-async function loadInventory() {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/Sheet1!A2:B10?key=${API_KEY}`;
-  
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    
-    if (data.values) {
-      // Check each color's inventory
-      data.values.forEach(row => {
-        const color = row[0];         // e.g., "Red"
-        const quantity = parseInt(row[1]);  // e.g., 0
-        
-        if (quantity <= 0) {
-          disableColor(color);
-        }
-      });
-      
-      console.log('Inventory loaded successfully');
-    }
-  } catch (error) {
-    console.error('Error loading inventory:', error);
-    console.log('Make sure you have set up your Google Sheets credentials in inventory.js');
-  }
+// ── Load & apply inventory ───────────────────────────────────
+function loadInventory() {
+  fetch('/.netlify/functions/get-inventory')
+    .then(function(r) { return r.json(); })
+    .then(function(inventory) {
+      _inventory = inventory;
+      applyInventory(inventory);
+    })
+    .catch(function(err) {
+      console.warn('Could not load inventory:', err);
+    });
 }
 
-/**
- * Disable a color option (add red X and prevent clicking)
- */
-function disableColor(color) {
-  // Find all color buttons with matching data-color attribute
-  const colorButtons = document.querySelectorAll(`[data-color="${color}"]`);
-  
-  colorButtons.forEach(colorElement => {
-    if (!colorElement.classList.contains('out-of-stock')) {
-      // Add out-of-stock class
-      colorElement.classList.add('out-of-stock');
-      
-      // Add "Out of Stock" label if not already present
-      if (!colorElement.querySelector('.stock-label')) {
-        const label = document.createElement('div');
-        label.className = 'stock-label';
-        label.textContent = 'Out of Stock';
-        colorElement.appendChild(label);
-      }
+function applyInventory(inventory) {
+  // Mark individual color cards out of stock
+  Object.keys(inventory).forEach(function(itemName) {
+    if (inventory[itemName] <= 0) {
+      markOutOfStock(itemName);
+    }
+  });
+
+  // Disable order buttons where all variants are out of stock
+  Object.keys(PRODUCT_KEYS).forEach(function(btnId) {
+    var btn = document.getElementById(btnId);
+    if (!btn) return;
+
+    var keys   = PRODUCT_KEYS[btnId];
+    var allOut = keys.every(function(k) {
+      return inventory[k] !== undefined && inventory[k] <= 0;
+    });
+
+    if (allOut) {
+      btn.disabled         = true;
+      btn.textContent      = 'Currently Out of Stock';
+      btn.style.background = '#9ca3af';
+      btn.style.cursor     = 'not-allowed';
+      btn.style.opacity    = '0.7';
+      btn.title = 'This item is currently out of stock. Please check back soon!';
+    } else {
+      btn.disabled         = false;
+      btn.style.background = '';
+      btn.style.cursor     = '';
+      btn.style.opacity    = '';
+      btn.title            = '';
     }
   });
 }
 
-/**
- * Update inventory in Google Sheets (subtract 1)
- */
-async function updateInventory(selectedColor) {
-  try {
-    const response = await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        color: selectedColor,
-        key: SECRET_KEY
-      })
-    });
-    
-    const result = await response.text();
-    console.log('Inventory updated:', result);
-    
-    // Reload inventory to check if this color just went out of stock
-    await loadInventory();
-    
-    return true;
-  } catch (error) {
-    console.error('Error updating inventory:', error);
-    return false;
-  }
+// Adds red-X overlay + "Out of Stock" badge to a color card
+function markOutOfStock(itemName) {
+  var cards = document.querySelectorAll('[data-color="' + itemName + '"]');
+  cards.forEach(function(card) {
+    if (card.classList.contains('out-of-stock')) return;
+    card.classList.add('out-of-stock');
+    card.style.position = 'relative';
+    if (!card.querySelector('.stock-label')) {
+      var label         = document.createElement('div');
+      label.className   = 'stock-label';
+      label.textContent = 'Out of Stock';
+      card.appendChild(label);
+    }
+  });
 }
 
-// ========================================
-// INTEGRATE WITH EXISTING ORDER FLOW
-// ========================================
-
-/**
- * Hook into the existing form submission
- * This updates inventory when customer submits order
- */
+// ── Deduct stock on order submission ─────────────────────────
 function setupInventoryTracking() {
-  // Wait for the order form to exist
-  const orderForm = document.querySelector('form[name="custom-notebook-order"]');
-  
-  if (orderForm) {
-    // Add event listener to form submission
-    orderForm.addEventListener('submit', async function(e) {
-      // Get the selected color from the readonly input
-      const colorInput = document.getElementById('color');
-      
-      if (colorInput && colorInput.value) {
-        const selectedColor = colorInput.value;
-        
-        // Update inventory in Google Sheets
-        console.log('Updating inventory for color:', selectedColor);
-        await updateInventory(selectedColor);
-      }
+  var orderForm = document.querySelector('form[name="custom-notebook-order"]');
+  if (!orderForm) return;
+
+  orderForm.addEventListener('submit', function() {
+    var itemsToDeduct = [];
+    var colorInput    = document.getElementById('color');
+    var colorValue    = colorInput ? colorInput.value : '';
+
+    if (colorValue) {
+      itemsToDeduct.push(colorValue);
+    }
+
+    if (itemsToDeduct.length === 0) return;
+
+    // Fire and forget — don't block form submission
+    fetch('/.netlify/functions/deduct-inventory', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ items: itemsToDeduct })
+    }).catch(function(err) {
+      console.warn('Inventory deduction failed:', err);
     });
-  }
+  });
 }
 
-// ========================================
-// INITIALIZATION
-// ========================================
-
-// Load inventory when page loads
+// ── Init ─────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', function() {
-  console.log('Loading inventory...');
   loadInventory();
-  
-  // Set up tracking on order form page
   setupInventoryTracking();
 });
 
-// Also reload inventory every 60 seconds to catch updates from other users
+// Refresh every 60 seconds so stock changes are reflected live
 setInterval(loadInventory, 60000);
