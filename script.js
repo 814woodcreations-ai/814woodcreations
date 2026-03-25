@@ -63,8 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
     'Stardos Stencil':'Stardos Stencil,display','Stardos Stencil Bold':'Stardos Stencil,display'
   };
 
-  const textColors = { 'Red':'#ffffff','Blue':'#000000','Brown':'#000000','Teal':'#ffffff' };
-  const designColorClass = { 'Red':'preview-design-white','Blue':'preview-design-black','Brown':'preview-design-black','Teal':'preview-design-white' };
+  const textColors = { 'Red':'#ffffff','Blue':'#000000','Brown':'#000000','Teal':'#ffffff','Book Left':'#5c2a00','Book Right':'#5c2a00','Book Up':'#5c2a00' };
+  const designColorClass = { 'Red':'preview-design-white','Blue':'preview-design-black','Brown':'preview-design-black','Teal':'preview-design-white','Book Left':'preview-design-brown','Book Right':'preview-design-brown','Book Up':'preview-design-brown' };
 
   // Images that skip the laser engraving filter and always show in their natural color
   const noFilterImages = ['50.png', '52.png', '12.png'];
@@ -93,13 +93,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!imgEl) return;
     const filename = (imgEl.src || '').split('/').pop();
     if (noFilterImages.some(f => filename === f)) {
-      imgEl.classList.remove('preview-design-white', 'preview-design-black');
+      imgEl.classList.remove('preview-design-white', 'preview-design-black', 'preview-design-brown');
       imgEl.style.filter = 'none';
       return;
     }
     if (selectedColor && designColorClass[selectedColor]) {
-      imgEl.classList.remove('preview-design-white', 'preview-design-black');
+      imgEl.classList.remove('preview-design-white', 'preview-design-black', 'preview-design-brown');
       imgEl.classList.add(designColorClass[selectedColor]);
+      if (designColorClass[selectedColor] === 'preview-design-brown') {
+        imgEl.style.filter = 'brightness(0) invert(1) sepia(1) saturate(4) hue-rotate(355deg) brightness(0.5)';
+        imgEl.style.mixBlendMode = '';
+      } else {
+        imgEl.style.filter = '';
+      }
     }
   }
 
@@ -172,11 +178,11 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper.innerHTML = `
         ${selectedDesigns.length > 1 ? `<div style="font-size:0.82rem;font-weight:600;margin-bottom:0.25rem;color:#1e40af;">Design ${d.number}: ${d.name}</div>` : ''}
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.25rem;">
-          <small style="background-color:#add8e6;padding:0.25rem 0.5rem;border-radius:0.5rem;">30%</small>
+          <small style="background-color:#add8e6;padding:0.25rem 0.5rem;border-radius:0.5rem;">5%</small>
           <small id="size-label-${d.id}" style="background-color:#add8e6;padding:0.25rem 0.5rem;border-radius:0.5rem;font-weight:700;">${d.size}%</small>
-          <small style="background-color:#add8e6;padding:0.25rem 0.5rem;border-radius:0.5rem;">300%</small>
+          <small style="background-color:#add8e6;padding:0.25rem 0.5rem;border-radius:0.5rem;">100%</small>
         </div>
-        <input type="range" min="30" max="300" step="5" value="${d.size}"
+        <input type="range" min="5" max="100" step="5" value="${d.size}"
           style="width:100%;" data-design-id="${d.id}" class="design-size-slider">
       `;
       sizeControls.appendChild(wrapper);
@@ -205,6 +211,11 @@ document.addEventListener("DOMContentLoaded", () => {
     img.alt = d.name;
     img.style.cssText = 'width:100%;height:auto;opacity:0.9;pointer-events:none;display:block;';
     applyDesignFilter(img);
+
+    // Bookmark page: force filter with !important so nothing can override it
+    if (document.getElementById('orderBookmark')) {
+      img.setAttribute('style', img.getAttribute('style') + ';filter:invert(35%) sepia(60%) saturate(500%) hue-rotate(355deg) brightness(60%) !important');
+    }
 
     const badge = document.createElement('div');
     badge.style.cssText = 'position:absolute;top:-10px;left:-10px;background:#2563eb;color:white;border-radius:50%;width:22px;height:22px;font-size:0.7rem;font-weight:bold;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:20;';
@@ -278,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function addDesign(name, src) {
     const id = String(Date.now() + Math.random());
     const offset = selectedDesigns.length * 8;
-    const d = { id, name, src, number: selectedDesigns.length + 1, posX: clamp(50 + offset, 10, 85), posY: clamp(40 + offset, 10, 85), size: 60, el: null };
+    const d = { id, name, src, number: selectedDesigns.length + 1, posX: clamp(50 + offset, 10, 85), posY: clamp(40 + offset, 10, 85), size: 25, el: null };
     selectedDesigns.push(d);
     if (designsOverlay) designsOverlay.appendChild(createDesignElement(d));
     updateAllPositionReadouts();
@@ -310,8 +321,23 @@ document.addEventListener("DOMContentLoaded", () => {
     showPreviewIfNeeded();
     if (fontSizeControlWrapper) fontSizeControlWrapper.style.display = selectedFont ? "block" : "none";
 
+    const keychainImages = {
+      'Walnut Key Left':           'images/walnut/walnutkeyleft.png',
+      'Walnut Key Right':          'images/walnut/walnutkeyright.png',
+      'Walnut Key Up':             'images/walnut/walnutkeyup.png',
+      'Slate Key Left':            'images/slate/slatekeyleft.png',
+      'Slate Key Right':           'images/slate/slatekeyright.png',
+      'Slate Key Up':              'images/slate/slatekeyup.png',
+      'Book Left':                 'images/bookmark/bookleft.png',
+      'Book Right':                'images/bookmark/bookright.png',
+      'Book Up':                   'images/bookmark/bookup.png',
+      'Aqua Water Bottle':         'images/water/aqua.png',
+      'Dark Blue Water Bottle':    'images/water/darkblue.png',
+      'Light Purple Water Bottle': 'images/water/lightpurple.png'
+    };
+
     if (selectedColor && previewNotebook) {
-      previewNotebook.src = `images/colors/${selectedColor.toLowerCase()}.png`;
+      previewNotebook.src = keychainImages[selectedColor] || `images/colors/${selectedColor.toLowerCase()}.png`;
       if (previewText && textColors[selectedColor]) previewText.style.color = textColors[selectedColor];
       selectedDesigns.forEach(d => {
         if (!d.el) return;
@@ -467,11 +493,21 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ── ORDER BUTTON ──────────────────────────────────────────
-  const orderBtn = document.getElementById("orderNotebook");
+  const orderBtn = document.getElementById("orderNotebook") || document.getElementById("orderKeychain") || document.getElementById("orderCoaster") || document.getElementById("orderBookmark") || document.getElementById("orderWaterbottle");
+  const isKeychainPage    = !!document.getElementById("orderKeychain");
+  const isCoasterPage     = !!document.getElementById("orderCoaster");
+  const isBookmarkPage    = !!document.getElementById("orderBookmark");
+  const isWaterBottlePage = !!document.getElementById("orderWaterbottle");
+  const isNoColorPage     = isKeychainPage || isCoasterPage || isBookmarkPage;
+
   if (orderBtn) {
     orderBtn.addEventListener("click", async () => {
-      if (!selectedColor || selectedDesigns.length === 0) {
+      if (!isNoColorPage && (!selectedColor || selectedDesigns.length === 0)) {
         alert("Please select a color and at least one design before continuing.");
+        return;
+      }
+      if (isNoColorPage && selectedDesigns.length === 0) {
+        alert("Please select at least one design before continuing.");
         return;
       }
       if (selectedFont && (!selectedEngravingText || !selectedEngravingText.trim())) {
@@ -479,13 +515,17 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Disable button and show status
       orderBtn.disabled = true;
       orderBtn.textContent = "📸 Capturing your design...";
 
-      // Save all order data to localStorage
-      localStorage.setItem("product", "Custom Notebook");
-      localStorage.setItem("color", selectedColor);
+      const productName = isBookmarkPage    ? 'Custom Bookmark'
+                        : isCoasterPage     ? 'Slate Coaster'
+                        : isKeychainPage    ? (document.title.toLowerCase().includes('slate') ? 'Slate Keychain' : 'Walnut Keychain')
+                        : isWaterBottlePage ? 'Water Bottle'
+                        : 'Custom Notebook';
+
+      localStorage.setItem("product", productName);
+      localStorage.setItem("color", selectedColor || "");
       localStorage.setItem("font", selectedFont || "");
       localStorage.setItem("font_size", selectedFont ? `${previewFontSize}px` : "");
       localStorage.setItem("engraving_text", selectedEngravingText.trim() || "");
@@ -502,10 +542,11 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("text_pos_x", `${txIn} inches from left`);
       localStorage.setItem("text_pos_y", `${tyIn} inches from top`);
 
-      // ── SNAPSHOT: capture + upload to ImgBB → short URL ────
+      // ── SNAPSHOT: capture front + back preview ────
       try {
-        const notebookWrapper = previewNotebook ? previewNotebook.parentElement : null;
-        if (notebookWrapper && typeof html2canvas !== 'undefined') {
+        // Capture the full preview section which includes both front and back
+        const captureTarget = document.getElementById('preview-section') || (previewNotebook ? previewNotebook.parentElement : null);
+        if (captureTarget && typeof html2canvas !== 'undefined') {
           orderBtn.textContent = "📸 Capturing your design...";
 
           // Force the selected font to fully load before capturing,
@@ -528,7 +569,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } catch(e) { /* continue anyway */ }
           }
 
-          const canvas = await html2canvas(notebookWrapper, {
+          const canvas = await html2canvas(captureTarget, {
             useCORS: true,
             allowTaint: false,
             scale: 2,
@@ -579,6 +620,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       orderBtn.textContent = "✅ Redirecting to order form...";
       setTimeout(() => {
+        const snapshotUrl = localStorage.getItem('design_snapshot_url') || '';
+        if (localStorage.getItem('adding_item') === 'true') {
+          localStorage.setItem('pending_item', JSON.stringify({
+            product:    productName,
+            design:     selectedDesigns.map(d => d.name).join(', '),
+            color:      selectedColor || '',
+            engraving:  selectedEngravingText.trim() || '',
+            font:       selectedFont || '',
+            snapshot:   snapshotUrl,
+            text_lines: localStorage.getItem('text_lines') || '',
+            text_wrap:  localStorage.getItem('text_wrap')  || '',
+            image_wrap: localStorage.getItem('image_wrap') || ''
+          }));
+        } else {
+          localStorage.setItem('from_catalog', 'true');
+          localStorage.setItem('item_snapshot', snapshotUrl);
+        }
         window.location.href = "order.html";
       }, 600);
     });
@@ -626,4 +684,35 @@ document.addEventListener("DOMContentLoaded", () => {
       wrapper.style.display = "block";
     }
   }
+
+  // ── KEYCHAIN PAGE: auto-init preview & design overlay ────
+  // If this is a keychain page (has [data-color] buttons with walnut paths),
+  // pre-select the first keychain so the preview image shows on load.
+  const keychainBtns = document.querySelectorAll('[data-color]');
+  if (keychainBtns.length > 0 && previewNotebook) {
+    const firstBtn = keychainBtns[0];
+    // Only auto-init if not already selected
+    if (!selectedColor) {
+      selectedColor = firstBtn.dataset.color;
+      firstBtn.classList.add('selected');
+      const keychainMap = {
+        'Walnut Key Left':           'images/walnut/walnutkeyleft.png',
+        'Walnut Key Right':          'images/walnut/walnutkeyright.png',
+        'Walnut Key Up':             'images/walnut/walnutkeyup.png',
+        'Slate Key Left':            'images/slate/slatekeyleft.png',
+        'Slate Key Right':           'images/slate/slatekeyright.png',
+        'Slate Key Up':              'images/slate/slatekeyup.png',
+        'Book Left':                 'images/bookmark/bookleft.png',
+        'Book Right':                'images/bookmark/bookright.png',
+        'Book Up':                   'images/bookmark/bookup.png',
+        'Aqua Water Bottle':         'images/water/aqua.png',
+        'Dark Blue Water Bottle':    'images/water/darkblue.png',
+        'Light Purple Water Bottle': 'images/water/lightpurple.png'
+      };
+      previewNotebook.src = keychainMap[selectedColor] || '';
+      if (previewSection) previewSection.style.display = 'block';
+    }
+  }
+
+
 });
