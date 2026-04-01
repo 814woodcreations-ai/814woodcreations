@@ -95,6 +95,7 @@
                 <select id="product" name="product" required>
                   <option value="">Choose an option</option>
                   <option value="Custom Notebook">Custom Notebook</option>
+                  <option value="Water Bottle">Water Bottle</option>
                   <option value="Laser-Engraved Leather">Laser-Engraved Leather</option>
                 </select>
               </div>
@@ -236,7 +237,8 @@
                 <div style="display:flex; gap:1.25rem; align-items:flex-start; flex-wrap:wrap;">
                   <img id="snapshot-preview" src="" alt="Customer design preview"
                     style="max-width:340px; width:100%; border-radius:0.5rem; border:1px solid #d1d5db; display:block;" />
-                  <div style="background:#f8f5f0; border:1px solid #d6c9b0; border-radius:0.5rem; padding:0.85rem 1rem; font-size:0.85rem; color:#4b3f2f; line-height:1.6; min-width:200px; max-width:280px;">
+                  <!-- Notebook color note (hidden for water bottle orders) -->
+                  <div id="notebook-color-note" style="background:#f8f5f0; border:1px solid #d6c9b0; border-radius:0.5rem; padding:0.85rem 1rem; font-size:0.85rem; color:#4b3f2f; line-height:1.6; min-width:200px; max-width:280px;">
                     <strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem;">🎨 Design Color Note</strong>
                     <p style="margin:0 0 0.5rem 0;">The engraved design color depends on the notebook color selected:</p>
                     <ul style="margin:0; padding-left:1.1rem;">
@@ -246,6 +248,12 @@
                       <li><strong>Brown</strong> notebook → design will be <strong>Black</strong></li>
                     </ul>
                     <p style="margin:0.6rem 0 0 0; font-size:0.8rem; color:#6b5c4c;">This matches exactly what you saw in the design preview.</p>
+                  </div>
+                  <!-- Water bottle note (hidden for non-water-bottle orders) -->
+                  <div id="waterbottle-color-note" style="display:none; background:#f8f5f0; border:1px solid #d6c9b0; border-radius:0.5rem; padding:0.85rem 1rem; font-size:0.85rem; color:#4b3f2f; line-height:1.6; min-width:200px; max-width:280px;">
+                    <strong style="display:block; margin-bottom:0.5rem; font-size:0.9rem;">💧 Water Bottle Order</strong>
+                    <p style="margin:0 0 0.5rem 0;">Engraving appears in the natural finish of the bottle surface. The preview above shows the selected color and design placement.</p>
+                    <p style="margin:0; font-size:0.8rem; color:#6b5c4c;">Wrap and line selections are recorded above.</p>
                   </div>
                 </div>
                 <span class="small-note" style="margin-top:0.5rem; display:block;">This is what the customer designed. Auto-captured from the catalog page.</span>
@@ -257,6 +265,28 @@
 
               <!-- Font size -->
               <input type="hidden" id="font-size" name="font_size" />
+
+              <!-- Water bottle wrap + line selections -->
+              <input type="hidden" id="text-lines" name="text_lines" />
+              <input type="hidden" id="text-wrap" name="text_wrap" />
+              <input type="hidden" id="image-wrap" name="image_wrap" />
+
+              <!-- Visible read-only water bottle fields (shown only when product is Water Bottle) -->
+              <div class="form-group" id="wb-text-lines-group" style="display:none;">
+                <label for="text-lines-display">Number of Text Lines</label>
+                <input id="text-lines-display" type="text" readonly placeholder="Selected from catalog" />
+                <span class="small-note">Selected from catalog. Cannot be changed here.</span>
+              </div>
+              <div class="form-group" id="wb-text-wrap-group" style="display:none;">
+                <label for="text-wrap-display">Text Wrap</label>
+                <input id="text-wrap-display" type="text" readonly placeholder="Selected from catalog" />
+                <span class="small-note">Selected from catalog. Cannot be changed here.</span>
+              </div>
+              <div class="form-group" id="wb-image-wrap-group" style="display:none;">
+                <label for="image-wrap-display">Image Wrap</label>
+                <input id="image-wrap-display" type="text" readonly placeholder="Selected from catalog" />
+                <span class="small-note">Selected from catalog. Cannot be changed here.</span>
+              </div>
 
               <!-- Text position -->
               <input type="hidden" id="text-pos-x" name="text_pos_x" />
@@ -314,6 +344,46 @@
       // Show the order number visibly above the form
       var label = document.getElementById('order-number-label');
       if (label) label.textContent = orderNum;
+    })();
+  </script>
+
+  <!-- Water Bottle: populate wrap/lines fields and toggle UI panels -->
+  <script>
+    (function () {
+      var product = localStorage.getItem('product') || '';
+      var isWaterBottle = product === 'Water Bottle';
+
+      // Populate hidden fields
+      var textLines = localStorage.getItem('text_lines') || '';
+      var textWrap  = localStorage.getItem('text_wrap')  || '';
+      var imageWrap = localStorage.getItem('image_wrap') || '';
+
+      var tlHidden = document.getElementById('text-lines');
+      var twHidden = document.getElementById('text-wrap');
+      var iwHidden = document.getElementById('image-wrap');
+      if (tlHidden) tlHidden.value = textLines;
+      if (twHidden) twHidden.value = textWrap;
+      if (iwHidden) iwHidden.value = imageWrap;
+
+      // Show/populate visible read-only fields only for water bottle orders
+      if (isWaterBottle) {
+        var tlGroup = document.getElementById('wb-text-lines-group');
+        var twGroup = document.getElementById('wb-text-wrap-group');
+        var iwGroup = document.getElementById('wb-image-wrap-group');
+        var tlDisplay = document.getElementById('text-lines-display');
+        var twDisplay = document.getElementById('text-wrap-display');
+        var iwDisplay = document.getElementById('image-wrap-display');
+
+        if (textLines && tlGroup) { tlGroup.style.display = ''; tlDisplay.value = textLines + (textLines === '1' ? ' line' : ' lines'); }
+        if (textWrap  && twGroup) { twGroup.style.display = ''; twDisplay.value = textWrap; }
+        if (imageWrap && iwGroup) { iwGroup.style.display = ''; iwDisplay.value = imageWrap; }
+
+        // Swap color note panels
+        var notebookNote   = document.getElementById('notebook-color-note');
+        var waterbottleNote = document.getElementById('waterbottle-color-note');
+        if (notebookNote)    notebookNote.style.display   = 'none';
+        if (waterbottleNote) waterbottleNote.style.display = '';
+      }
     })();
   </script>
 
