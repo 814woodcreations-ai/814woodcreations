@@ -1938,6 +1938,66 @@
             'Prince Valiant':'Prince Valiant,fantasy','Remachine Script':'Remachine Script,cursive',
             'Stardos Stencil':'Stardos Stencil,display','Stardos Stencil Bold':'Stardos Stencil,display'
           };
+          // ── Front text update ─────────────────────────────────
+          var frontFontFamilies = {
+            'Achafexp':'Achafexp,serif','Achafita':'Achafita,serif','Achaflft':'Achaflft,serif',
+            'Achafont':'Achafont,serif','Achafout':'Achafout,serif','Achafsex':'Achafsex,serif',
+            'Alegreya SC':'Alegreya SC,serif','Alegreya SC Italic':'Alegreya SC,serif',
+            'Alegreya SC Bold':'Alegreya SC,serif','Alegreya SC Bold Italic':'Alegreya SC,serif',
+            'Alegreya SC Black':'Alegreya SC,serif','Alegreya SC Black Italic':'Alegreya SC,serif'
+          };
+          var frontTextColors = { 'Red':'#ffffff','Blue':'#000000','Brown':'#000000','Teal':'#ffffff' };
+          var frontFontSize = 24;
+          var frontTextPosX = 50, frontTextPosY = 80;
+
+          function updateFrontText() {
+            var textEl    = document.getElementById('preview-text');
+            var container = document.getElementById('preview-text-container');
+            var input     = document.getElementById('engraving-text');
+            var fontSel   = document.getElementById('font-select');
+            if (!textEl || !container) return;
+
+            var text = input ? input.value.trim() : '';
+            var font = fontSel ? fontSel.value : '';
+
+            if (font && text) {
+              textEl.style.setProperty('font-family', frontFontFamilies[font] || 'serif', 'important');
+              textEl.style.setProperty('font-size', frontFontSize + 'px', 'important');
+              var colorBtn = document.querySelector('[data-color].selected');
+              var color = colorBtn ? colorBtn.dataset.color : null;
+              textEl.style.color = (color && frontTextColors[color]) ? frontTextColors[color] : '#000';
+              textEl.textContent = text;
+              container.style.left = frontTextPosX + '%';
+              container.style.top  = frontTextPosY + '%';
+              container.style.bottom = 'auto';
+              container.style.transform = 'translate(-50%,-50%)';
+              container.style.display = 'block';
+              var preview = document.getElementById('preview-section');
+              if (preview) preview.style.display = 'block';
+            } else {
+              container.style.display = 'none';
+            }
+          }
+
+          // Front text input listener
+          var frontInput = document.getElementById('engraving-text');
+          if (frontInput) frontInput.addEventListener('input', updateFrontText);
+
+          // Front font select listener
+          var frontFontSel = document.getElementById('font-select');
+          if (frontFontSel) frontFontSel.addEventListener('change', updateFrontText);
+
+          // Front font size slider
+          var frontSizeSlider  = document.getElementById('font-size-control');
+          var frontSizeDisplay = document.getElementById('font-size-display');
+          if (frontSizeSlider) {
+            frontSizeSlider.addEventListener('input', function() {
+              frontFontSize = parseInt(this.value);
+              if (frontSizeDisplay) frontSizeDisplay.textContent = frontFontSize + 'px';
+              updateFrontText();
+            });
+          }
+
           var backTextColors = { 'Red':'#ffffff','Blue':'#000000','Brown':'#000000','Teal':'#ffffff' };
           var backFontSize = 24;
           var backTextPosX = 50, backTextPosY = 80;
