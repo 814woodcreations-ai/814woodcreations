@@ -674,9 +674,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── EVENT LISTENERS ───────────────────────────────────────
   // ── ENGRAVING TEXT (multi-line) ───────────────────────────
   function getEngravingLines() {
-    const l1 = (document.getElementById('engraving-line1') || {}).value || '';
-    const l2 = (document.getElementById('engraving-line2') || {}).value || '';
-    const l3 = (document.getElementById('engraving-line3') || {}).value || '';
+    const single = (document.getElementById('engraving-text') || {}).value || '';
+    const l1 = (document.getElementById('engraving-line1') || {}).value || single;
+    const l2 = (document.getElementById('engraving-line1') ? (document.getElementById('engraving-line2') || {}).value || '' : '');
+    const l3 = (document.getElementById('engraving-line1') ? (document.getElementById('engraving-line3') || {}).value || '' : '');
     const lines = parseInt((document.getElementById('text-lines-select') || {}).value) || 1;
     if (lines === 3) return [l1, l2, l3];
     if (lines === 2) return [l1, l2];
@@ -692,7 +693,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updatePreview();
   }
 
-  ['engraving-line1', 'engraving-line2', 'engraving-line3'].forEach(id => {
+  ['engraving-line1', 'engraving-line2', 'engraving-line3', 'engraving-text'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.addEventListener('input', onEngravingInput);
   });
