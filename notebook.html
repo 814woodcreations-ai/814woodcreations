@@ -1960,8 +1960,8 @@
             var text = input ? input.value.trim() : '';
             var font = fontSel ? fontSel.value : '';
 
-            if (font && text) {
-              textEl.style.setProperty('font-family', frontFontFamilies[font] || 'serif', 'important');
+            if (text) {
+              textEl.style.setProperty('font-family', (font && frontFontFamilies[font]) ? frontFontFamilies[font] : 'serif', 'important');
               textEl.style.setProperty('font-size', frontFontSize + 'px', 'important');
               var colorBtn = document.querySelector('[data-color].selected');
               var color = colorBtn ? colorBtn.dataset.color : null;
@@ -2014,8 +2014,8 @@
             var text = input ? input.value.trim() : '';
             var font = fontSel ? fontSel.value : '';
 
-            if (font && text) {
-              textEl.style.setProperty('font-family', backFontFamilies[font] || 'serif', 'important');
+            if (text) {
+              textEl.style.setProperty('font-family', (font && backFontFamilies[font]) ? backFontFamilies[font] : 'serif', 'important');
               textEl.style.setProperty('font-size', backFontSize + 'px', 'important');
               // Apply color based on selected notebook color
               var colorBtn = document.querySelector('[data-color].selected');
