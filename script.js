@@ -976,7 +976,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (orderBtn) {
     orderBtn.addEventListener("click", async () => {
-      if (!isNoColorPage && !isWaterBottlePage && (!selectedColor || selectedDesigns.length === 0)) {
+      // For the notebook page, designs are managed by the inline script
+      var backDesignsCount = (typeof window.getBackDesigns === 'function') ? window.getBackDesigns().length : 0;
+      var inlineFrontCount = (typeof window.getFrontDesigns === 'function') ? window.getFrontDesigns().length : 0;
+      var totalDesigns = selectedDesigns.length + inlineFrontCount + backDesignsCount;
+      if (!isNoColorPage && !isWaterBottlePage && (!selectedColor || totalDesigns === 0)) {
         alert("Please select a color and at least one design before continuing.");
         return;
       }
@@ -1040,9 +1044,23 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("engraving_line1", engLines[0] || "");
       localStorage.setItem("engraving_line2", engLines[1] || "");
       localStorage.setItem("engraving_line3", engLines[2] || "");
-      localStorage.setItem("design_number", selectedDesigns.map(d => d.name).join(', '));
+      // For notebook page, front designs are managed by the inline script
+      const notebookFrontDesigns = (typeof window.getFrontDesigns === 'function') ? window.getFrontDesigns() : null;
+      const frontDesignsForOrder = notebookFrontDesigns || selectedDesigns;
 
-      const designsData = selectedDesigns.map(d => {
+      localStorage.setItem("design_number", frontDesignsForOrder.map(d => d.name).join(', '));
+
+      // Save back designs from the notebook inline script (if present)
+      if (typeof window.getBackDesigns === 'function') {
+        const backDesignsArr = window.getBackDesigns();
+        localStorage.setItem("design_number_back", backDesignsArr.map(d => d.name).join(', '));
+      }
+
+      const designsData = frontDesignsForOrder.map((d, i) => {
+        // Inline notebook front designs just have name/src/size — no inch calc
+        if (notebookFrontDesigns) {
+          return { side: 'front', number: i + 1, name: d.name, size: (d.size || 25) + '%' };
+        }
         const { xC, yC, xE, yE } = calcInches(d);
         const previewIn = d.sizeIn !== undefined ? d.sizeIn : (WB_MAX_H_IN / WB_SCALE_H);
         const rW = d.aspect ? Math.min(toRealW(previewIn * d.aspect), WB_MAX_W_IN) : null;
@@ -1063,6 +1081,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
       localStorage.setItem("designs", JSON.stringify([...designsData, ...designs2Data]));
       localStorage.setItem("design_number_side2", selectedDesigns2.map(d => d.name).join(', '));
+
+      // For notebook page: merge backDesigns from inline script into designs JSON
+      if (typeof window.getBackDesigns === 'function') {
+        const nbBackDesigns = window.getBackDesigns();
+        if (nbBackDesigns.length > 0) {
+          const nbBackData = nbBackDesigns.map((d, i) => ({
+            side: 'back', number: i + 1, name: d.name, size: (d.size || 25) + '%'
+          }));
+          const combined = JSON.parse(localStorage.getItem("designs") || '[]');
+          localStorage.setItem("designs", JSON.stringify([...combined, ...nbBackData]));
+        }
+      }
 
       const txIn = ((textPosX / 100) * NOTEBOOK_WIDTH_IN).toFixed(2);
       const tyIn = ((textPosY / 100) * NOTEBOOK_HEIGHT_IN).toFixed(2);
