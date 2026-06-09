@@ -1274,12 +1274,30 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault(); // Hold the form while EmailJS sends
       console.log('Form submit intercepted by EmailJS handler');
 
-      // Check base64 size and strip if too large (EmailJS limit ~50kb)
-      const b64 = localStorage.getItem('design_snapshot_base64') || '';
-      const b64Size = Math.round(b64.length / 1024);
-      console.log('Base64 size:', b64Size, 'kb');
-      const safeBase64 = b64.length > 40000 ? '' : b64;
-      if (b64.length > 40000) console.warn('Base64 too large, stripping image from email');
+      // EmailJS limit is 50kb total for all variables — keep image under 30kb to be safe
+      const b64Raw = localStorage.getItem('design_snapshot_base64') || '';
+      let safeBase64 = '';
+      if (b64Raw.length > 0) {
+        // Re-compress to tiny size to guarantee under 30kb
+        try {
+          const tempImg = new Image();
+          await new Promise(resolve => {
+            tempImg.onload = resolve;
+            tempImg.src = 'data:image/jpeg;base64,' + b64Raw;
+          });
+          const tinyCanvas = document.createElement('canvas');
+          const MAX = 250;
+          const scale = Math.min(1, MAX / tempImg.width, MAX / tempImg.height);
+          tinyCanvas.width  = Math.round(tempImg.width  * scale);
+          tinyCanvas.height = Math.round(tempImg.height * scale);
+          tinyCanvas.getContext('2d').drawImage(tempImg, 0, 0, tinyCanvas.width, tinyCanvas.height);
+          const compressed = tinyCanvas.toDataURL('image/jpeg', 0.4).split(',')[1];
+          safeBase64 = compressed.length < 30000 ? compressed : '';
+          console.log('Compressed image size:', Math.round(compressed.length/1024), 'kb');
+        } catch(e) {
+          console.warn('Image recompress failed:', e);
+        }
+      }
 
       // Collect all form field values
       const getValue = id => (document.getElementById(id) || {}).value || '';
