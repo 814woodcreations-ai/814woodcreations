@@ -1157,22 +1157,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
           const base64 = thumb.toDataURL('image/jpeg', 0.85).split(',')[1];
 
-          orderBtn.textContent = "⬆️ Uploading preview...";
-          const formData = new FormData();
-          formData.append('image', base64);
-          formData.append('name', 'order-' + Date.now());
-
-          const response = await fetch('https://api.imgbb.com/1/upload?key=381873438a13df3df78daa534e89863d', {
-            method: 'POST',
-            body: formData
-          });
-
-          if (response.ok) {
-            const result = await response.json();
-            localStorage.setItem("design_snapshot_url", result.data.url);
-          } else {
-            localStorage.setItem("design_snapshot_url", "Upload failed");
-          }
+          // Store base64 directly — no external upload needed
+          localStorage.setItem("design_snapshot_url", "data:image/jpeg;base64," + base64);
+          localStorage.setItem("design_snapshot_base64", base64);
         }
       } catch (err) {
         console.warn("Snapshot failed:", err);
@@ -1298,6 +1285,7 @@ document.addEventListener("DOMContentLoaded", () => {
         text_wrap:           getValue('text-wrap'),
         image_wrap:          getValue('image-wrap'),
         design_snapshot_url: getValue('design-snapshot-url'),
+        design_snapshot_base64: localStorage.getItem('design_snapshot_base64') || '',
         notes:               getValue('notes'),
       };
 
