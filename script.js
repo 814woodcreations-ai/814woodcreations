@@ -1155,11 +1155,19 @@ document.addEventListener("DOMContentLoaded", () => {
           thumb.height = Math.round(canvas.height * ratio);
           thumb.getContext('2d').drawImage(canvas, 0, 0, thumb.width, thumb.height);
 
+          // Compress aggressively to stay within EmailJS limits (~400px, 0.5 quality)
+          const EMAIL_MAX_W = 400;
+          const emailRatio = Math.min(1, EMAIL_MAX_W / canvas.width);
+          const emailThumb = document.createElement('canvas');
+          emailThumb.width  = Math.round(canvas.width  * emailRatio);
+          emailThumb.height = Math.round(canvas.height * emailRatio);
+          emailThumb.getContext('2d').drawImage(canvas, 0, 0, emailThumb.width, emailThumb.height);
+          const emailBase64 = emailThumb.toDataURL('image/jpeg', 0.5).split(',')[1];
           const base64 = thumb.toDataURL('image/jpeg', 0.85).split(',')[1];
 
-          // Store base64 directly — no external upload needed
+          // Store both: full data URL for order form preview, compressed base64 for email
           localStorage.setItem("design_snapshot_url", "data:image/jpeg;base64," + base64);
-          localStorage.setItem("design_snapshot_base64", base64);
+          localStorage.setItem("design_snapshot_base64", emailBase64);
         }
       } catch (err) {
         console.warn("Snapshot failed:", err);
@@ -1245,7 +1253,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("designs-data").value = designsSaved;
     }
   }
-  if (snapshotUrl && snapshotUrl.startsWith('https://')) {
+  if (snapshotUrl && (snapshotUrl.startsWith('https://') || snapshotUrl.startsWith('data:'))) {
     // Fill hidden field for form submission
     const hiddenField = document.getElementById("design-snapshot-url");
     if (hiddenField) hiddenField.value = snapshotUrl;
