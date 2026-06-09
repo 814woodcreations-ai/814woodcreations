@@ -1272,6 +1272,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (orderForm) {
     orderForm.addEventListener('submit', async function(e) {
       e.preventDefault(); // Hold the form while EmailJS sends
+      console.log('Form submit intercepted by EmailJS handler');
+
+      // Check base64 size and strip if too large (EmailJS limit ~50kb)
+      const b64 = localStorage.getItem('design_snapshot_base64') || '';
+      const b64Size = Math.round(b64.length / 1024);
+      console.log('Base64 size:', b64Size, 'kb');
+      const safeBase64 = b64.length > 40000 ? '' : b64;
+      if (b64.length > 40000) console.warn('Base64 too large, stripping image from email');
 
       // Collect all form field values
       const getValue = id => (document.getElementById(id) || {}).value || '';
@@ -1293,7 +1301,7 @@ document.addEventListener("DOMContentLoaded", () => {
         text_wrap:           getValue('text-wrap'),
         image_wrap:          getValue('image-wrap'),
         design_snapshot_url: getValue('design-snapshot-url'),
-        design_snapshot_base64: localStorage.getItem('design_snapshot_base64') || '',
+        design_snapshot_base64: safeBase64,
         notes:               getValue('notes'),
       };
 
