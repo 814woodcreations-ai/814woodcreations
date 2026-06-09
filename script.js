@@ -1272,6 +1272,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ── EMAILJS ORDER NOTIFICATION ───────────────────────────
+  const orderForm = document.querySelector('form[name="custom-notebook-order"]');
+  if (orderForm) {
+    orderForm.addEventListener('submit', function(e) {
+      // Collect all form field values
+      const getValue = id => (document.getElementById(id) || {}).value || '';
+      const templateParams = {
+        order_number:        getValue('order-number'),
+        name:                getValue('name'),
+        email:               getValue('email'),
+        phone:               getValue('phone'),
+        product:             getValue('product'),
+        design_number:       getValue('design-number'),
+        color:               getValue('color'),
+        font:                getValue('font'),
+        font_size:           getValue('font-size'),
+        engraving_text:      getValue('engraving-text-form') || getValue('engraving-line1'),
+        designs_data:        getValue('designs-data'),
+        text_pos_x:          getValue('text-pos-x'),
+        text_pos_y:          getValue('text-pos-y'),
+        text_lines:          getValue('text-lines'),
+        text_wrap:           getValue('text-wrap'),
+        image_wrap:          getValue('image-wrap'),
+        design_snapshot_url: getValue('design-snapshot-url'),
+        notes:               getValue('notes'),
+      };
+
+      // Send email via EmailJS (non-blocking — form still submits to Netlify normally)
+      if (typeof emailjs !== 'undefined') {
+        emailjs.send('service_ge7r0cu', 'template_855gskr', templateParams)
+          .catch(err => console.warn('EmailJS error:', err));
+      }
+      // Do NOT call e.preventDefault() — let Netlify form submit proceed as normal
+    });
+  }
+
   // ── KEYCHAIN PAGE: auto-init preview & design overlay ────
   // If this is a keychain page (has [data-color] buttons with walnut paths),
   // pre-select the first keychain so the preview image shows on load.
