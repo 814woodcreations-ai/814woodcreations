@@ -1275,7 +1275,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // ── EMAILJS ORDER NOTIFICATION ───────────────────────────
   const orderForm = document.querySelector('form[name="custom-notebook-order"]');
   if (orderForm) {
-    orderForm.addEventListener('submit', function(e) {
+    orderForm.addEventListener('submit', async function(e) {
+      e.preventDefault(); // Hold the form while EmailJS sends
+
       // Collect all form field values
       const getValue = id => (document.getElementById(id) || {}).value || '';
       const templateParams = {
@@ -1299,12 +1301,21 @@ document.addEventListener("DOMContentLoaded", () => {
         notes:               getValue('notes'),
       };
 
-      // Send email via EmailJS (non-blocking — form still submits to Netlify normally)
+      // Send email via EmailJS and wait for it to finish
       if (typeof emailjs !== 'undefined') {
-        emailjs.send('service_ge7r0cu', 'template_855gskr', templateParams)
-          .catch(err => console.warn('EmailJS error:', err));
+        try {
+          await emailjs.send('service_ge7r0cu', 'template_855gskr', templateParams);
+          console.log('EmailJS sent successfully');
+        } catch(err) {
+          console.warn('EmailJS error:', err);
+        }
       }
-      // Do NOT call e.preventDefault() — let Netlify form submit proceed as normal
+
+      // Re-enable any disabled fields so Netlify captures them
+      orderForm.querySelectorAll('[disabled]').forEach(el => el.removeAttribute('disabled'));
+
+      // Now submit to Netlify
+      orderForm.submit();
     });
   }
 
