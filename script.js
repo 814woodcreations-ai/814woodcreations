@@ -1155,19 +1155,34 @@ document.addEventListener("DOMContentLoaded", () => {
           thumb.height = Math.round(canvas.height * ratio);
           thumb.getContext('2d').drawImage(canvas, 0, 0, thumb.width, thumb.height);
 
-          // Compress aggressively to stay within EmailJS limits (~400px, 0.5 quality)
-          const EMAIL_MAX_W = 400;
-          const emailRatio = Math.min(1, EMAIL_MAX_W / canvas.width);
-          const emailThumb = document.createElement('canvas');
-          emailThumb.width  = Math.round(canvas.width  * emailRatio);
-          emailThumb.height = Math.round(canvas.height * emailRatio);
-          emailThumb.getContext('2d').drawImage(canvas, 0, 0, emailThumb.width, emailThumb.height);
-          const emailBase64 = emailThumb.toDataURL('image/jpeg', 0.5).split(',')[1];
           const base64 = thumb.toDataURL('image/jpeg', 0.85).split(',')[1];
 
-          // Store both: full data URL for order form preview, compressed base64 for email
+          // Store base64 for order form preview
           localStorage.setItem("design_snapshot_url", "data:image/jpeg;base64," + base64);
-          localStorage.setItem("design_snapshot_base64", emailBase64);
+
+          // Upload to Imgbb with no expiration (expiration=0 means never expires)
+          orderBtn.textContent = "⬆️ Uploading preview...";
+          try {
+            const formData = new FormData();
+            formData.append('image', base64);
+            formData.append('name', 'order-' + Date.now());
+            formData.append('expiration', '0');
+            const imgbbRes = await fetch('https://api.imgbb.com/1/upload?key=381873438a13df3df78daa534e89863d', {
+              method: 'POST',
+              body: formData
+            });
+            if (imgbbRes.ok) {
+              const imgbbData = await imgbbRes.json();
+              localStorage.setItem("design_snapshot_imgbb", imgbbData.data.url);
+              console.log('Imgbb upload success:', imgbbData.data.url);
+            } else {
+              localStorage.setItem("design_snapshot_imgbb", "");
+              console.warn('Imgbb upload failed');
+            }
+          } catch(imgbbErr) {
+            localStorage.setItem("design_snapshot_imgbb", "");
+            console.warn('Imgbb error:', imgbbErr);
+          }
         }
       } catch (err) {
         console.warn("Snapshot failed:", err);
@@ -1274,30 +1289,7 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault(); // Hold the form while EmailJS sends
       console.log('Form submit intercepted by EmailJS handler');
 
-      // EmailJS limit is 50kb total for all variables — keep image under 30kb to be safe
-      const b64Raw = localStorage.getItem('design_snapshot_base64') || '';
-      let safeBase64 = '';
-      if (b64Raw.length > 0) {
-        // Re-compress to tiny size to guarantee under 30kb
-        try {
-          const tempImg = new Image();
-          await new Promise(resolve => {
-            tempImg.onload = resolve;
-            tempImg.src = 'data:image/jpeg;base64,' + b64Raw;
-          });
-          const tinyCanvas = document.createElement('canvas');
-          const MAX = 250;
-          const scale = Math.min(1, MAX / tempImg.width, MAX / tempImg.height);
-          tinyCanvas.width  = Math.round(tempImg.width  * scale);
-          tinyCanvas.height = Math.round(tempImg.height * scale);
-          tinyCanvas.getContext('2d').drawImage(tempImg, 0, 0, tinyCanvas.width, tinyCanvas.height);
-          const compressed = tinyCanvas.toDataURL('image/jpeg', 0.4).split(',')[1];
-          safeBase64 = compressed.length < 30000 ? compressed : '';
-          console.log('Compressed image size:', Math.round(compressed.length/1024), 'kb');
-        } catch(e) {
-          console.warn('Image recompress failed:', e);
-        }
-      }
+
 
       // Collect all form field values
       const getValue = id => (document.getElementById(id) || {}).value || '';
@@ -1318,8 +1310,7 @@ document.addEventListener("DOMContentLoaded", () => {
         text_lines:          getValue('text-lines'),
         text_wrap:           getValue('text-wrap'),
         image_wrap:          getValue('image-wrap'),
-        design_snapshot_url: getValue('design-snapshot-url'),
-        design_snapshot_base64: safeBase64,
+        design_snapshot_url: localStorage.getItem('design_snapshot_imgbb') || getValue('design-snapshot-url'),
         notes:               getValue('notes'),
       };
 
