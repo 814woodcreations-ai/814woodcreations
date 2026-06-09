@@ -1243,7 +1243,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (textPosXSaved && document.getElementById("text-pos-x")) document.getElementById("text-pos-x").value = textPosXSaved;
   if (textPosYSaved && document.getElementById("text-pos-y")) document.getElementById("text-pos-y").value = textPosYSaved;
-  if (designsSaved && document.getElementById("designs-data")) document.getElementById("designs-data").value = designsSaved;
+  if (designsSaved && document.getElementById("designs-data")) {
+    try {
+      const parsed = JSON.parse(designsSaved);
+      const readable = parsed.map(d => {
+        const side = d.side === 'front' ? 'Front' : d.side === 'back' ? 'Back' : `Side ${d.side}`;
+        const parts = [`${side} - Design ${d.number}: ${d.name}`, `Size: ${d.size}`];
+        if (d.centerX) parts.push(`Center: ${d.centerX} from left, ${d.centerY} from top`);
+        if (d.leftEdge) parts.push(`Edge: ${d.leftEdge} from left, ${d.topEdge} from top`);
+        return parts.join(' | ');
+      }).join('\n');
+      document.getElementById("designs-data").value = readable;
+    } catch(e) {
+      document.getElementById("designs-data").value = designsSaved;
+    }
+  }
   if (snapshotUrl && snapshotUrl.startsWith('https://')) {
     // Fill hidden field for form submission
     const hiddenField = document.getElementById("design-snapshot-url");
