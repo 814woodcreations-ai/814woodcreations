@@ -1300,7 +1300,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Send email via EmailJS and wait for it to finish
       if (typeof emailjs !== 'undefined') {
         try {
-          await emailjs.send('service_ge7r0cu', 'template_855gskr', templateParams);
+          await emailjs.send('service_4xin3ug', 'template_855gskr', templateParams);
           console.log('EmailJS sent successfully');
         } catch(err) {
           console.warn('EmailJS error:', err);
