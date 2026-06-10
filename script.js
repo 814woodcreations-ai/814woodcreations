@@ -117,8 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
     'Stardos Stencil':'Stardos Stencil,display','Stardos Stencil Bold':'Stardos Stencil,display'
   };
 
-  const textColors = { 'Red':'#ffffff','Blue':'#000000','Brown':'#000000','Teal':'#ffffff','Book Left':'#5c2a00','Book Right':'#5c2a00','Book Up':'#5c2a00' };
-  const designColorClass = { 'Red':'preview-design-white','Blue':'preview-design-black','Brown':'preview-design-black','Teal':'preview-design-white','Book Left':'preview-design-brown','Book Right':'preview-design-brown','Book Up':'preview-design-brown' };
+  const textColors = { 'Red':'#ffffff','Blue':'#000000','Brown':'#000000','Teal':'#ffffff','Book Left':'#5c2a00','Book Right':'#5c2a00','Book Up':'#5c2a00','Apricot':'#5c2a00','Black':'#ffffff','Gray':'#ffffff','Green':'#ffffff','Light Blue':'#5c2a00' };
+  const designColorClass = { 'Red':'preview-design-black','Blue':'preview-design-black','Brown':'preview-design-black','Teal':'preview-design-black','Apricot':'preview-design-black','Black':'preview-design-black','Gray':'preview-design-black','Green':'preview-design-black','Light Blue':'preview-design-black','Book Left':'preview-design-brown','Book Right':'preview-design-brown','Book Up':'preview-design-brown' };
 
   // Images that skip the laser engraving filter and always show in their natural color
   const noFilterImages = ['50.png', '52.png', '12.png'];
@@ -599,7 +599,14 @@ document.addEventListener("DOMContentLoaded", () => {
       'Black Water Bottle':        'images/water/black.png',
       'Dark Green Water Bottle':   'images/water/darkgreen.png',
       'Red Water Bottle':          'images/water/red.png',
-      'Pink Water Bottle':         'images/water/pink.png'
+      'Pink Water Bottle':         'images/water/pink.png',
+      'Apricot':                   'apricot.jpg',
+      'Black':                     'black.jpg',
+      'Brown':                     'brown.jpg',
+      'Gray':                      'gray.jpg',
+      'Green':                     'green.jpg',
+      'Light Blue':                'lightblue.jpg',
+      'Red':                       'red.jpg',
     };
 
     if (selectedColor && previewNotebook) {
@@ -1358,7 +1365,14 @@ document.addEventListener("DOMContentLoaded", () => {
         'Black Water Bottle':        'images/water/black.png',
         'Dark Green Water Bottle':   'images/water/darkgreen.png',
         'Red Water Bottle':          'images/water/red.png',
-        'Pink Water Bottle':         'images/water/pink.png'
+        'Pink Water Bottle':         'images/water/pink.png',
+        'Apricot':                   'apricot.jpg',
+        'Black':                     'black.jpg',
+        'Brown':                     'brown.jpg',
+        'Gray':                      'gray.jpg',
+        'Green':                     'green.jpg',
+        'Light Blue':                'lightblue.jpg',
+        'Red':                       'red.jpg',
       };
       previewNotebook.src = keychainMap[selectedColor] || '';
       if (previewSection) previewSection.style.display = 'block';

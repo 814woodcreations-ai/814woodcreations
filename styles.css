@@ -327,7 +327,7 @@ body {
   background-color: var(--bg-main);
   background-image:
     linear-gradient(120deg, rgba(139, 92, 60, 0.16), rgba(120, 64, 32, 0.10)),
-    url("images/background-wood.png");
+    url("background.jpg");
   background-size: auto, cover;
   background-repeat: repeat, no-repeat;
   background-attachment: fixed;
