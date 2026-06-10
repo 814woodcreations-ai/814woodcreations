@@ -1334,8 +1334,15 @@ document.addEventListener("DOMContentLoaded", () => {
       // Re-enable any disabled fields so Netlify captures them
       orderForm.querySelectorAll('[disabled]').forEach(el => el.removeAttribute('disabled'));
 
-      // Now submit to Netlify
-      orderForm.submit();
+      // Show thank-you modal
+      const modal = document.getElementById('thank-you-modal');
+      const modalOrderNum = document.getElementById('modal-order-number');
+      if (modalOrderNum) modalOrderNum.textContent = '📋 Order #: ' + (getValue('order-number') || '');
+      if (modal) modal.style.display = 'flex';
+
+      // Submit to Netlify silently in the background via fetch
+      const formData = new FormData(orderForm);
+      fetch('/', { method: 'POST', body: formData }).catch(() => {});
     });
   }
 
