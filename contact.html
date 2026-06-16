@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Us | 814 Wood Creations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="images/logo.webp" alt="814 Wood Creations Logo" class="brand-logo" />
+        <div class="logo-text">814 Wood Creations</div>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Notebooks</a>
+        <a href="waterbottle.html">Water Bottle</a>
+        <a href="gift-sets.html">Gallery</a>
+        <a href="order.html">Order</a>
+        <a href="slate.html">Slate</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <h1>Contact Us</h1>
+        <p class="section-intro">Have a question or want to place a custom order? Reach out and we'll get back to you as soon as possible.</p>
+
+        <div style="display: flex; gap: 3rem; flex-wrap: wrap; margin-top: 2rem; align-items: flex-start;">
+
+          <!-- Contact Info -->
+          <div style="flex: 0 0 260px; min-width: 220px;">
+            <h2 style="margin-top: 0;">Get in Touch</h2>
+            <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 1rem;">
+              <div>
+                <strong>Email</strong><br />
+                <a href="mailto:814woodcreations@gmail.com" style="color: #4b3f2f;">814woodcreations@gmail.com</a>
+              </div>
+              <div>
+                <strong>Phone (Korea)</strong><br />
+                <a href="tel:01073404564" style="color: #4b3f2f;">010-7340-4564</a>
+              </div>
+              <div>
+                <strong>Phone (US)</strong><br />
+                <a href="tel:18143058523" style="color: #4b3f2f;">814-305-8523</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div style="flex: 1; min-width: 280px; max-width: 540px;">
+            <h2 style="margin-top: 0;">Send a Message</h2>
+            <form
+              name="contact"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.25rem;"
+            >
+              <input type="hidden" name="form-name" value="contact" />
+              <p style="display: none;">
+                <label>Don't fill this out: <input name="bot-field" /></label>
+              </p>
+
+              <div>
+                <label for="contact-name" style="display: block; font-weight: 600; margin-bottom: 0.4rem;">Your Name</label>
+                <input
+                  id="contact-name"
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Jane Smith"
+                  style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem; box-sizing: border-box;"
+                />
+              </div>
+
+              <div>
+                <label for="contact-email" style="display: block; font-weight: 600; margin-bottom: 0.4rem;">Your Email</label>
+                <input
+                  id="contact-email"
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="you@example.com"
+                  style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem; box-sizing: border-box;"
+                />
+              </div>
+
+              <div>
+                <label for="contact-message" style="display: block; font-weight: 600; margin-bottom: 0.4rem;">Message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  required
+                  rows="6"
+                  placeholder="Tell us what you're looking for..."
+                  style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem; resize: vertical; box-sizing: border-box;"
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn-primary" style="align-self: flex-start; cursor: pointer;">Send Message</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>&copy; <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Slate | 814 Wood Creations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  
+  <!-- Add inventory CSS -->
+  <style>
+    /* Out of Stock Styling */
+    .option-card.out-of-stock {
+      opacity: 0.5;
+      pointer-events: none;
+      position: relative;
+      cursor: not-allowed;
+    }
+
+    .option-card.out-of-stock::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(to top right,
+          transparent 0%,
+          transparent calc(50% - 2px),
+          #ff0000 50%,
+          transparent calc(50% + 2px),
+          transparent 100%),
+        linear-gradient(to bottom right,
+          transparent 0%,
+          transparent calc(50% - 2px),
+          #ff0000 50%,
+          transparent calc(50% + 2px),
+          transparent 100%);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .stock-label {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 0, 0, 0.9);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      z-index: 11;
+      white-space: nowrap;
+    }
+
+    /* Medium gray filter for all design preview images on slate */
+    #designs-overlay img {
+      filter: brightness(0) invert(0.55) !important;
+    }
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      z-index: 11;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+
+<body>
+    <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <img src="images/logo.webp" alt="814 Wood Creations Logo" class="brand-logo" />
+        <div class="logo-text">814 Wood Creations</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="products.html">Notebooks</a>
+        <a href="waterbottle.html">Water Bottle</a>
+        <a href="gift-sets.html">Gallery</a>
+        <a href="order.html">Order</a>
+        <a href="slate.html">Slate</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+ <main>
+    <section class="section">
+      <div class="container">
+        <h1>Slate Coaster $5.00</h1>
+        <p class="section-intro">
+          Choose your font and design. Your selections will be sent to the order form automatically when you click &quot;Order This Coaster.&quot;
+        </p>
+
+        <!-- Engraving Text -->
+        <h2 style="margin-top: 2rem;">Engraving Text</h2>
+        <div style="max-width: 520px; margin-top: 1rem;">
+          <label for="engraving-text" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">
+            Text to engrave
+          </label>
+          <input
+            id="engraving-text"
+            type="text"
+            placeholder="Type the text you want engraved"
+            maxlength="30"
+            style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;"
+          />
+          <small class="small-note" style="display: block; margin-top: 0.5rem; background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Max 30 characters</small>
+        </div>
+
+        <!-- Font Selection -->
+        <h2 style="margin-top: 2rem;">Choose a Font</h2>
+        <div style="max-width: 400px; margin-top: 1rem;">
+          <select id="font-select" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem;">
+            <option value="">Choose a font</option>
+            <option value="Achafexp">Achafexp (Expanded)</option>
+            <option value="Achafita">Achafita (Italic)</option>
+            <option value="Achaflft">Achaflft (Light)</option>
+            <option value="Achafont">Achafont (Regular)</option>
+            <option value="Achafout">Achafout (Outline)</option>
+            <option value="Achafsex">Achafsex (Semi-Extended)</option>
+            <option value="Alegreya SC">Alegreya SC (Regular)</option>
+            <option value="Alegreya SC Italic">Alegreya SC (Italic)</option>
+            <option value="Alegreya SC Bold">Alegreya SC (Bold)</option>
+            <option value="Alegreya SC Bold Italic">Alegreya SC (Bold Italic)</option>
+            <option value="Alegreya SC Black">Alegreya SC (Black)</option>
+            <option value="Alegreya SC Black Italic">Alegreya SC (Black Italic)</option>
+            <option value="Dancing Script">Dancing Script (Regular)</option>
+            <option value="Dancing Script Medium">Dancing Script (Medium)</option>
+            <option value="Dancing Script SemiBold">Dancing Script (SemiBold)</option>
+            <option value="Dancing Script Bold">Dancing Script (Bold)</option>
+            <option value="Bloody Terror">Bloody Terror</option>
+            <option value="Clesgoth">Clesgoth (Gothic)</option>
+            <option value="Collegiate">Collegiate (Regular)</option>
+            <option value="Collegiate Black">Collegiate (Black)</option>
+            <option value="Collegiate Border">Collegiate (Border)</option>
+            <option value="Collegiate Inside">Collegiate (Inside)</option>
+            <option value="Collegiate Outline">Collegiate (Outline)</option>
+            <option value="Enchanted Land">Enchanted Land</option>
+            <option value="Freshman">Freshman</option>
+            <option value="Heorot">Heorot (Regular)</option>
+            <option value="Heorot Italic">Heorot (Italic)</option>
+            <option value="Heorot Bold">Heorot (Bold)</option>
+            <option value="Heorot Bold Italic">Heorot (Bold Italic)</option>
+            <option value="Heorot SemiBold">Heorot (SemiBold)</option>
+            <option value="Heorot SemiBold Italic">Heorot (SemiBold Italic)</option>
+            <option value="Lato Thin">Lato (Thin)</option>
+            <option value="Lato Thin Italic">Lato (Thin Italic)</option>
+            <option value="Lato Light">Lato (Light)</option>
+            <option value="Lato Light Italic">Lato (Light Italic)</option>
+            <option value="Lato">Lato (Regular)</option>
+            <option value="Lato Italic">Lato (Italic)</option>
+            <option value="Lato Bold">Lato (Bold)</option>
+            <option value="Lato Bold Italic">Lato (Bold Italic)</option>
+            <option value="Lato Black">Lato (Black)</option>
+            <option value="Lato Black Italic">Lato (Black Italic)</option>
+            <option value="Marlboro">Marlboro</option>
+            <option value="Mostwasted">Mostwasted (Grunge)</option>
+            <option value="Old London">Old London</option>
+            <option value="Old London Alternate">Old London Alternate</option>
+            <option value="Plank">Plank (Wooden)</option>
+            <option value="Playball">Playball (Script)</option>
+            <option value="Prince Valiant">Prince Valiant (Medieval)</option>
+            <option value="Remachine Script">Remachine Script</option>
+            <option value="Stardos Stencil">Stardos Stencil (Regular)</option>
+            <option value="Stardos Stencil Bold">Stardos Stencil (Bold)</option>
+          </select>
+        </div>
+
+        <!-- PREVIEW SECTION -->
+        <div id="preview-section" style="margin-top: 3rem; display: block;">
+          <h2>Your Slate Preview</h2>
+          <div style="display: flex; gap: 2rem; align-items: flex-start; flex-wrap: wrap;">
+            <!-- Left side: Preview image -->
+            <div style="flex: 1; min-width: 300px;">
+              <div style="border-radius: 1rem; padding: 2rem; text-align: center;">
+                <div style="position: relative; display: inline-block; max-width: 400px;">
+                  <!-- Slate preview — loaded immediately -->
+                  <img id="preview-notebook" src="slate.webp" alt="Slate Preview" style="width: 100%; height: auto; border-radius: 0.5rem; box-shadow: 0 4px 16px rgba(0,0,0,0.2);" />
+                  
+                  <!-- Multi-design overlay — all draggable designs render here -->
+                  <div id="designs-overlay" style="position:absolute;top:0;left:0;width:100%;height:100%;"></div>
+                  
+                  <!-- Font preview text - DRAGGABLE -->
+                  <div id="preview-text-container" style="position: absolute; bottom: 15%; left: 50%; transform: translateX(-50%); width: 80%; display: none; cursor: grab; user-select: none; touch-action: none;">
+                    <p id="preview-text" style="margin: 0; font-size: 1.5rem; text-align: center; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">Your Text</p>
+                    <div id="text-drag-hint" style="position: absolute; bottom: -24px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.7); color: #fff; font-size: 0.7rem; padding: 3px 8px; border-radius: 4px; white-space: nowrap; pointer-events: none;">✋ Drag to reposition</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right side: Preview Controls -->
+            <div style="flex: 0 0 300px; min-width: 250px;">
+              <div style="background-color: var(--light-nature-green); padding: 1.5rem; border-radius: 0.75rem;">
+                <h3 style="margin-top: 0; margin-bottom: 1rem; font-size: 1.1rem; background-color: transparent; padding: 0;">Adjust Preview Display</h3>
+                
+                <!-- Font Size Control -->
+                <div style="margin-bottom: 1.5rem;" id="font-size-control-wrapper">
+                  <label for="font-size-control" style="display: block; font-weight: 600; margin-bottom: 0.5rem; background-color: #add8e6; padding: 0.5rem 0.75rem; border-radius: 0.5rem;">Text Size:</label>
+                  <input 
+                    type="range" 
+                    id="font-size-control" 
+                    min="12" 
+                    max="72" 
+                    value="24" 
+                    step="2"
+                    style="width: 100%;"
+                  />
+                  <div style="display: flex; justify-content: space-between; margin-top: 0.25rem;">
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Small (12px)</small>
+                    <small id="font-size-display" style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">24px</small>
+                    <small style="background-color: #add8e6; padding: 0.25rem 0.5rem; border-radius: 0.5rem;">Large (72px)</small>
+                  </div>
+                </div>
+
+                <!-- Design Positions Readout (multi) - hidden from customer -->
+                <div style="display:none;">
+                  <div id="position-readout-container"></div>
+                </div>
+
+                <!-- Text Position Readout - hidden from customer -->
+                <div id="text-position-readout" style="display: none;">
+                  <div style="display:none;">
+                    <div>↔ From left: <strong id="text-pos-x-display">—</strong></div>
+                    <div>↕ From top: <strong id="text-pos-y-display">—</strong></div>
+                  </div>
+                </div>
+
+                <!-- Design size sliders (visible, per design) -->
+                <div id="design-size-controls"></div>
+
+                <!-- Order button inside panel -->
+                <div style="margin-top: 1.5rem;">
+                  <button class="btn-primary" id="orderCoaster" style="width: 100%;">
+                    Order This Coaster
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design Selection -->
+        <h2 style="margin-top: 2rem;">Choose a Design</h2>
+        <p style="margin-top: 0.25rem; margin-bottom: 1.25rem; font-size: 0.92rem; background-color: #add8e6; display: inline-block; padding: 0.4rem 0.75rem; border-radius: 0.5rem;">
+          💡 Open a category below, then select one design using the radio button.
+        </p>
+
+        <!-- Hidden container that script.js still reads from -->
+        <div id="logo-options" style="display:none;">
+  <button class="option-card image-option" data-logo="Army Design 1" style="display:none;"><img src="images/army/1.webp" alt="Army Design 1" /></button>
+  <button class="option-card image-option" data-logo="Army Design 2" style="display:none;"><img src="images/army/2.webp" alt="Army Design 2" /></button>
+  <button class="option-card image-option" data-logo="Army Design 3" style="display:none;"><img src="images/army/3.webp" alt="Army Design 3" /></button>
+  <button class="option-card image-option" data-logo="Army Design 4" style="display:none;"><img src="images/army/4.webp" alt="Army Design 4" /></button>
+  <button class="option-card image-option" data-logo="Army Design 5" style="display:none;"><img src="images/army/5.webp" alt="Army Design 5" /></button>
+  <button class="option-card image-option" data-logo="Army Design 6" style="display:none;"><img src="images/army/6.webp" alt="Army Design 6" /></button>
+  <button class="option-card image-option" data-logo="Army Design 7" style="display:none;"><img src="images/army/7.webp" alt="Army Design 7" /></button>
+  <button class="option-card image-option" data-logo="Army Design 8" style="display:none;"><img src="images/army/8.webp" alt="Army Design 8" /></button>
+  <button class="option-card image-option" data-logo="Army Design 9" style="display:none;"><img src="images/army/9.webp" alt="Army Design 9" /></button>
+  <button class="option-card image-option" data-logo="Army Design 10" style="display:none;"><img src="images/army/10.webp" alt="Army Design 10" /></button>
+  <button class="option-card image-option" data-logo="Army Design 11" style="display:none;"><img src="images/army/11.webp" alt="Army Design 11" /></button>
+  <button class="option-card image-option" data-logo="Army Design 12" style="display:none;"><img src="images/army/12.webp" alt="Army Design 12" /></button>
+  <button class="option-card image-option" data-logo="Army Design 13" style="display:none;"><img src="images/army/13.webp" alt="Army Design 13" /></button>
+  <button class="option-card image-option" data-logo="Army Design 14" style="display:none;"><img src="images/army/14.webp" alt="Army Design 14" /></button>
+  <button class="option-card image-option" data-logo="Army Design 15" style="display:none;"><img src="images/army/15.webp" alt="Army Design 15" /></button>
+  <button class="option-card image-option" data-logo="Army Design 16" style="display:none;"><img src="images/army/16.webp" alt="Army Design 16" /></button>
+  <button class="option-card image-option" data-logo="Army Design 17" style="display:none;"><img src="images/army/17.webp" alt="Army Design 17" /></button>
+  <button class="option-card image-option" data-logo="Army Design 18" style="display:none;"><img src="images/army/18.webp" alt="Army Design 18" /></button>
+  <button class="option-card image-option" data-logo="Army Design 19" style="display:none;"><img src="images/army/19.webp" alt="Army Design 19" /></button>
+  <button class="option-card image-option" data-logo="Army Design 20" style="display:none;"><img src="images/army/20.webp" alt="Army Design 20" /></button>
+  <button class="option-card image-option" data-logo="Army Design 21" style="display:none;"><img src="images/army/21.webp" alt="Army Design 21" /></button>
+  <button class="option-card image-option" data-logo="Army Design 22" style="display:none;"><img src="images/army/22.webp" alt="Army Design 22" /></button>
+  <button class="option-card image-option" data-logo="Army Design 23" style="display:none;"><img src="images/army/23.webp" alt="Army Design 23" /></button>
+  <button class="option-card image-option" data-logo="Army Design 24" style="display:none;"><img src="images/army/24.webp" alt="Army Design 24" /></button>
+  <button class="option-card image-option" data-logo="Army Design 25" style="display:none;"><img src="images/army/25.webp" alt="Army Design 25" /></button>
+  <button class="option-card image-option" data-logo="Army Design 26" style="display:none;"><img src="images/army/26.webp" alt="Army Design 26" /></button>
+  <button class="option-card image-option" data-logo="Army Design 27" style="display:none;"><img src="images/army/27.webp" alt="Army Design 27" /></button>
+  <button class="option-card image-option" data-logo="Army Design 28" style="display:none;"><img src="images/army/28.webp" alt="Army Design 28" /></button>
+  <button class="option-card image-option" data-logo="Army Design 29" style="display:none;"><img src="images/army/29.webp" alt="Army Design 29" /></button>
+  <button class="option-card image-option" data-logo="Army Design 30" style="display:none;"><img src="images/army/30.webp" alt="Army Design 30" /></button>
+  <button class="option-card image-option" data-logo="Army Design 31" style="display:none;"><img src="images/army/31.webp" alt="Army Design 31" /></button>
+  <button class="option-card image-option" data-logo="Army Design 32" style="display:none;"><img src="images/army/32.webp" alt="Army Design 32" /></button>
+  <button class="option-card image-option" data-logo="Army Design 33" style="display:none;"><img src="images/army/33.webp" alt="Army Design 33" /></button>
+  <button class="option-card image-option" data-logo="Army Design 34" style="display:none;"><img src="images/army/34.webp" alt="Army Design 34" /></button>
+  <button class="option-card image-option" data-logo="Army Design 35" style="display:none;"><img src="images/army/35.webp" alt="Army Design 35" /></button>
+  <button class="option-card image-option" data-logo="Army Design 36" style="display:none;"><img src="images/army/36.webp" alt="Army Design 36" /></button>
+  <button class="option-card image-option" data-logo="Army Design 37" style="display:none;"><img src="images/army/37.webp" alt="Army Design 37" /></button>
+  <button class="option-card image-option" data-logo="Army Design 38" style="display:none;"><img src="images/army/38.webp" alt="Army Design 38" /></button>
+  <button class="option-card image-option" data-logo="Army Design 39" style="display:none;"><img src="images/army/39.webp" alt="Army Design 39" /></button>
+  <button class="option-card image-option" data-logo="Army Design 40" style="display:none;"><img src="images/army/40.webp" alt="Army Design 40" /></button>
+  <button class="option-card image-option" data-logo="Army Design 41" style="display:none;"><img src="images/army/41.webp" alt="Army Design 41" /></button>
+  <button class="option-card image-option" data-logo="Army Design 42" style="display:none;"><img src="images/army/42.webp" alt="Army Design 42" /></button>
+  <button class="option-card image-option" data-logo="Army Design 43" style="display:none;"><img src="images/army/43.webp" alt="Army Design 43" /></button>
+  <button class="option-card image-option" data-logo="Army Design 44" style="display:none;"><img src="images/army/44.webp" alt="Army Design 44" /></button>
+  <button class="option-card image-option" data-logo="Army Design 45" style="display:none;"><img src="images/army/45.webp" alt="Army Design 45" /></button>
+  <button class="option-card image-option" data-logo="Army Design 46" style="display:none;"><img src="images/army/46.webp" alt="Army Design 46" /></button>
+  <button class="option-card image-option" data-logo="Army Design 47" style="display:none;"><img src="images/army/47.webp" alt="Army Design 47" /></button>
+  <button class="option-card image-option" data-logo="Army Design 48" style="display:none;"><img src="images/army/48.webp" alt="Army Design 48" /></button>
+  <button class="option-card image-option" data-logo="Army Design 49" style="display:none;"><img src="images/army/49.webp" alt="Army Design 49" /></button>
+  <button class="option-card image-option" data-logo="Army Design 50" style="display:none;"><img src="images/army/50.webp" alt="Army Design 50" /></button>
+  <button class="option-card image-option" data-logo="Army Design 51" style="display:none;"><img src="images/army/51.webp" alt="Army Design 51" /></button>
+  <button class="option-card image-option" data-logo="Army Design 52" style="display:none;"><img src="images/army/52.webp" alt="Army Design 52" /></button>
+</div>
+
+        <style>
+          .cat-tab { border: 1px solid #d1d5db; border-radius: 0.75rem; overflow: hidden; margin-bottom: 0.65rem; max-width: 700px; }
+          .cat-tab-header {
+            width: 100%; display: flex; justify-content: space-between; align-items: center;
+            padding: 0.9rem 1.1rem; background: #f8f5f0; border: none; cursor: pointer;
+            font-size: 1rem; font-weight: 600; color: #4b3f2f; text-align: left;
+          }
+          .cat-tab-header:hover { background: #efe8dc; }
+          .cat-tab-header.open { background: #e8f4f8; }
+          .cat-arrow { font-size: 0.8rem; transition: transform 0.2s; }
+          .cat-body { display: none; padding: 1rem 1.1rem 1.25rem; background: #fff; }
+          .design-radio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 0.85rem;
+            margin-top: 0.75rem;
+          }
+          .design-radio-item {
+            display: flex; flex-direction: column; align-items: center;
+            gap: 0.4rem; cursor: pointer;
+          }
+          .design-radio-item input[type="radio"] { display: none; }
+          .design-radio-item .thumb-wrap {
+            border: 2px solid #d1d5db; border-radius: 0.5rem; padding: 0.3rem;
+            background: #fafafa; transition: border-color 0.15s, box-shadow 0.15s;
+            width: 100%;
+          }
+          .design-radio-item input[type="radio"]:checked ~ .thumb-wrap,
+          .design-radio-item.checked .thumb-wrap {
+            border-color: #4b3f2f; box-shadow: 0 0 0 3px rgba(75,63,47,0.2);
+          }
+          .design-radio-item img { width: 100%; height: 90px; object-fit: contain; border-radius: 0.3rem; display: block; }
+          .design-radio-item .design-label { font-size: 0.78rem; text-align: center; color: #4b3f2f; line-height: 1.3; }
+          .design-radio-item input[type="radio"]:checked ~ .design-label { font-weight: 700; }
+        </style>
+
+
+        <!-- ARMY -->
+        <div class="cat-tab">
+          <button class="cat-tab-header" onclick="toggleCat(this, 'cat-army')">
+            <span>🎖️ Army</span><span class="cat-arrow">▼</span>
+          </button>
+          <div class="cat-body" id="cat-army">
+            <div class="design-radio-grid">
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 1" data-img="images/army/1.webp" /><div class="thumb-wrap"><img src="images/army/1.webp" alt="Army Design 1" /></div><span class="design-label">Army Design 1</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 2" data-img="images/army/2.webp" /><div class="thumb-wrap"><img src="images/army/2.webp" alt="Army Design 2" /></div><span class="design-label">Army Design 2</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 3" data-img="images/army/3.webp" /><div class="thumb-wrap"><img src="images/army/3.webp" alt="Army Design 3" /></div><span class="design-label">Army Design 3</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 4" data-img="images/army/4.webp" /><div class="thumb-wrap"><img src="images/army/4.webp" alt="Army Design 4" /></div><span class="design-label">Army Design 4</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 5" data-img="images/army/5.webp" /><div class="thumb-wrap"><img src="images/army/5.webp" alt="Army Design 5" /></div><span class="design-label">Army Design 5</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 6" data-img="images/army/6.webp" /><div class="thumb-wrap"><img src="images/army/6.webp" alt="Army Design 6" /></div><span class="design-label">Army Design 6</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 7" data-img="images/army/7.webp" /><div class="thumb-wrap"><img src="images/army/7.webp" alt="Army Design 7" /></div><span class="design-label">Army Design 7</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 8" data-img="images/army/8.webp" /><div class="thumb-wrap"><img src="images/army/8.webp" alt="Army Design 8" /></div><span class="design-label">Army Design 8</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 9" data-img="images/army/9.webp" /><div class="thumb-wrap"><img src="images/army/9.webp" alt="Army Design 9" /></div><span class="design-label">Army Design 9</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 10" data-img="images/army/10.webp" /><div class="thumb-wrap"><img src="images/army/10.webp" alt="Army Design 10" /></div><span class="design-label">Army Design 10</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 11" data-img="images/army/11.webp" /><div class="thumb-wrap"><img src="images/army/11.webp" alt="Army Design 11" /></div><span class="design-label">Army Design 11</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 12" data-img="images/army/12.webp" /><div class="thumb-wrap"><img src="images/army/12.webp" alt="Army Design 12" /></div><span class="design-label">Army Design 12</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 13" data-img="images/army/13.webp" /><div class="thumb-wrap"><img src="images/army/13.webp" alt="Army Design 13" /></div><span class="design-label">Army Design 13</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 14" data-img="images/army/14.webp" /><div class="thumb-wrap"><img src="images/army/14.webp" alt="Army Design 14" /></div><span class="design-label">Army Design 14</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 15" data-img="images/army/15.webp" /><div class="thumb-wrap"><img src="images/army/15.webp" alt="Army Design 15" /></div><span class="design-label">Army Design 15</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 16" data-img="images/army/16.webp" /><div class="thumb-wrap"><img src="images/army/16.webp" alt="Army Design 16" /></div><span class="design-label">Army Design 16</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 17" data-img="images/army/17.webp" /><div class="thumb-wrap"><img src="images/army/17.webp" alt="Army Design 17" /></div><span class="design-label">Army Design 17</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 18" data-img="images/army/18.webp" /><div class="thumb-wrap"><img src="images/army/18.webp" alt="Army Design 18" /></div><span class="design-label">Army Design 18</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 19" data-img="images/army/19.webp" /><div class="thumb-wrap"><img src="images/army/19.webp" alt="Army Design 19" /></div><span class="design-label">Army Design 19</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 20" data-img="images/army/20.webp" /><div class="thumb-wrap"><img src="images/army/20.webp" alt="Army Design 20" /></div><span class="design-label">Army Design 20</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 21" data-img="images/army/21.webp" /><div class="thumb-wrap"><img src="images/army/21.webp" alt="Army Design 21" /></div><span class="design-label">Army Design 21</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 22" data-img="images/army/22.webp" /><div class="thumb-wrap"><img src="images/army/22.webp" alt="Army Design 22" /></div><span class="design-label">Army Design 22</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 23" data-img="images/army/23.webp" /><div class="thumb-wrap"><img src="images/army/23.webp" alt="Army Design 23" /></div><span class="design-label">Army Design 23</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 24" data-img="images/army/24.webp" /><div class="thumb-wrap"><img src="images/army/24.webp" alt="Army Design 24" /></div><span class="design-label">Army Design 24</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 25" data-img="images/army/25.webp" /><div class="thumb-wrap"><img src="images/army/25.webp" alt="Army Design 25" /></div><span class="design-label">Army Design 25</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 26" data-img="images/army/26.webp" /><div class="thumb-wrap"><img src="images/army/26.webp" alt="Army Design 26" /></div><span class="design-label">Army Design 26</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 27" data-img="images/army/27.webp" /><div class="thumb-wrap"><img src="images/army/27.webp" alt="Army Design 27" /></div><span class="design-label">Army Design 27</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 28" data-img="images/army/28.webp" /><div class="thumb-wrap"><img src="images/army/28.webp" alt="Army Design 28" /></div><span class="design-label">Army Design 28</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 29" data-img="images/army/29.webp" /><div class="thumb-wrap"><img src="images/army/29.webp" alt="Army Design 29" /></div><span class="design-label">Army Design 29</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 30" data-img="images/army/30.webp" /><div class="thumb-wrap"><img src="images/army/30.webp" alt="Army Design 30" /></div><span class="design-label">Army Design 30</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 31" data-img="images/army/31.webp" /><div class="thumb-wrap"><img src="images/army/31.webp" alt="Army Design 31" /></div><span class="design-label">Army Design 31</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 32" data-img="images/army/32.webp" /><div class="thumb-wrap"><img src="images/army/32.webp" alt="Army Design 32" /></div><span class="design-label">Army Design 32</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 33" data-img="images/army/33.webp" /><div class="thumb-wrap"><img src="images/army/33.webp" alt="Army Design 33" /></div><span class="design-label">Army Design 33</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 34" data-img="images/army/34.webp" /><div class="thumb-wrap"><img src="images/army/34.webp" alt="Army Design 34" /></div><span class="design-label">Army Design 34</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 35" data-img="images/army/35.webp" /><div class="thumb-wrap"><img src="images/army/35.webp" alt="Army Design 35" /></div><span class="design-label">Army Design 35</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 36" data-img="images/army/36.webp" /><div class="thumb-wrap"><img src="images/army/36.webp" alt="Army Design 36" /></div><span class="design-label">Army Design 36</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 37" data-img="images/army/37.webp" /><div class="thumb-wrap"><img src="images/army/37.webp" alt="Army Design 37" /></div><span class="design-label">Army Design 37</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 38" data-img="images/army/38.webp" /><div class="thumb-wrap"><img src="images/army/38.webp" alt="Army Design 38" /></div><span class="design-label">Army Design 38</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 39" data-img="images/army/39.webp" /><div class="thumb-wrap"><img src="images/army/39.webp" alt="Army Design 39" /></div><span class="design-label">Army Design 39</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 40" data-img="images/army/40.webp" /><div class="thumb-wrap"><img src="images/army/40.webp" alt="Army Design 40" /></div><span class="design-label">Army Design 40</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 41" data-img="images/army/41.webp" /><div class="thumb-wrap"><img src="images/army/41.webp" alt="Army Design 41" /></div><span class="design-label">Army Design 41</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 42" data-img="images/army/42.webp" /><div class="thumb-wrap"><img src="images/army/42.webp" alt="Army Design 42" /></div><span class="design-label">Army Design 42</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 43" data-img="images/army/43.webp" /><div class="thumb-wrap"><img src="images/army/43.webp" alt="Army Design 43" /></div><span class="design-label">Army Design 43</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 44" data-img="images/army/44.webp" /><div class="thumb-wrap"><img src="images/army/44.webp" alt="Army Design 44" /></div><span class="design-label">Army Design 44</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 45" data-img="images/army/45.webp" /><div class="thumb-wrap"><img src="images/army/45.webp" alt="Army Design 45" /></div><span class="design-label">Army Design 45</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 46" data-img="images/army/46.webp" /><div class="thumb-wrap"><img src="images/army/46.webp" alt="Army Design 46" /></div><span class="design-label">Army Design 46</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 47" data-img="images/army/47.webp" /><div class="thumb-wrap"><img src="images/army/47.webp" alt="Army Design 47" /></div><span class="design-label">Army Design 47</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 48" data-img="images/army/48.webp" /><div class="thumb-wrap"><img src="images/army/48.webp" alt="Army Design 48" /></div><span class="design-label">Army Design 48</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 49" data-img="images/army/49.webp" /><div class="thumb-wrap"><img src="images/army/49.webp" alt="Army Design 49" /></div><span class="design-label">Army Design 49</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 50" data-img="images/army/50.webp" /><div class="thumb-wrap"><img src="images/army/50.webp" alt="Army Design 50" /></div><span class="design-label">Army Design 50</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 51" data-img="images/army/51.webp" /><div class="thumb-wrap"><img src="images/army/51.webp" alt="Army Design 51" /></div><span class="design-label">Army Design 51</span></label>
+              <label class="design-radio-item"><input type="radio" name="design-pick" value="Army Design 52" data-img="images/army/52.webp" /><div class="thumb-wrap"><img src="images/army/52.webp" alt="Army Design 52" /></div><span class="design-label">Army Design 52</span></label>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          // Toggle category tab open/close
+          function toggleCat(btn, id) {
+            var body = document.getElementById(id);
+            var arrow = btn.querySelector('.cat-arrow');
+            var isOpen = body.style.display === 'block';
+            body.style.display = isOpen ? 'none' : 'block';
+            arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+            btn.classList.toggle('open', !isOpen);
+          }
+
+          // When a radio is selected:
+          // 1. Visually highlight it
+          // 2. Click the matching hidden [data-logo] button so script.js handles add/remove
+          document.addEventListener('change', function(e) {
+            if (e.target.name !== 'design-pick') return;
+            var radio = e.target;
+            var name = radio.value;
+
+            // Visual highlight on the radio card
+            document.querySelectorAll('.design-radio-item').forEach(function(el) {
+              el.classList.remove('checked');
+            });
+            radio.closest('.design-radio-item').classList.add('checked');
+
+            // Deselect any previously selected hidden button (so script.js removes old design)
+            var prev = document.querySelector('#logo-options .option-card.image-option.selected');
+            if (prev && prev.dataset.logo !== name) {
+              prev.click(); // toggles it off in script.js
+            }
+
+            // Click the matching hidden button to add the new design via script.js
+            var target = document.querySelector('#logo-options .option-card.image-option[data-logo="' + CSS.escape(name) + '"]');
+            if (target && !target.classList.contains('selected')) {
+              target.click();
+            }
+
+            // Scroll to preview
+            var preview = document.getElementById('preview-section');
+            if (preview) {
+              setTimeout(function() {
+                preview.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 100);
+            }
+          });
+        </script>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Image Lightbox -->
+  <div id="image-lightbox" class="lightbox">
+    <div class="lightbox-inner">
+      <img id="lightbox-img" src="" alt="Preview" />
+      <button id="lightbox-close" type="button">× Close</button>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="
+    display: none;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    background: #4b3f2f;
+    color: #fff;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.65rem 1.1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  ">⬆ Back to Top</button>
+  <script>
+    window.addEventListener('scroll', function() {
+      var btn = document.getElementById('back-to-top');
+      btn.style.display = window.scrollY > 400 ? 'block' : 'none';
+    });
+  </script>
+
+  <!-- Slate: keep preview visible and image loaded regardless of color selection -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var previewSec = document.getElementById('preview-section');
+      var previewImg = document.getElementById('preview-notebook');
+      if (previewSec) previewSec.style.display = 'block';
+      if (previewImg && !previewImg.src.includes('slate')) {
+        previewImg.src = 'images/slate.webp';
+      }
+      // Re-apply after script.js runs in case it clears the src
+      setTimeout(function () {
+        if (previewImg && (!previewImg.src || previewImg.src.endsWith('/'))) {
+          previewImg.src = 'images/slate.webp';
+        }
+        if (previewSec) previewSec.style.display = 'block';
+      }, 0);
+    });
+  </script>
+
+  <!-- html2canvas for notebook snapshot -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <!-- Load your existing script -->
+  <script src="script.js"></script>
+  
+  <!-- Inventory tracking script -->
+  <script src="inventory.js"></script>
+</body>
+</html>
