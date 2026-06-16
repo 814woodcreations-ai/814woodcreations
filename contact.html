@@ -55,26 +55,15 @@
           <!-- Contact Form -->
           <div style="flex: 1; min-width: 280px; max-width: 540px;">
             <h2 style="margin-top: 0;">Send a Message</h2>
-            <form
-              name="contact"
-              method="POST"
-              data-netlify="true"
-              netlify-honeypot="bot-field"
-              style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.25rem;"
-            >
-              <input type="hidden" name="form-name" value="contact" />
-              <p style="display: none;">
-                <label>Don't fill this out: <input name="bot-field" /></label>
-              </p>
+            <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 1.25rem;">
 
               <div>
                 <label for="contact-name" style="display: block; font-weight: 600; margin-bottom: 0.4rem;">Your Name</label>
                 <input
                   id="contact-name"
-                  name="name"
                   type="text"
-                  required
                   placeholder="Jane Smith"
+                  maxlength="100"
                   style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem; box-sizing: border-box;"
                 />
               </div>
@@ -83,9 +72,7 @@
                 <label for="contact-email" style="display: block; font-weight: 600; margin-bottom: 0.4rem;">Your Email</label>
                 <input
                   id="contact-email"
-                  name="email"
                   type="email"
-                  required
                   placeholder="you@example.com"
                   style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem; box-sizing: border-box;"
                 />
@@ -95,16 +82,20 @@
                 <label for="contact-message" style="display: block; font-weight: 600; margin-bottom: 0.4rem;">Message</label>
                 <textarea
                   id="contact-message"
-                  name="message"
-                  required
                   rows="6"
                   placeholder="Tell us what you're looking for..."
                   style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #d1d5db; font-size: 1rem; resize: vertical; box-sizing: border-box;"
                 ></textarea>
               </div>
 
-              <button type="submit" class="btn-primary" style="align-self: flex-start; cursor: pointer;">Send Message</button>
-            </form>
+              <div>
+                <button id="contact-submit" type="button" class="btn-primary" style="cursor: pointer;">Send Message</button>
+              </div>
+
+              <!-- Status message -->
+              <div id="contact-status" style="display: none; padding: 0.75rem 1rem; border-radius: 0.5rem; font-weight: 600;"></div>
+
+            </div>
           </div>
 
         </div>
@@ -117,6 +108,60 @@
       <p>&copy; <span id="year"></span> 814 Wood Creations. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function () {
+      emailjs.init({ publicKey: 'bHE73iQndsWGd0HS2' });
+    })();
+
+    document.getElementById('contact-submit').addEventListener('click', async function () {
+      var name    = document.getElementById('contact-name').value.trim();
+      var email   = document.getElementById('contact-email').value.trim();
+      var message = document.getElementById('contact-message').value.trim();
+      var status  = document.getElementById('contact-status');
+      var btn     = document.getElementById('contact-submit');
+
+      if (!name || !email || !message) {
+        status.style.display = 'block';
+        status.style.background = '#fee2e2';
+        status.style.color = '#991b1b';
+        status.textContent = 'Please fill out all fields before sending.';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      status.style.display = 'none';
+
+      try {
+        await emailjs.send('service_4xin3ug', 'template_g58jjt7', {
+          name:    name,
+          email:   email,
+          message: message
+        });
+
+        status.style.display = 'block';
+        status.style.background = '#dcfce7';
+        status.style.color = '#166534';
+        status.textContent = "Message sent! We'll get back to you soon.";
+        btn.textContent = 'Sent!';
+
+        document.getElementById('contact-name').value = '';
+        document.getElementById('contact-email').value = '';
+        document.getElementById('contact-message').value = '';
+
+      } catch (err) {
+        status.style.display = 'block';
+        status.style.background = '#fee2e2';
+        status.style.color = '#991b1b';
+        status.textContent = 'Something went wrong. Please try emailing us directly.';
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+      }
+    });
+  </script>
 
   <script src="script.js"></script>
 </body>
