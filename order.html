@@ -96,7 +96,8 @@
                 <label for="product">Select Item *</label>
                 <select id="product" name="product" required>
                   <option value="">Choose an option</option>
-                  <option value="Custom Notebook">Custom Notebook</option>
+                  <option value="A5 Diary Notebook">A5 Diary Notebook</option>
+                  <option value="Suede Like Notebook">Suede Like Notebook</option>
                   <option value="Water Bottle">Water Bottle</option>
                   <option value="Laser-Engraved Leather">Laser-Engraved Leather</option>
                 </select>
@@ -354,6 +355,20 @@
     (function () {
       var product = localStorage.getItem('product') || '';
       var isWaterBottle = product === 'Water Bottle';
+
+      // Auto-select product dropdown if coming from a product page
+      if (product) {
+        var productSelect = document.getElementById('product');
+        if (productSelect) {
+          for (var i = 0; i < productSelect.options.length; i++) {
+            if (productSelect.options[i].value === product) {
+              productSelect.selectedIndex = i;
+              productSelect.dispatchEvent(new Event('change'));
+              break;
+            }
+          }
+        }
+      }
 
       // Populate hidden fields
       var textLines = localStorage.getItem('text_lines') || '';
